@@ -4,7 +4,7 @@
 ## Creator Notes
 Unity `2020.3.26f1 LTS`
 
->Project Seetings
+>Project Settings
 
 >*Team Project started on 17th February, 2022.*
 
