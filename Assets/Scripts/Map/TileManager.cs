@@ -30,5 +30,5 @@ public class TileManager : MonoBehaviour
         return result;
     }
 
-    // 타일 렌더러 변경
+    //TODO 타일 렌더러 변경
 }
