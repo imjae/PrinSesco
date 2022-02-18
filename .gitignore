@@ -22,6 +22,7 @@
 
 # Visual Studio cache directory
 .vs/
+.vscode/
 
 # Gradle cache directory
 .gradle/
@@ -61,3 +62,4 @@ crashlytics-build.properties
 
 
 /[Aa]ssets/[Ee]nviroments/
+/[Aa]ssets/[Vv][Ss]Code/
