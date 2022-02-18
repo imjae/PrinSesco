@@ -39,10 +39,4 @@ public class MapGenerator : MonoBehaviour
             new Room(node).PaintGround(MapManager.Instance.TileArray);
         });
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
