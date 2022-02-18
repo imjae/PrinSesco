@@ -20,8 +20,8 @@ public class Room
         {
             for (int j = y; j < y + h; j++)
             {
-                tileArray[i, j].color = Color.cyan;
-                tileArray[i, j].type = Tile.Type.GROUND;
+                tileArray[j, i].color = Color.cyan;
+                tileArray[j, i].type = Tile.Type.GROUND;
             }
         }
     }

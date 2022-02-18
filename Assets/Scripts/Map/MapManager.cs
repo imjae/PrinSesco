@@ -25,7 +25,7 @@ public class MapManager : Singleton<MapManager>
     #endregion
 
     #region Unity Life Cycles ()
-    
+
     #endregion
 
 
@@ -35,7 +35,8 @@ public class MapManager : Singleton<MapManager>
         int dy = 0;
 
         // 맵의 높이 크기만큼 배열의 가로축 개수가 정해지는 방식
-        TileArray = new Tile[height, width];
+        // 실제로 맵에 사용되는 부분은 Room이기 때문에 홀수로 크기가 주어질 경우 여분으로 1을 늘려 인덱스 범위를 벗어나지 않게한다.
+        TileArray = new Tile[height + 1, width + 1];
 
         int halfWidth = Mathf.RoundToInt(width * 0.5f);
         int halfHeight = Mathf.RoundToInt(height * 0.5f);
@@ -47,7 +48,7 @@ public class MapManager : Singleton<MapManager>
             {
                 // 실제로 생성되는 타일의 위치는 0,0을 중심으로 생성되야 하기 때문에 좌표값을 할당하지 않는다.
                 var tileObject = tileManager.Create(tileManager.transform, new Vector2(x, y), Color.white);
-                tileObject.Coordinate = new Vector2(dy, dx);
+                tileObject.Coordinate = new Vector2(dx, dy);
                 tileObject.name = $"Tile({dx}.{dy})";
 
                 // dx, dy를 사용해 실제 타일의 위치값과 좌표값을 일치시긴다.

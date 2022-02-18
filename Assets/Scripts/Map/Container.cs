@@ -30,7 +30,7 @@ public class Container
                 else if (j == y + h - 1) isPainting = true;
 
                 if (isPainting)
-                    tileArray[i, j].color = Color.gray;
+                    tileArray[j, i].color = Color.gray;
 
                 isPainting = false;
             }
