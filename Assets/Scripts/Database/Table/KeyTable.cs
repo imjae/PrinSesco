@@ -1,6 +1,8 @@
 using Amazon.DynamoDBv2.DataModel;
 
-public class KeyTable
+using UnityEngine;
+
+public class KeyTable : MonoBehaviour
 {
     [DynamoDBHashKey]
     public string PK { get; set; }

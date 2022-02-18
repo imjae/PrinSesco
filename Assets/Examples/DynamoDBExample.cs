@@ -39,17 +39,17 @@ namespace AWSSDK.Examples
 
         void LowLevelListener()
         {
-            Application.LoadLevel(1);
+            // Application.LoadLevel(1);
         }
 
         void MidLevelScanListener()
         {
-            Application.LoadLevel(2);
+            // Application.LoadLevel(2);
         }
 
         void HighLevelListener()
         {
-            Application.LoadLevel(3);
+            // Application.LoadLevel(3);
         }
     }
 }
