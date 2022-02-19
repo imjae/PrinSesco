@@ -22,6 +22,7 @@ public class TileManager : Singleton<TileManager>
 
         tileset = Resources.LoadAll<Sprite>("Map/DungeonTileset/Dungeon_Tileset");
         tileDictionary = InitializeTileset(tileset);
+
     }
 
     public Tile Create(Transform parent, Vector2 position, Color color, int order = 1)
@@ -34,7 +35,7 @@ public class TileManager : Singleton<TileManager>
 
         if (result.TryGetComponent<Tile>(out Tile tile))
         {
-            tile.type = Tile.Type.Ground_Inner;
+            tile.type = Tile.Type.Dark;
             // tile.color = color;
             tile.sortingOrder = order;
         }
@@ -46,9 +47,10 @@ public class TileManager : Singleton<TileManager>
     {
         Dictionary<string, List<Sprite>> result = new Dictionary<string, List<Sprite>>();
 
-        List<Sprite> tmpList = new List<Sprite>();
         foreach (string type in Enum.GetNames(typeof(Tile.Type)))
         {
+            Debug.Log(type);
+            List<Sprite> tmpList = new List<Sprite>();
             for (int i = 0; i < tileset.Length; i++)
             {
                 if (tileset[i].name.Contains(type))
@@ -57,31 +59,23 @@ public class TileManager : Singleton<TileManager>
                 }
             }
 
-            result[type] = tmpList;
-            tmpList.Clear();
+            result.Add(type, tmpList);
         }
 
         return result;
     }
 
     //TODO 타일 스프라이트 변경
-    public void ChangeTileSpriteByType(ref Tile tile, Tile.Type type)
+    public void ChangeTileSpriteByType(ref Tile tile)
     {
-        string prefix = "Dungeon_Tileset";
+        List<Sprite> tmpTileSprite = tileDictionary[tile.type.ToString()];
 
-        string typeStr = type.ToString();
-        string[] typeKeywordArr = typeStr.Split('_');
+        int index = 0;
+        if (tmpTileSprite.Count < 2)
+            index = 0;
+        else
+            index = UnityEngine.Random.Range(0, tmpTileSprite.Count);
 
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < typeKeywordArr.Length; i++)
-        {
-            if (i > 0) sb.Append(typeKeywordArr[i]);
-            if (i != typeKeywordArr.Length - 1) sb.Append("_");
-        }
-
-        string spriteStr = default(string);
-        spriteStr = $"{prefix}_{sb.ToString()}";
-
-        // tile.sprite = new Sprite(spriteStr);
+        tile.sprite = tmpTileSprite[index];
     }
 }

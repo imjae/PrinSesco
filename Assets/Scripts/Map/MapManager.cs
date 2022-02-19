@@ -50,6 +50,7 @@ public class MapManager : Singleton<MapManager>
                 var tileObject = tileManager.Create(tileManager.transform, new Vector2(x, y), Color.white);
                 tileObject.Coordinate = new Vector2(dx, dy);
                 tileObject.name = $"Tile({dx}.{dy})";
+                tileObject.type = Tile.Type.Dark;
 
                 // dx, dy를 사용해 실제 타일의 위치값과 좌표값을 일치시긴다.
                 TileArray[dy, dx] = tileObject;

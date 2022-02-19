@@ -42,5 +42,13 @@ public class MapGenerator : MonoBehaviour
             roomList.Add(tmpRoom);
             tmpRoom.PaintGround(MapManager.Instance.TileArray);
         });
+
+        for (int x = 0; x < height; x++)
+        {
+            for (int y = 0; y < width; y++)
+            {
+                TileManager.Instance.ChangeTileSpriteByType(ref manager.TileArray[x, y]);
+            }
+        }
     }
 }

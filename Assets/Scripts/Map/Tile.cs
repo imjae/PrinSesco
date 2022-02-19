@@ -7,7 +7,7 @@ public class Tile : MonoBehaviour
     #region Fields
     private SpriteRenderer spriteRenderer;
     private Vector2 _coordinate;
-    Type _type;
+    public Type _type;
     #endregion
 
     #region Properties
@@ -32,10 +32,7 @@ public class Tile : MonoBehaviour
 
     public Type type
     {
-        set
-        {
-            //TODO 설정되는 value에 따라 spriteRenderer의 Sprite를 알맞게 변경
-        }
+        set => _type = value;
         get => _type;
     }
     #endregion
@@ -103,21 +100,21 @@ public class Tile : MonoBehaviour
         string stringType = type.ToString();
         string category = stringType.Split('_')[0];
 
-        if(category.Equals("GROUND"))
+        if (category.Equals("GROUND"))
         {
 
         }
-        else if(category.Equals("WALL"))
+        else if (category.Equals("WALL"))
         {
 
         }
-        else if(category.Equals("WAY"))
+        else if (category.Equals("WAY"))
         {
-            
+
         }
-        else if(category.Equals("STRUCTURE"))
+        else if (category.Equals("STRUCTURE"))
         {
-            
+
         }
     }
 
