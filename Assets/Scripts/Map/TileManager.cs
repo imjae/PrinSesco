@@ -76,6 +76,7 @@ public class TileManager : Singleton<TileManager>
         else
             index = UnityEngine.Random.Range(0, tmpTileSprite.Count);
 
+        Debug.Log($"{tile.type.ToString()} -> {tmpTileSprite.Count} -> {index}");
         tile.sprite = tmpTileSprite[index];
     }
 }

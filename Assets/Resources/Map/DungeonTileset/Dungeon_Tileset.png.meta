@@ -4,7 +4,7 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -3786115476455808955
-    second: Dungeon_Tileset_Edge_Left_Top
+    second: Dungeon_Tileset_Wall_Edge_Left_Top
   - first:
       213: -3590207636862898149
     second: Dungeon_Tileset_Wall_Top_0
@@ -19,7 +19,7 @@ TextureImporter:
     second: Dungeon_Tileset_Wall_Top_3
   - first:
       213: 4023018930920339469
-    second: Dungeon_Tileset_Edge_Right_Top
+    second: Dungeon_Tileset_Wall_Edge_Right_Top
   - first:
       213: -8120323925528636241
     second: Dungeon_Tileset_Ground_Inner_0
@@ -37,7 +37,7 @@ TextureImporter:
     second: Dungeon_Tileset_Wall_Left_0
   - first:
       213: 4521207776522067839
-    second: Dungeon_Tileset_Ground_Left_Top
+    second: Dungeon_Tileset_Ground_Edge_Left_Top
   - first:
       213: 1558959487191823921
     second: Dungeon_Tileset_Ground_Top_0
@@ -46,7 +46,7 @@ TextureImporter:
     second: Dungeon_Tileset_Ground_Top_1
   - first:
       213: -1474506998622769691
-    second: Dungeon_Tileset_Ground_Right_Top
+    second: Dungeon_Tileset_Ground_Edge_Right_Top
   - first:
       213: -3624728776038038798
     second: Dungeon_Tileset_Wall_Right_0
@@ -97,7 +97,7 @@ TextureImporter:
     second: Dungeon_Tileset_Wall_Left_2
   - first:
       213: 91974681427787221
-    second: Dungeon_Tileset_Ground_Left_Bottom
+    second: Dungeon_Tileset_Ground_Edge_Left_Bottom
   - first:
       213: 8049239735045566497
     second: Dungeon_Tileset_Ground_Bottom_0
@@ -106,7 +106,7 @@ TextureImporter:
     second: Dungeon_Tileset_Ground_Bottom_1
   - first:
       213: -305168554068363993
-    second: Dungeon_Tileset_Ground_Right_Bottom
+    second: Dungeon_Tileset_Ground_Edge_Right_Bottom
   - first:
       213: -1745049011280948865
     second: Dungeon_Tileset_Wall_Right_2
@@ -124,7 +124,7 @@ TextureImporter:
     second: Dungeon_Tileset_ladder
   - first:
       213: 814100358431600263
-    second: Dungeon_Tileset_Edge_Left_Bottom
+    second: Dungeon_Tileset_Wall_Edge_Left_Bottom
   - first:
       213: -931493284425913039
     second: Dungeon_Tileset_Wall_Bottom_0
@@ -139,7 +139,7 @@ TextureImporter:
     second: Dungeon_Tileset_Wall_Bottom_3
   - first:
       213: -6208134848360472016
-    second: Dungeon_Tileset_Edge_Right_Bottom
+    second: Dungeon_Tileset_Wall_Edge_Right_Bottom
   - first:
       213: -2680935109507513731
     second: Dungeon_Tileset_VerticalDoor_Center_Up
@@ -427,7 +427,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dungeon_Tileset_Edge_Left_Top
+      name: Dungeon_Tileset_Wall_Edge_Left_Top
       rect:
         serializedVersion: 2
         x: 0
@@ -532,7 +532,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Edge_Right_Top
+      name: Dungeon_Tileset_Wall_Edge_Right_Top
       rect:
         serializedVersion: 2
         x: 80
@@ -658,7 +658,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Left_Top
+      name: Dungeon_Tileset_Ground_Edge_Left_Top
       rect:
         serializedVersion: 2
         x: 16
@@ -721,7 +721,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Right_Top
+      name: Dungeon_Tileset_Ground_Edge_Right_Top
       rect:
         serializedVersion: 2
         x: 64
@@ -1078,7 +1078,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Left_Bottom
+      name: Dungeon_Tileset_Ground_Edge_Left_Bottom
       rect:
         serializedVersion: 2
         x: 16
@@ -1141,7 +1141,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Right_Bottom
+      name: Dungeon_Tileset_Ground_Edge_Right_Bottom
       rect:
         serializedVersion: 2
         x: 64
@@ -1267,7 +1267,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Edge_Left_Bottom
+      name: Dungeon_Tileset_Wall_Edge_Left_Bottom
       rect:
         serializedVersion: 2
         x: 0
@@ -1372,7 +1372,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Edge_Right_Bottom
+      name: Dungeon_Tileset_Wall_Edge_Right_Bottom
       rect:
         serializedVersion: 2
         x: 80

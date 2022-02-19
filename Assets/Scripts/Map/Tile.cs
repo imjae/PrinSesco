@@ -45,14 +45,14 @@ public class Tile : MonoBehaviour
         Ground_Bottom,
         Ground_Left,
         Ground_Right,
-        Ground_Left_Top,
-        Ground_Left_Bottom,
-        Ground_Right_Top,
-        Ground_Right_Bottom,
-        Edge_Left_Top,
-        Edge_Right_Top,
-        Edge_Left_Bottom,
-        Edge_Right_Bottom,
+        Ground_Edge_Left_Top,
+        Ground_Edge_Left_Bottom,
+        Ground_Edge_Right_Top,
+        Ground_Edge_Right_Bottom,
+        Wall_Edge_Left_Top,
+        Wall_Edge_Right_Top,
+        Wall_Edge_Left_Bottom,
+        Wall_Edge_Right_Bottom,
         Wall_Left,
         Wall_Right,
         Wall_Top,
@@ -95,28 +95,7 @@ public class Tile : MonoBehaviour
     }
 
     #region Functions
-    public void ChangeSpriteByType(Type type)
-    {
-        string stringType = type.ToString();
-        string category = stringType.Split('_')[0];
-
-        if (category.Equals("GROUND"))
-        {
-
-        }
-        else if (category.Equals("WALL"))
-        {
-
-        }
-        else if (category.Equals("WAY"))
-        {
-
-        }
-        else if (category.Equals("STRUCTURE"))
-        {
-
-        }
-    }
+    
 
     #endregion
 }
