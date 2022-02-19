@@ -154,13 +154,13 @@ TextureImporter:
     second: Dungeon_Tileset_Big_Rock
   - first:
       213: 2203797919881089718
-    second: Dungeon_Tileset_50
+    second: Dungeon_Tileset_Corner_Right_Bottom
   - first:
       213: 8673527630790295319
-    second: Dungeon_Tileset_51
+    second: Dungeon_Tileset_Way_Bottom_0
   - first:
       213: 8854592227059702305
-    second: Dungeon_Tileset_52
+    second: Dungeon_Tileset_Way_Bottom_1
   - first:
       213: -224872910991652484
     second: Dungeon_Tileset_53
@@ -1477,7 +1477,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_50
+      name: Dungeon_Tileset_Corner_Right_Bottom
       rect:
         serializedVersion: 2
         x: 0
@@ -1498,7 +1498,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_51
+      name: Dungeon_Tileset_Way_Bottom_0
       rect:
         serializedVersion: 2
         x: 16
@@ -1519,7 +1519,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_52
+      name: Dungeon_Tileset_Way_Bottom_1
       rect:
         serializedVersion: 2
         x: 32

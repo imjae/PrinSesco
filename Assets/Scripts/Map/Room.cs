@@ -23,7 +23,7 @@ public class Room
             for (int j = y; j < y + h; j++)
             {
                 // tileArray[j, i].color = Color.cyan;
-                tileArray[j, i].type = Tile.Type.Ground;
+                tileArray[j, i].type = Tile.Type.Ground_Inner;
             }
         }
     }

@@ -4,24 +4,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileManager : MonoBehaviour
+public class TileManager : Singleton<TileManager>
 {
     #region Fields
     [Header("Tile Prefabs")]
     [SerializeField] private Tile tilePrefab;
 
-    public Texture2D tileset;
-
     // 타일의 타입별 Sprite를 담고있는 리스트
-    public List<Sprite> tilesetList;
+    public Sprite[] tileset;
     public Dictionary<string, List<Sprite>> tileDictionary;
     #endregion
 
     void Start()
     {
+        tileset = Resources.LoadAll<Sprite>("Map/DungeonTileset/Dungeon_Tileset");
+        InitializeTileset(tileset);
+
         tileDictionary = new Dictionary<string, List<Sprite>>();
-        Tile t = new Tile();
-        ChangeTileSpriteByType(ref t, Tile.Type.Ground_Edge_Left_Bottom);
+
+
     }
 
     public Tile Create(Transform parent, Vector2 position, Color color, int order = 1)
@@ -34,9 +35,21 @@ public class TileManager : MonoBehaviour
 
         if (result.TryGetComponent<Tile>(out Tile tile))
         {
-            tile.type = Tile.Type.Ground;
+            tile.type = Tile.Type.Ground_Inner;
             // tile.color = color;
             tile.sortingOrder = order;
+        }
+
+        return result;
+    }
+
+    public Dictionary<string, List<Sprite>> InitializeTileset(Sprite[] tileset)
+    {
+        Dictionary<string, List<Sprite>> result = new Dictionary<string, List<Sprite>>();
+
+        for (int i = 0; i < tileset.Length; i++)
+        {
+            Debug.Log(tileset[i].name);
         }
 
         return result;
@@ -57,15 +70,9 @@ public class TileManager : MonoBehaviour
             if (i != typeKeywordArr.Length - 1) sb.Append("_");
         }
 
-        string typeKeyword = sb.ToString();
-
         string spriteStr = default(string);
-        spriteStr = $"{prefix}_{typeKeyword}";
+        spriteStr = $"{prefix}_{sb.ToString()}";
 
-        Debug.Log(spriteStr);
-
-        if (type == Tile.Type.Ground_Edge_Left_Top) spriteStr = $"{prefix}_{typeKeyword}";
-
-
+        // tile.sprite = new Sprite(spriteStr);
     }
 }
