@@ -55,8 +55,8 @@ public class TreeNode
             // 수평 분할 된 자식
             for (int i = left_y; i < right_y; i++)
             {
-                MapManager.Instance.TileArray[i, left_x].color = Color.cyan;
-                MapManager.Instance.TileArray[i, left_x].type = Tile.Type.WAY;
+                // MapManager.Instance.TileArray[i, left_x].color = Color.cyan;
+                // MapManager.Instance.TileArray[i, left_x].type = Tile.Type.WAY;
             }
         }
         else if (left_y == right_y)
@@ -64,8 +64,8 @@ public class TreeNode
             // 수직 분할 된 자식
             for (int i = left_x; i < right_x; i++)
             {
-                MapManager.Instance.TileArray[left_y, i].color = Color.cyan;
-                MapManager.Instance.TileArray[i, left_x].type = Tile.Type.WAY;
+                // MapManager.Instance.TileArray[left_y, i].color = Color.cyan;
+                // MapManager.Instance.TileArray[i, left_x].type = Tile.Type.WAY;
             }
         }
 

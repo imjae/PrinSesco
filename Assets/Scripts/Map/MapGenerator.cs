@@ -19,11 +19,13 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private float widthRatio;
     [SerializeField] private float heightRatio;
 
-
+    private List<Room> roomList;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
+        roomList = new List<Room>();
+
         manager.width = width;
         manager.height = height;
         manager.InitializeTiles();
@@ -36,7 +38,18 @@ public class MapGenerator : MonoBehaviour
 
         containerTree.GetLeafs().ForEach(node =>
         {
-            new Room(node).PaintGround(MapManager.Instance.TileArray);
+            Room tmpRoom = new Room(node);
+            roomList.Add(tmpRoom);
+            tmpRoom.InitTileType(MapManager.Instance.TileArray);
         });
+
+        // 타일에 설정된 타입에 맞게 스프라이트 한번에 변경
+        for (int x = 0; x < height; x++)
+        {
+            for (int y = 0; y < width; y++)
+            {
+                TileManager.Instance.ChangeTileSpriteByType(ref manager.TileArray[x, y]);
+            }
+        }
     }
 }

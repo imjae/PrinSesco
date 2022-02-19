@@ -132,19 +132,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: width
-      value: 50
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: height
-      value: 74
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 1614107565}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
+      propertyPath: widthRatio
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
+      propertyPath: heightRatio
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: iterationNumber
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622278, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: m_RootOrder
@@ -355,8 +363,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 4391378522864355753, guid: e83e83cec635620419bdc67fca1d15c9, type: 3}
-  tileWidth: 1
-  tileHeight: 1
+  tileset:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1949893550
 Transform:
   m_ObjectHideFlags: 0

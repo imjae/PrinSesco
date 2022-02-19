@@ -29,8 +29,12 @@ public class Container
                 else if (j == y) isPainting = true;
                 else if (j == y + h - 1) isPainting = true;
 
+                // Container 구역 나누는 벽. 테스트 용
                 if (isPainting)
-                    tileArray[j, i].color = Color.gray;
+                {
+                    // tileArray[j, i].color = Color.gray;
+
+                }
 
                 isPainting = false;
             }
