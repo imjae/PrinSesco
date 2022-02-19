@@ -12,11 +12,11 @@ public class Tile : MonoBehaviour
 
     #region Properties
     [field: SerializeField] public Vector2 Coordinate { get; set; }
-    public Color color
-    {
-        set => spriteRenderer.color = value;
-        get => spriteRenderer.color;
-    }
+    // public Color color
+    // {
+    //     set => spriteRenderer.color = value;
+    //     get => spriteRenderer.color;
+    // }
 
     public int sortingOrder
     {
@@ -43,11 +43,11 @@ public class Tile : MonoBehaviour
     #region Enums
     public enum Type
     {
-        GROUND,
-        GROUND_LEFT_TOP,
-        GROUND_RIGHT_TOP,
-        GROUND_LEFT_BOTTOM,
-        GROUND_RIGHT_BOTTOM,
+        Ground,
+        Ground_Edge_Left_Top,
+        Ground_Edge_Right_Top,
+        Ground_Edge_Left_Bottom,
+        Ground_Edge_Right_Bottom,
         WALL_LEFT,
         WALL_RIGHT,
         WALL_TOP,
@@ -91,8 +91,29 @@ public class Tile : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
+    #region Functions
+    public void ChangeSpriteByType(Type type)
     {
-        Debug.Log("click!");
+        string stringType = type.ToString();
+        string category = stringType.Split('_')[0];
+
+        if(category.Equals("GROUND"))
+        {
+
+        }
+        else if(category.Equals("WALL"))
+        {
+
+        }
+        else if(category.Equals("WAY"))
+        {
+            
+        }
+        else if(category.Equals("STRUCTURE"))
+        {
+            
+        }
     }
+
+    #endregion
 }
