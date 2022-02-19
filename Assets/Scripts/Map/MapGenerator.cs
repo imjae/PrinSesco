@@ -19,11 +19,13 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private float widthRatio;
     [SerializeField] private float heightRatio;
 
-
+    private List<Room> roomList;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
+        roomList = new List<Room>();
+
         manager.width = width;
         manager.height = height;
         manager.InitializeTiles();
@@ -36,7 +38,9 @@ public class MapGenerator : MonoBehaviour
 
         containerTree.GetLeafs().ForEach(node =>
         {
-            new Room(node).PaintGround(MapManager.Instance.TileArray);
+            Room tmpRoom = new Room(node);
+            roomList.Add(tmpRoom);
+            tmpRoom.PaintGround(MapManager.Instance.TileArray);
         });
     }
 }

@@ -24,6 +24,12 @@ public class Tile : MonoBehaviour
         get => spriteRenderer.sortingOrder;
     }
 
+    public Sprite sprite
+    {
+        set => spriteRenderer.sprite = value;
+        get => spriteRenderer.sprite;
+    }
+
     public Type type
     {
         set

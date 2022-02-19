@@ -3,6 +3,7 @@ using UnityEngine;
 public class Room
 {
     private int x, y, w, h;
+    private int size;
 
     public Room(Container container)
     {
@@ -12,6 +13,7 @@ public class Room
         this.h = container.h - (this.y - container.y);
         this.w -= Random.Range(1, this.w / 3);
         this.h -= Random.Range(1, this.h / 3);
+        this.size = this.w * this.h;
     }
 
     public void PaintGround(Tile[,] tileArray)
