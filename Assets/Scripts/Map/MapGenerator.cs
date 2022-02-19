@@ -36,6 +36,7 @@ public class MapGenerator : MonoBehaviour
         containerTree.Paint();
         containerTree.PaintWay();
 
+        
         containerTree.GetLeafs().ForEach(node =>
         {
             Room tmpRoom = new Room(node);
