@@ -5,12 +5,11 @@ using UnityEngine;
 public class TileManager : MonoBehaviour
 {
     #region Fields
+    [Header("Tile Prefabs")]
     [SerializeField] private Tile tilePrefab;
     public int tileWidth;
     public int tileHeight;
     #endregion
-
-
 
     public Tile Create(Transform parent, Vector2 position, Color color, int order = 1)
     {
