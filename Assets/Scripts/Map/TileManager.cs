@@ -7,22 +7,21 @@ using UnityEngine;
 public class TileManager : Singleton<TileManager>
 {
     #region Fields
+    private readonly string tile_prefix = "Dungeon_Tileset";
+
     [Header("Tile Prefabs")]
     [SerializeField] private Tile tilePrefab;
 
-    // 타일의 타입별 Sprite를 담고있는 리스트
     public Sprite[] tileset;
     public Dictionary<string, List<Sprite>> tileDictionary;
     #endregion
 
-    void Start()
+    public override void Awake()
     {
+        base.Awake();
+
         tileset = Resources.LoadAll<Sprite>("Map/DungeonTileset/Dungeon_Tileset");
-        InitializeTileset(tileset);
-
-        tileDictionary = new Dictionary<string, List<Sprite>>();
-
-
+        tileDictionary = InitializeTileset(tileset);
     }
 
     public Tile Create(Transform parent, Vector2 position, Color color, int order = 1)
@@ -47,9 +46,19 @@ public class TileManager : Singleton<TileManager>
     {
         Dictionary<string, List<Sprite>> result = new Dictionary<string, List<Sprite>>();
 
-        for (int i = 0; i < tileset.Length; i++)
+        List<Sprite> tmpList = new List<Sprite>();
+        foreach (string type in Enum.GetNames(typeof(Tile.Type)))
         {
-            Debug.Log(tileset[i].name);
+            for (int i = 0; i < tileset.Length; i++)
+            {
+                if (tileset[i].name.Contains(type))
+                {
+                    tmpList.Add(tileset[i]);
+                }
+            }
+
+            result[type] = tmpList;
+            tmpList.Clear();
         }
 
         return result;
