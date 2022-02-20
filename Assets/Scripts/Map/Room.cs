@@ -23,7 +23,7 @@ public class Room
         {
             for (int j = y; j < y + h; j++)
             {
-                if (!TileManager.Instance.IsWay(tileArray[j, i]))
+                if (!TileManager.Instance.IsWay(tileArray[j, i], this))
                 {
                     // tileArray[j, i].color = Color.cyan;
                     tileArray[j, i].type = Tile.Type.Ground_Inner;

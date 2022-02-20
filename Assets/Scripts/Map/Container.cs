@@ -2,7 +2,7 @@ using UnityEngine;
 public class Container
 {
     public int x, y, w, h;
-    public Vector2 center;
+    public Vector2Int center;
 
     public Container(int x, int y, int w, int h)
     {
@@ -10,7 +10,7 @@ public class Container
         this.y = y;
         this.w = w;
         this.h = h;
-        this.center = new Vector2
+        this.center = new Vector2Int
         {
             x = this.x + Mathf.RoundToInt(this.w * 0.5f),
             y = this.y + Mathf.RoundToInt(this.h * 0.5f)

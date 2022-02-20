@@ -6,12 +6,12 @@ public class Tile : MonoBehaviour
 {
     #region Fields
     private SpriteRenderer spriteRenderer;
-    private Vector2 _coordinate;
+    private Vector2Int _coordinate;
     public Type _type;
     #endregion
 
     #region Properties
-    [field: SerializeField] public Vector2 Coordinate { get; set; }
+    [field: SerializeField] public Vector2Int Coordinate { get; set; }
     // public Color color
     // {
     //     set => spriteRenderer.color = value;

@@ -80,7 +80,7 @@ public class TileManager : Singleton<TileManager>
         tile.sprite = tmpTileSprite[index];
     }
 
-    public bool IsWay(Tile tile)
+    public bool IsWay(Tile tile, Room room)
     {
         bool result = false;
 

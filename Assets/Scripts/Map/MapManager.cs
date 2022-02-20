@@ -48,7 +48,7 @@ public class MapManager : Singleton<MapManager>
             {
                 // 실제로 생성되는 타일의 위치는 0,0을 중심으로 생성되야 하기 때문에 좌표값을 할당하지 않는다.
                 var tileObject = tileManager.Create(tileManager.transform, new Vector2(x, y), Color.white);
-                tileObject.Coordinate = new Vector2(dx, dy);
+                tileObject.Coordinate = new Vector2Int(dx, dy);
                 tileObject.name = $"Tile({dx}.{dy})";
                 tileObject.type = Tile.Type.Dark;
 
