@@ -47,9 +47,9 @@ public class TileManager : Singleton<TileManager>
     {
         Dictionary<string, List<Sprite>> result = new Dictionary<string, List<Sprite>>();
 
+        // 
         foreach (string type in Enum.GetNames(typeof(Tile.Type)))
         {
-            Debug.Log(type);
             List<Sprite> tmpList = new List<Sprite>();
             for (int i = 0; i < tileset.Length; i++)
             {
@@ -76,7 +76,7 @@ public class TileManager : Singleton<TileManager>
         else
             index = UnityEngine.Random.Range(0, tmpTileSprite.Count);
 
-        Debug.Log($"{tile.type.ToString()} -> {tmpTileSprite.Count} -> {index}");
+        // Debug.Log($"{tile.type.ToString()} -> {tmpTileSprite.Count} -> {index}");
         tile.sprite = tmpTileSprite[index];
     }
 }

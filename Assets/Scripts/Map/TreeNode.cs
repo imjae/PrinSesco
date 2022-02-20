@@ -40,7 +40,7 @@ public class TreeNode
             this.rightChild.Paint();
     }
 
-    public void PaintWay()
+    public void InitTileWayType()
     {
         if (this.leftChild == null || this.rightChild == null)
             return;
@@ -69,7 +69,7 @@ public class TreeNode
             }
         }
 
-        this.leftChild.PaintWay();
-        this.rightChild.PaintWay();
+        this.leftChild.InitTileWayType();
+        this.rightChild.InitTileWayType();
     }
 }
