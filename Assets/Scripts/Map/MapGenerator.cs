@@ -34,13 +34,14 @@ public class MapGenerator : MonoBehaviour
         TreeNode containerTree = mainContainer.SplitContainer(mainContainer, iterationNumber, widthRatio, heightRatio);
 
         containerTree.Paint();
-        containerTree.PaintWay();
+        containerTree.InitTileWayType();
 
+        
         containerTree.GetLeafs().ForEach(node =>
         {
             Room tmpRoom = new Room(node);
             roomList.Add(tmpRoom);
-            tmpRoom.InitTileType(MapManager.Instance.TileArray);
+            tmpRoom.InitTileType();
         });
 
         // 타일에 설정된 타입에 맞게 스프라이트 한번에 변경

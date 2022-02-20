@@ -16,8 +16,9 @@ public class Room
         this.size = this.w * this.h;
     }
 
-    public void InitTileType(Tile[,] tileArray)
+    public void InitTileType()
     {
+        Tile[,] tileArray = MapManager.Instance.TileArray;
         for (int i = x; i < x + w; i++)
         {
             for (int j = y; j < y + h; j++)
@@ -80,7 +81,6 @@ public class Room
                     tileArray[j, i].type = Tile.Type.Ground_Edge_Right_Bottom;
                     tileArray[j - 1, i + 1].type = Tile.Type.Wall_Edge_Right_Bottom;
                 }
-
             }
         }
     }

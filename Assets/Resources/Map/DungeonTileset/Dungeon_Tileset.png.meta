@@ -7,31 +7,31 @@ TextureImporter:
     second: Dungeon_Tileset_Wall_Edge_Left_Top
   - first:
       213: -3590207636862898149
-    second: Dungeon_Tileset_Wall_Top_0
+    second: Dungeon_Tileset_Wall_Top_0#Entrance_Top_0#Way_Wall_Top_0
   - first:
       213: -6941422852762540485
-    second: Dungeon_Tileset_Wall_Top_1
+    second: Dungeon_Tileset_Wall_Top_1#Entrance_Top_1##Way_Wall_Top_1
   - first:
       213: -6419999111262848172
-    second: Dungeon_Tileset_Wall_Top_2
+    second: Dungeon_Tileset_Wall_Top_2#Entrance_Top_2##Way_Wall_Top_2
   - first:
       213: 5094737752361063794
-    second: Dungeon_Tileset_Wall_Top_3
+    second: Dungeon_Tileset_Wall_Top_3#Entrance_Top_3#Way_Wall_Top_3
   - first:
       213: 4023018930920339469
     second: Dungeon_Tileset_Wall_Edge_Right_Top
   - first:
       213: -8120323925528636241
-    second: Dungeon_Tileset_Ground_Inner_0
+    second: Dungeon_Tileset_Ground_Inner_0#Way_Floor_NotTop_0
   - first:
       213: 8938356945095094423
-    second: Dungeon_Tileset_Ground_Inner_1
+    second: Dungeon_Tileset_Ground_Inner_1#Way_Floor_NotTop_1
   - first:
       213: 2818063909598327431
-    second: Dungeon_Tileset_Ground_Inner_2
+    second: Dungeon_Tileset_Ground_Inner_2##Way_Floor_NotTop_2
   - first:
       213: -778764822399169897
-    second: Dungeon_Tileset_Ground_Inner_3
+    second: Dungeon_Tileset_Ground_Inner_3##Way_Floor_NotTop_3
   - first:
       213: -8474740879727053552
     second: Dungeon_Tileset_Wall_Left_0
@@ -40,10 +40,10 @@ TextureImporter:
     second: Dungeon_Tileset_Ground_Edge_Left_Top
   - first:
       213: 1558959487191823921
-    second: Dungeon_Tileset_Ground_Top_0
+    second: Dungeon_Tileset_Ground_Top_0#Way_Floor_Top_0
   - first:
       213: 595508747133529673
-    second: Dungeon_Tileset_Ground_Top_1
+    second: Dungeon_Tileset_Ground_Top_1##Way_Floor_Top_1
   - first:
       213: -1474506998622769691
     second: Dungeon_Tileset_Ground_Edge_Right_Top
@@ -52,16 +52,16 @@ TextureImporter:
     second: Dungeon_Tileset_Wall_Right_0
   - first:
       213: -7606234629451901924
-    second: Dungeon_Tileset_Ground_Inner_4
+    second: Dungeon_Tileset_Ground_Inner_4##Way_Floor_NotTop_4
   - first:
       213: -7657094741939605724
-    second: Dungeon_Tileset_Ground_Inner_5
+    second: Dungeon_Tileset_Ground_Inner_5##Way_Floor_NotTop_5
   - first:
       213: -9000362276992120081
-    second: Dungeon_Tileset_Ground_Inner_6
+    second: Dungeon_Tileset_Ground_Inner_6##Way_Floor_NotTop_6
   - first:
       213: -3317108722525156635
-    second: Dungeon_Tileset_Ground_Inner_7
+    second: Dungeon_Tileset_Ground_Inner_7##Way_Floor_NotTop_7
   - first:
       213: -8355083117788888566
     second: Dungeon_Tileset_Wall_Left_1
@@ -82,16 +82,16 @@ TextureImporter:
     second: Dungeon_Tileset_Wall_Right_1
   - first:
       213: -5052320489504722407
-    second: Dungeon_Tileset_Ground_Inner_8
+    second: Dungeon_Tileset_Ground_Inner_8##Way_Floor_NotTop_8
   - first:
       213: 1114646796741094055
-    second: Dungeon_Tileset_Ground_Inner_9
+    second: Dungeon_Tileset_Ground_Inner_9##Way_Floor_NotTop_9
   - first:
       213: -9048192641222686197
-    second: Dungeon_Tileset_Ground_Inner_10
+    second: Dungeon_Tileset_Ground_Inner_10##Way_Floor_NotTop_10
   - first:
       213: 5211745164843661978
-    second: Dungeon_Tileset_Ground_Inner_11
+    second: Dungeon_Tileset_Ground_Inner_11##Way_Floor_NotTop_11
   - first:
       213: -3684562326207342857
     second: Dungeon_Tileset_Wall_Left_2
@@ -127,16 +127,16 @@ TextureImporter:
     second: Dungeon_Tileset_Wall_Edge_Left_Bottom
   - first:
       213: -931493284425913039
-    second: Dungeon_Tileset_Wall_Bottom_0
+    second: Dungeon_Tileset_Wall_Bottom_0#Way_Wall_Bottom_0
   - first:
       213: 8501229379153569890
-    second: Dungeon_Tileset_Wall_Bottom_1
+    second: Dungeon_Tileset_Wall_Bottom_1##Way_Wall_Bottom_1
   - first:
       213: 5769662111529959046
-    second: Dungeon_Tileset_Wall_Bottom_2
+    second: Dungeon_Tileset_Wall_Bottom_2#Way_Wall_Bottom_2
   - first:
       213: -9148341807223554030
-    second: Dungeon_Tileset_Wall_Bottom_3
+    second: Dungeon_Tileset_Wall_Bottom_3#Way_Wall_Bottom_3
   - first:
       213: -6208134848360472016
     second: Dungeon_Tileset_Wall_Edge_Right_Bottom
@@ -154,16 +154,16 @@ TextureImporter:
     second: Dungeon_Tileset_Big_Rock
   - first:
       213: 2203797919881089718
-    second: Dungeon_Tileset_Corner_Right_Bottom
+    second: Dungeon_Tileset_Entrance_Right_Bottom#Entrance_Bottom_Right
   - first:
       213: 8673527630790295319
-    second: Dungeon_Tileset_Way_Bottom_0
+    second: Dungeon_Tileset_Way_Wall_Bottom_4
   - first:
       213: 8854592227059702305
-    second: Dungeon_Tileset_Way_Bottom_1
+    second: Dungeon_Tileset_Way_Wall_Bottom_5
   - first:
       213: -224872910991652484
-    second: Dungeon_Tileset_53
+    second: Dungeon_Tileset_Entrance_Left_Bottom#Entrance_Bottom_Left
   - first:
       213: 1421881976529914242
     second: Dungeon_Tileset_54
@@ -184,16 +184,16 @@ TextureImporter:
     second: Dungeon_Tileset_Small_Rock
   - first:
       213: 824959492066083578
-    second: Dungeon_Tileset_60
+    second: Dungeon_Tileset_Ground_Top_2#Way_Floor_Top_2
   - first:
       213: -5892618101177633896
-    second: Dungeon_Tileset_61
+    second: Dungeon_Tileset_Ground_Top_3#Way_Floor_Top_3
   - first:
       213: 8901531028996712117
-    second: Dungeon_Tileset_62
+    second: Dungeon_Tileset_Ground_Top_4#Way_Floor_Top_4
   - first:
       213: 356223449659879753
-    second: Dungeon_Tileset_63
+    second: Dungeon_Tileset_Ground_Top_5#Way_Floor_Top_5
   - first:
       213: 1053006213846151300
     second: Dungeon_Tileset_64
@@ -448,7 +448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Wall_Top_0
+      name: Dungeon_Tileset_Wall_Top_0#Entrance_Top_0#Way_Wall_Top_0
       rect:
         serializedVersion: 2
         x: 16
@@ -469,7 +469,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Wall_Top_1
+      name: Dungeon_Tileset_Wall_Top_1#Entrance_Top_1##Way_Wall_Top_1
       rect:
         serializedVersion: 2
         x: 32
@@ -490,7 +490,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Wall_Top_2
+      name: Dungeon_Tileset_Wall_Top_2#Entrance_Top_2##Way_Wall_Top_2
       rect:
         serializedVersion: 2
         x: 48
@@ -511,7 +511,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Wall_Top_3
+      name: Dungeon_Tileset_Wall_Top_3#Entrance_Top_3#Way_Wall_Top_3
       rect:
         serializedVersion: 2
         x: 64
@@ -553,7 +553,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_0
+      name: Dungeon_Tileset_Ground_Inner_0#Way_Floor_NotTop_0
       rect:
         serializedVersion: 2
         x: 96
@@ -574,7 +574,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_1
+      name: Dungeon_Tileset_Ground_Inner_1#Way_Floor_NotTop_1
       rect:
         serializedVersion: 2
         x: 112
@@ -595,7 +595,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_2
+      name: Dungeon_Tileset_Ground_Inner_2##Way_Floor_NotTop_2
       rect:
         serializedVersion: 2
         x: 128
@@ -616,7 +616,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_3
+      name: Dungeon_Tileset_Ground_Inner_3##Way_Floor_NotTop_3
       rect:
         serializedVersion: 2
         x: 144
@@ -679,7 +679,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Top_0
+      name: Dungeon_Tileset_Ground_Top_0#Way_Floor_Top_0
       rect:
         serializedVersion: 2
         x: 32
@@ -700,7 +700,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Top_1
+      name: Dungeon_Tileset_Ground_Top_1##Way_Floor_Top_1
       rect:
         serializedVersion: 2
         x: 48
@@ -763,7 +763,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_4
+      name: Dungeon_Tileset_Ground_Inner_4##Way_Floor_NotTop_4
       rect:
         serializedVersion: 2
         x: 96
@@ -784,7 +784,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_5
+      name: Dungeon_Tileset_Ground_Inner_5##Way_Floor_NotTop_5
       rect:
         serializedVersion: 2
         x: 112
@@ -805,7 +805,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_6
+      name: Dungeon_Tileset_Ground_Inner_6##Way_Floor_NotTop_6
       rect:
         serializedVersion: 2
         x: 128
@@ -826,7 +826,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_7
+      name: Dungeon_Tileset_Ground_Inner_7##Way_Floor_NotTop_7
       rect:
         serializedVersion: 2
         x: 144
@@ -973,7 +973,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_8
+      name: Dungeon_Tileset_Ground_Inner_8##Way_Floor_NotTop_8
       rect:
         serializedVersion: 2
         x: 96
@@ -994,7 +994,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_9
+      name: Dungeon_Tileset_Ground_Inner_9##Way_Floor_NotTop_9
       rect:
         serializedVersion: 2
         x: 112
@@ -1015,7 +1015,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_10
+      name: Dungeon_Tileset_Ground_Inner_10##Way_Floor_NotTop_10
       rect:
         serializedVersion: 2
         x: 128
@@ -1036,7 +1036,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Ground_Inner_11
+      name: Dungeon_Tileset_Ground_Inner_11##Way_Floor_NotTop_11
       rect:
         serializedVersion: 2
         x: 144
@@ -1288,7 +1288,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Wall_Bottom_0
+      name: Dungeon_Tileset_Wall_Bottom_0#Way_Wall_Bottom_0
       rect:
         serializedVersion: 2
         x: 16
@@ -1309,7 +1309,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Wall_Bottom_1
+      name: Dungeon_Tileset_Wall_Bottom_1##Way_Wall_Bottom_1
       rect:
         serializedVersion: 2
         x: 32
@@ -1330,7 +1330,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Wall_Bottom_2
+      name: Dungeon_Tileset_Wall_Bottom_2#Way_Wall_Bottom_2
       rect:
         serializedVersion: 2
         x: 48
@@ -1351,7 +1351,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Wall_Bottom_3
+      name: Dungeon_Tileset_Wall_Bottom_3#Way_Wall_Bottom_3
       rect:
         serializedVersion: 2
         x: 64
@@ -1477,7 +1477,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Corner_Right_Bottom
+      name: Dungeon_Tileset_Entrance_Right_Bottom#Entrance_Bottom_Right
       rect:
         serializedVersion: 2
         x: 0
@@ -1498,7 +1498,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Way_Bottom_0
+      name: Dungeon_Tileset_Way_Wall_Bottom_4
       rect:
         serializedVersion: 2
         x: 16
@@ -1519,7 +1519,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Way_Bottom_1
+      name: Dungeon_Tileset_Way_Wall_Bottom_5
       rect:
         serializedVersion: 2
         x: 32
@@ -1540,7 +1540,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_53
+      name: Dungeon_Tileset_Entrance_Left_Bottom#Entrance_Bottom_Left
       rect:
         serializedVersion: 2
         x: 48
@@ -1687,7 +1687,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_60
+      name: Dungeon_Tileset_Ground_Top_2#Way_Floor_Top_2
       rect:
         serializedVersion: 2
         x: 0
@@ -1708,7 +1708,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_61
+      name: Dungeon_Tileset_Ground_Top_3#Way_Floor_Top_3
       rect:
         serializedVersion: 2
         x: 16
@@ -1729,7 +1729,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_62
+      name: Dungeon_Tileset_Ground_Top_4#Way_Floor_Top_4
       rect:
         serializedVersion: 2
         x: 32
@@ -1750,7 +1750,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_63
+      name: Dungeon_Tileset_Ground_Top_5#Way_Floor_Top_5
       rect:
         serializedVersion: 2
         x: 48
