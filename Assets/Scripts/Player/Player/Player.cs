@@ -40,7 +40,8 @@ public class Player : MonoBehaviour
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime,
                                         Input.GetAxis("Vertical") * speed * Time.deltaTime);
         transform.position = new Vector2(transform.position.x + moveInput.x, transform.position.y+ moveInput.y);
-        bool isWalk = Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0;
+        //bool isWalk = Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0;
+        bool isWalk = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W);
         bool isAttack = whip.activeSelf;
         ani.SetBool("isWalk", isWalk);
         if (Input.GetKeyDown(KeyCode.D)) // Horizontal의 Velocity를 받아서 구현해도 됨.
@@ -48,9 +49,9 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
             reversal = false;
         if(reversal && !isAttack) // 이 부분은 무기 클래스에 들어갈 수도 있음
-            whip.transform.localPosition = new Vector2(0.2f, whip.transform.localPosition.y);
+            whip.transform.localPosition = new Vector2(0.4f, whip.transform.localPosition.y);
         else if(!isAttack)
-            whip.transform.localPosition = new Vector2(-0.2f, whip.transform.localPosition.y);
+            whip.transform.localPosition = new Vector2(-0.4f, whip.transform.localPosition.y);
         spriteRenderer.flipX = reversal; // 캐릭터 반전
     }
 }
