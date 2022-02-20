@@ -154,7 +154,7 @@ TextureImporter:
     second: Dungeon_Tileset_Big_Rock
   - first:
       213: 2203797919881089718
-    second: Dungeon_Tileset_Entrance_Right_Bottom#Entrance_Bottom_Right
+    second: Dungeon_Tileset_Entrance_Right_Bottom_0#Entrance_Bottom_Right_0
   - first:
       213: 8673527630790295319
     second: Dungeon_Tileset_Way_Wall_Bottom_4
@@ -163,13 +163,13 @@ TextureImporter:
     second: Dungeon_Tileset_Way_Wall_Bottom_5
   - first:
       213: -224872910991652484
-    second: Dungeon_Tileset_Entrance_Left_Bottom#Entrance_Bottom_Left
+    second: Dungeon_Tileset_Entrance_Left_Bottom_0#Entrance_Bottom_Left_0
   - first:
       213: 1421881976529914242
-    second: Dungeon_Tileset_54
+    second: Dungeon_Tileset_Entrance_Right_Bottom_1#Entrance_Bottom_Right_1
   - first:
       213: 252558984209222252
-    second: Dungeon_Tileset_55
+    second: Dungeon_Tileset_Entrance_Left_Bottom_1#Entrance_Bottom_Left_1
   - first:
       213: -2097155515530198684
     second: Dungeon_Tileset_VerticalDoor_Center_Down
@@ -1477,7 +1477,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Entrance_Right_Bottom#Entrance_Bottom_Right
+      name: Dungeon_Tileset_Entrance_Right_Bottom_0#Entrance_Bottom_Right_0
       rect:
         serializedVersion: 2
         x: 0
@@ -1540,7 +1540,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Entrance_Left_Bottom#Entrance_Bottom_Left
+      name: Dungeon_Tileset_Entrance_Left_Bottom_0#Entrance_Bottom_Left_0
       rect:
         serializedVersion: 2
         x: 48
@@ -1561,7 +1561,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_54
+      name: Dungeon_Tileset_Entrance_Right_Bottom_1#Entrance_Bottom_Right_1
       rect:
         serializedVersion: 2
         x: 64
@@ -1582,7 +1582,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_55
+      name: Dungeon_Tileset_Entrance_Left_Bottom_1#Entrance_Bottom_Left_1
       rect:
         serializedVersion: 2
         x: 80

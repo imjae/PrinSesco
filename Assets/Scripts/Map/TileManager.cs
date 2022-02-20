@@ -79,4 +79,13 @@ public class TileManager : Singleton<TileManager>
         // Debug.Log($"{tile.type.ToString()} -> {tmpTileSprite.Count} -> {index}");
         tile.sprite = tmpTileSprite[index];
     }
+
+    public bool IsWay(Tile tile)
+    {
+        bool result = false;
+
+        result = tile.type.ToString().Contains("Way");
+
+        return result;
+    }
 }
