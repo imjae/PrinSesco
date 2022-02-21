@@ -151,6 +151,10 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
+      propertyPath: wayMinRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: iterationNumber
       value: 3
       objectReference: {fileID: 0}

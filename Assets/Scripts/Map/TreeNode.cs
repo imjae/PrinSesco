@@ -40,7 +40,7 @@ public class TreeNode
             this.rightChild.Paint();
     }
 
-    public void InitTileWayType()
+    public void InitTileWayType(int minWidth)
     {
         if (this.leftChild == null || this.rightChild == null)
             return;
@@ -51,16 +51,18 @@ public class TreeNode
         int right_center_y = Mathf.RoundToInt(this.rightChild.self.center.y);
 
         //TODO 자식 노드의 시작위치, 크기를 비교해 길의 너비와 위치를 조절하는 로직이 필요한상태
-        // bool isHorizontalWay = 
-        // bool isVerticalWay = 
-
+        int wayWidth = UnityEngine.Random.Range(minWidth, 3);
         if (left_center_x == right_center_x)
         {
             // 수평 분할 된 자식
             for (int i = left_center_y; i < right_center_y; i++)
             {
-                MapManager.Instance.TileArray[i, left_center_x].type = Tile.Type.Way_Floor_NotTop;
-                MapManager.Instance.TileArray[i, left_center_x + 1].type = Tile.Type.Way_Floor_NotTop;
+
+                for (int j = 0; j < wayWidth; j++)
+                {
+                    MapManager.Instance.TileArray[i, left_center_x + j].type = Tile.Type.Way_Floor_NotTop;
+
+                }
             }
         }
         else if (left_center_y == right_center_y)
@@ -73,7 +75,7 @@ public class TreeNode
             }
         }
 
-        this.leftChild.InitTileWayType();
-        this.rightChild.InitTileWayType();
+        this.leftChild.InitTileWayType(minWidth);
+        this.rightChild.InitTileWayType(minWidth);
     }
 }
