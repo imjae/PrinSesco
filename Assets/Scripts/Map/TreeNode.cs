@@ -60,8 +60,7 @@ public class TreeNode
             {
                 MapManager.Instance.TileArray[i, left_center_x - 1].type = Tile.Type.Way_Wall_Left;
                 MapManager.Instance.TileArray[i, left_center_x].type = Tile.Type.Way_Floor_NotTop;
-                MapManager.Instance.TileArray[i, left_center_x + 1].type = Tile.Type.Way_Floor_NotTop;
-                MapManager.Instance.TileArray[i, left_center_x + 2].type = Tile.Type.Way_Wall_Right;
+                MapManager.Instance.TileArray[i, left_center_x + 1].type = Tile.Type.Way_Wall_Right;
             }
         }
         else if (left_center_y == right_center_y)
@@ -69,10 +68,9 @@ public class TreeNode
             // 수직 분할 된 자식
             for (int i = left_center_x; i < right_center_x; i++)
             {
-                MapManager.Instance.TileArray[left_center_y - 1, i].type = Tile.Type.Way_Wall_Top;
-                MapManager.Instance.TileArray[left_center_y, i].type = Tile.Type.Way_Floor_Top;
-                MapManager.Instance.TileArray[left_center_y + 1, i].type = Tile.Type.Way_Floor_Top;
-                MapManager.Instance.TileArray[left_center_y + 2, i].type = Tile.Type.Way_Wall_Bottom;
+                MapManager.Instance.TileArray[left_center_y - 1, i].type = Tile.Type.Way_Wall_Bottom;
+                MapManager.Instance.TileArray[left_center_y, i].type = Tile.Type.Way_Floor_NotTop;
+                MapManager.Instance.TileArray[left_center_y + 1, i].type = Tile.Type.Way_Wall_Top;
             }
         }
 

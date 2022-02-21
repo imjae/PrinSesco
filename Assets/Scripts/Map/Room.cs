@@ -107,5 +107,11 @@ public class Room
                 }
             }
         }
+
+        // // 방의 각 모서리 바닥 타일 셋팅
+        // tileArray[y + 1, x + 1].type = Tile.Type.Ground_Edge_Left_Bottom;
+        // tileArray[y + h - 2, x + w - 2].type = Tile.Type.Ground_Edge_Right_Top;
+        // tileArray[y + h - 2, x + 1].type = Tile.Type.Ground_Edge_Left_Top;
+        // tileArray[y + 1, x + w - 2].type = Tile.Type.Ground_Edge_Right_Bottom;
     }
 }

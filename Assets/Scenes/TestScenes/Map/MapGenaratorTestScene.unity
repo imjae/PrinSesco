@@ -132,11 +132,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: width
-      value: 60
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: height
-      value: 60
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: manager
@@ -144,11 +144,11 @@ PrefabInstance:
       objectReference: {fileID: 1614107565}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: widthRatio
-      value: 0.25
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: heightRatio
-      value: 0.25
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: wayMinRange
@@ -156,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: iterationNumber
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622278, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: m_RootOrder
