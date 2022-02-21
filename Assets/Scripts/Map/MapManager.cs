@@ -86,4 +86,28 @@ public class MapManager : Singleton<MapManager>
             }
         }
     }
+
+    public void InspectedVerticalWay()
+    {
+        for (int x = 0; x < height; x++)
+        {
+            for (int y = 0; y < width; y++)
+            {
+                if (TileArray[x, y].type == Tile.Type.Way_Wall_Left)
+                {
+                    // 수직 길이 수평길을 만났을 경우에 수평 길이 위쪽에 있는 경우와 아래쪽에 있는 경우 길 합치기 로직
+                    if (TileArray[x + 1, y].type == Tile.Type.Way_Wall_Bottom)
+                    {
+                        TileArray[x + 1, y].type = Tile.Type.Entrance_Bottom_Left;
+                        TileArray[x + 1, y + 1].type = Tile.Type.Way_Floor_NotTop;
+                        TileArray[x + 1, y + 2].type = Tile.Type.Entrance_Bottom_Right;
+                    }
+                    else if (TileArray[x - 1, y].type == Tile.Type.Way_Wall_Top)
+                    {
+                        TileArray[x - 1, y + 1].type = Tile.Type.Way_Floor_NotTop;
+                    }
+                }
+            }
+        }
+    }
 }
