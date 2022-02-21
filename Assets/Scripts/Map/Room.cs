@@ -15,12 +15,12 @@ public class Room
 
     public Room(Container container)
     {
-        this.x = container.x + Mathf.RoundToInt(container.w * 0.2f);
-        this.y = container.y + Mathf.RoundToInt(container.h * 0.2f);
+        this.x = container.x + UnityEngine.Random.Range(2,4);
+        this.y = container.y + UnityEngine.Random.Range(2,4);
         this.w = container.w - (this.x - container.x);
         this.h = container.h - (this.y - container.y);
-        this.w -= Mathf.RoundToInt(this.w * 0.2f);
-        this.h -= Mathf.RoundToInt(this.h * 0.2f);
+        this.w -= UnityEngine.Random.Range(2,4);
+        this.h -= UnityEngine.Random.Range(2,4);
 
         this.Coordinate = new Vector2Int(this.x, this.y);
         this.Width = w;
