@@ -40,13 +40,14 @@ public class MapGenerator : MonoBehaviour
         containerTree.Paint();
         containerTree.InitTileWayType(wayMinRange);
 
-        
         containerTree.GetLeafs().ForEach(node =>
         {
             Room tmpRoom = new Room(node);
             roomList.Add(tmpRoom);
             tmpRoom.InitTileType();
         });
+
+
 
 
 

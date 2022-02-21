@@ -88,17 +88,7 @@ public class TileManager : Singleton<TileManager>
         // 타일의 할당된 타입이 Way인지 확인
         // bool isEnaranceType = tile.type.ToString().Contains(typePrefix);
 
-        // Vector2Int tileCoordinate = tile.Coordinate;
-        // int tile_x = tileCoordinate.x;
-        // int tile_y = tileCoordinate.y;
 
-        // Vector2Int roomCoordinate = room.Coordinate;
-        // int room_x = roomCoordinate.x;
-        // int room_y = roomCoordinate.y;
-        // int room_w = room.Width;
-        // int room_h = room.Height;
-        // int room_end_x = room_x + room_w;
-        // int room_end_y = room_y + room_y;
 
         // // 해당 타일이 기준 방의 입구, 출구 위치가 아니라면 길로 인식하면 안된다.
         // bool isRoomFloor = (tile_x >= room_x && tile_x < room_end_x) && (tile_y >= room_y && tile_y < room_end_y);
@@ -106,6 +96,27 @@ public class TileManager : Singleton<TileManager>
 
         // 할당된 타입이 Way이고 Room의 바닥 범위가 아니면
         result = tile.type.ToString().Contains(typePrefix);
+
+        return result;
+    }
+
+    public bool IsWallTile(Tile tile, Room room)
+    {
+        bool result = default(bool);
+
+        Vector2Int tileCoordinate = tile.Coordinate;
+        int tile_x = tileCoordinate.x;
+        int tile_y = tileCoordinate.y;
+
+        Vector2Int roomCoordinate = room.Coordinate;
+        int room_x = roomCoordinate.x;
+        int room_y = roomCoordinate.y;
+        int room_w = room.Width;
+        int room_h = room.Height;
+        int room_end_x = room_x + room_w;
+        int room_end_y = room_y + room_y;
+
+        // if(tile_x == room_x)
 
         return result;
     }

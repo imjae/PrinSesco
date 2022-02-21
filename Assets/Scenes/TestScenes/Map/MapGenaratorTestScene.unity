@@ -132,11 +132,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: width
-      value: 40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: height
-      value: 40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: manager
@@ -144,11 +144,11 @@ PrefabInstance:
       objectReference: {fileID: 1614107565}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: widthRatio
-      value: 0.3
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: heightRatio
-      value: 0.3
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: wayMinRange
@@ -243,7 +243,7 @@ Camera:
   m_GameObject: {fileID: 1571252029}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
