@@ -60,4 +60,30 @@ public class MapManager : Singleton<MapManager>
             dy += 1;
         }
     }
+
+    public void InspectedHorizontalWay()
+    {
+        for (int x = 0; x < height; x++)
+        {
+            for (int y = 0; y < width; y++)
+            {
+                if (TileArray[x, y].type == Tile.Type.Way_Wall_Top)
+                {
+                    // 수평 길이 수직길을 만났을 경우에 수직 길이 왼쪽에 있는경우와 오른쪽에 있는 경우 길 합치기 로직
+                    if (TileArray[x, y - 1].type == Tile.Type.Way_Wall_Right)
+                    {
+                        TileArray[x, y - 1].type = Tile.Type.Way_Wall_Top;
+                        TileArray[x - 1, y - 1].type = Tile.Type.Way_Floor_Top;
+                        TileArray[x - 2, y - 1].type = Tile.Type.Entrance_Right_Bottom;
+                    }
+                    else if (TileArray[x, y + 1].type == Tile.Type.Way_Wall_Left)
+                    {
+                        TileArray[x, y + 1].type = Tile.Type.Way_Wall_Top;
+                        TileArray[x - 1, y + 1].type = Tile.Type.Way_Floor_Top;
+                        TileArray[x - 2, y + 1].type = Tile.Type.Entrance_Left_Bottom;
+                    }
+                }
+            }
+        }
+    }
 }

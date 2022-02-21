@@ -69,7 +69,7 @@ public class TreeNode
             for (int i = left_center_x; i < right_center_x; i++)
             {
                 MapManager.Instance.TileArray[left_center_y - 1, i].type = Tile.Type.Way_Wall_Bottom;
-                MapManager.Instance.TileArray[left_center_y, i].type = Tile.Type.Way_Floor_NotTop;
+                MapManager.Instance.TileArray[left_center_y, i].type = Tile.Type.Way_Floor_Top;
                 MapManager.Instance.TileArray[left_center_y + 1, i].type = Tile.Type.Way_Wall_Top;
             }
         }

@@ -15,12 +15,12 @@ public class Room
 
     public Room(Container container)
     {
-        this.x = container.x + Mathf.RoundToInt(container.w * 0.15f);
-        this.y = container.y + Mathf.RoundToInt(container.h * 0.15f);
+        this.x = container.x + Mathf.RoundToInt(container.w * 0.2f);
+        this.y = container.y + Mathf.RoundToInt(container.h * 0.2f);
         this.w = container.w - (this.x - container.x);
         this.h = container.h - (this.y - container.y);
-        this.w -= Mathf.RoundToInt(this.w * 0.15f);
-        this.h -= Mathf.RoundToInt(this.h * 0.15f);
+        this.w -= Mathf.RoundToInt(this.w * 0.2f);
+        this.h -= Mathf.RoundToInt(this.h * 0.2f);
 
         this.Coordinate = new Vector2Int(this.x, this.y);
         this.Width = w;
@@ -40,7 +40,7 @@ public class Room
         }
     }
 
-    public void InitTileType()
+    public void InitRoomTileType()
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
         for (int i = x; i < x + w; i++)
@@ -113,5 +113,69 @@ public class Room
         // tileArray[y + h - 2, x + w - 2].type = Tile.Type.Ground_Edge_Right_Top;
         // tileArray[y + h - 2, x + 1].type = Tile.Type.Ground_Edge_Left_Top;
         // tileArray[y + 1, x + w - 2].type = Tile.Type.Ground_Edge_Right_Bottom;
+    }
+
+    public void InspectedTopWall()
+    {
+        Tile[,] tileArray = MapManager.Instance.TileArray;
+        for (int i = x - 1; i < x + w + 1; i++)
+        {
+            // tileArray[y + h, i].color = Color.black;
+            if (tileArray[y + h + 1, i].type.ToString().Contains("Way_Floor"))
+            {
+                tileArray[y + h, i].type = Tile.Type.Way_Floor_NotTop;
+                tileArray[y + h - 1, i].type = Tile.Type.Ground_Inner;
+            }
+        }
+    }
+    public void InspectedBottomWall()
+    {
+        Tile[,] tileArray = MapManager.Instance.TileArray;
+        for (int i = x - 1; i < x + w + 1; i++)
+        {
+            // tileArray[y - 1, i].color = Color.black;
+            if (tileArray[y - 2, i].type.ToString().Contains("Way_Floor"))
+            {
+                tileArray[y, i].type = Tile.Type.Way_Floor_NotTop;
+
+                tileArray[y - 1, i].type = Tile.Type.Ground_Inner;
+                tileArray[y - 1, i - 1].type = Tile.Type.Entrance_Bottom_Left;
+                tileArray[y - 1, i + 1].type = Tile.Type.Entrance_Bottom_Right;
+            }
+        }
+    }
+
+    public void InspectedLeftWall()
+    {
+        Tile[,] tileArray = MapManager.Instance.TileArray;
+        for (int i = y - 1; i < y + h + 1; i++)
+        {
+            // tileArray[i, x - 2].color = Color.black;
+            if (tileArray[i, x - 2].type.ToString().Contains("Way_Floor"))
+            {
+                tileArray[i, x - 1].type = Tile.Type.Way_Floor_Top;
+                tileArray[i, x].type = Tile.Type.Ground_Inner;
+
+                tileArray[i + 1, x - 1].type = Tile.Type.Entrance_Top;
+                tileArray[i - 1, x - 1].type = Tile.Type.Entrance_Left_Bottom;
+            }
+        }
+    }
+
+    public void InspectedRightWall()
+    {
+        Tile[,] tileArray = MapManager.Instance.TileArray;
+        for (int i = y - 1; i < y + h + 1; i++)
+        {
+            // tileArray[i, x + w + 1].color = Color.black;
+            if (tileArray[i, x + w + 1].type.ToString().Contains("Way_Floor"))
+            {
+                tileArray[i, x + w].type = Tile.Type.Way_Floor_Top;
+                tileArray[i, x + w - 1].type = Tile.Type.Ground_Inner;
+
+                tileArray[i + 1, x + w].type = Tile.Type.Entrance_Top;
+                tileArray[i - 1, x + w].type = Tile.Type.Entrance_Right_Bottom;
+            }
+        }
     }
 }
