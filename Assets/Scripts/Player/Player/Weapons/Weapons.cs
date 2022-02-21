@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Weapons : MonoBehaviour
+public abstract class Weapons : MonoBehaviour
 {
+    private int level;
+    private float duration;
 
+    public abstract void LevelUp();
+    public abstract void WeaponEffect();
 }

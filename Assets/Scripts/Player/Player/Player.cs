@@ -4,11 +4,41 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("PlayerInfo")]
     [SerializeField] float speed;
-    public bool reversal = false;
+    [SerializeField] float hp;
+    [SerializeField] float level;
+    [SerializeField] float exp;
+    public float Hp
+    {
+        get { return hp; }
+        set
+        {
+            hp = value;
+        }
+    }
+    public float Level
+    {
+        get { return level; }
+        set
+        {
+            level = value;
+        }
+    }
+    public float Exp
+    {
+        get { return exp; }
+        set
+        {
+            exp = value;
+        }
+    }
+    private bool reversal = false; // 반전처리
     SpriteRenderer spriteRenderer;
     Animator ani;
     GameObject whip;
+
+    [SerializeField] PlayerUIManager playerUIManager;
 
     void Awake()
     {
@@ -34,12 +64,12 @@ public class Player : MonoBehaviour
             whip.SetActive(false);
         }
     }
-    
     void PlayerMove()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime,
-                                        Input.GetAxis("Vertical") * speed * Time.deltaTime);
-        transform.position = new Vector2(transform.position.x + moveInput.x, transform.position.y+ moveInput.y);
+        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime * 5,
+                                        Input.GetAxis("Vertical") * speed * Time.deltaTime * 5);
+        //transform.position = new Vector2(transform.position.x + moveInput.x, transform.position.y+ moveInput.y);
+        transform.Translate(new Vector2(moveInput.x, moveInput.y));
         //bool isWalk = Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0;
         bool isWalk = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W);
         bool isAttack = whip.activeSelf;
