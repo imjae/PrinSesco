@@ -43,12 +43,19 @@ public class MapGenerator : MonoBehaviour
         containerTree.GetLeafs().ForEach(node =>
         {
             Room tmpRoom = new Room(node);
-            roomList.Add(tmpRoom);
-            tmpRoom.InitRoomTileType();
+            
+            //방의 가로, 세로 길이가 1인 경우 방을 추가하지 않는다. (타일 구조상 한칸짜리 방은 타일의 규칙을 흐트러트린다.)
+            if(!(tmpRoom.Width == 1 || tmpRoom.Height == 1))
+                roomList.Add(tmpRoom);
         });
 
         roomList.ForEach(room =>
         {
+            // 기본 방 타일 타입 변경
+            room.InitRoomTileType();
+
+
+            // 방과 길의 예외케이스 검사
             room.InspectedTopWall();
             room.InspectedBottomWall();
             room.InspectedLeftWall();
