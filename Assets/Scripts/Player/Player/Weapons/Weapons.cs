@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class Weapons : MonoBehaviour
 {
+    public int att;
     private int level;
     private float duration;
 

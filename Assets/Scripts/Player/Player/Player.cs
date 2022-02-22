@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
             exp = value;
         }
     }
-    private bool reversal = false; // 반전처리
+    public bool reversal = false; // 반전처리
     SpriteRenderer spriteRenderer;
     Animator ani;
     GameObject whip;
@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         ani = GetComponent<Animator>();
         whip = transform.GetChild(0).gameObject;
-        StartCoroutine(AttackCo());
+        //StartCoroutine(AttackCo());
     }
     void Update()
     {
@@ -54,16 +54,16 @@ public class Player : MonoBehaviour
         PlayerMove();
     }
 
-    IEnumerator AttackCo() // 자동으로 공격함(TEST)
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(2);
-            whip.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
-            whip.SetActive(false);
-        }
-    }
+    //IEnumerator AttackCo() // 자동으로 공격함(TEST)
+    //{
+    //    while(true)
+    //    {
+    //        yield return new WaitForSeconds(2);
+    //        whip.SetActive(true);
+    //        yield return new WaitForSeconds(0.5f);
+    //        whip.SetActive(false);
+    //    }
+    //}
     void PlayerMove()
     {
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime * 5,
@@ -83,5 +83,15 @@ public class Player : MonoBehaviour
         else if(!isAttack)
             whip.transform.localPosition = new Vector2(-0.4f, whip.transform.localPosition.y);
         spriteRenderer.flipX = reversal; // 캐릭터 반전
+    }
+    //진영 : 추가 코드 입니다
+    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Candy")
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
