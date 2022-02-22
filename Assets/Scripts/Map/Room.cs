@@ -154,7 +154,7 @@ public class Room
     public void InspectedTopWall()
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
-        for (int i = x - 1; i < x + w + 1; i++)
+        for (int i = LT.x - 1; i <= RT.x + 1; i++)
         {
             // 윗쪽 벽의 윗쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
             if (tileArray[y + h + 1, i].type.ToString().Contains("Way_Floor") && tileArray[y + h + 2, i].type.ToString().Contains("Way_Floor"))
@@ -173,7 +173,7 @@ public class Room
     public void InspectedBottomWall()
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
-        for (int i = x - 1; i < x + w + 1; i++)
+        for (int i = LB.x - 1; i <= RB.x + 1; i++)
         {
             // 아래 벽의 아래쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
             if (tileArray[y - 2, i].type.ToString().Contains("Way_Floor") && tileArray[y - 3, i].type.ToString().Contains("Way_Floor"))
@@ -195,7 +195,7 @@ public class Room
     public void InspectedLeftWall()
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
-        for (int i = y - 1; i < y + h + 1; i++)
+        for (int i = LB.y - 1; i <= LT.y + 1; i++)
         {
             // 왼쪽 벽의 왼쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
             if (tileArray[i, x - 2].type.ToString().Contains("Way_Floor") && tileArray[i, x - 3].type.ToString().Contains("Way_Floor"))
@@ -223,7 +223,7 @@ public class Room
     public void InspectedRightWall()
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
-        for (int i = y - 1; i < y + h + 1; i++)
+        for (int i = RB.y - 1; i <= RT.y + 1; i++)
         {
             // 오른쪽 벽의 오른쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
             if (tileArray[i, x + w + 1].type.ToString().Contains("Way_Floor") && tileArray[i, x + w + 2].type.ToString().Contains("Way_Floor"))
