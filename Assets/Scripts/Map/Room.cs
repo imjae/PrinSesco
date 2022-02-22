@@ -1,5 +1,13 @@
 using UnityEngine;
 
+public enum Dir
+{
+    LEFT,
+    RIGHT,
+    TOP,
+    BOTTOM
+}
+
 public class Room
 {
     #region Fields
@@ -40,6 +48,21 @@ public class Room
         this.RT = new Vector2Int(this.x + this.Width - 1, this.y + this.Height - 1);
     }
 
+    public bool IsBorder(Dir dir, int x, int y)
+    {
+        bool result = default(bool);
+
+        if (dir == Dir.LEFT)
+            result = (x == LB.x && (y >= LB.y && y <= LT.y));
+        else if (dir == Dir.RIGHT)
+            result = (x == RB.x && (y >= RB.y && y <= RT.y));
+        else if (dir == Dir.TOP)
+            result = (x >= LT.x && x <= RT.x) && y == LT.y;
+        else if (dir == Dir.BOTTOM)
+            result = (x >= LT.x && x <= RT.x) && y == LB.y;
+        return result;
+    }
+
     public void PaintColor(Color color)
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
@@ -62,7 +85,7 @@ public class Room
                 // tileArray[j, i].color = Color.cyan;
                 tileArray[j, i].type = Tile.Type.Ground_Inner;
 
-                if (j == y)
+                if (IsBorder(Dir.BOTTOM, i, j))
                 {
                     // 방의 아랫쪽 벽, 바닥 타일 타입 셋팅
                     tileArray[j, i].type = Tile.Type.Ground_Bottom;
@@ -71,7 +94,7 @@ public class Room
                     // 방의 가장 좌측 아랫쪽 바닥의 경우 여기서 처리
                     // if (i == x) tileArray[j, i - 1].type = Tile.Type.Room_Wall_Left;
                 }
-                if (i == x)
+                if (IsBorder(Dir.LEFT, i, j))
                 {
                     // 방의 왼쪽 벽, 바닥 타일 타입 셋팅
                     tileArray[j, i].type = Tile.Type.Ground_Left;
@@ -80,13 +103,13 @@ public class Room
                     // 방의 가장 좌측 위쪽 바닥의 경우 여기서 처리
                     // if (j == y + h - 1) tileArray[j + 1, i].type = Tile.Type.Room_Wall_Top;
                 }
-                if (j == y + h - 1)
+                if (IsBorder(Dir.TOP, i, j))
                 {
                     // 방의 윗쪽 벽, 바닥 타일 타입 셋팅
                     tileArray[j, i].type = Tile.Type.Ground_Top;
                     tileArray[j + 1, i].type = Tile.Type.Room_Wall_Top;
                 }
-                if (i == x + w - 1)
+                if (IsBorder(Dir.RIGHT, i, j))
                 {
                     // 방의 오른쪽 벽, 바닥 타일 타입 셋팅
                     tileArray[j, i].type = Tile.Type.Ground_Right;

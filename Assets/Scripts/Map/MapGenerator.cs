@@ -55,7 +55,7 @@ public class MapGenerator : MonoBehaviour
             room.InitRoomTileType();
 
 
-            // 방과 길의 예외케이스 검사
+            // 방과 길의 예외케이스 검사 (최대한 방의 벽에서 체크를 해야 비용을 줄일 수 있다)
             room.InspectedTopWall();
             room.InspectedBottomWall();
             room.InspectedLeftWall();
