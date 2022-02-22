@@ -99,25 +99,4 @@ public class TileManager : Singleton<TileManager>
 
         return result;
     }
-
-    public bool IsWallTile(Tile tile, Room room)
-    {
-        bool result = default(bool);
-
-        Vector2Int tileCoordinate = tile.Coordinate;
-        int tile_x = tileCoordinate.x;
-        int tile_y = tileCoordinate.y;
-
-        Vector2Int roomCoordinate = room.Coordinate;
-        int room_x = roomCoordinate.x;
-        int room_y = roomCoordinate.y;
-        int room_w = room.Width;
-        int room_h = room.Height;
-        int room_end_x = room_x + room_w;
-        int room_end_y = room_y + room_y;
-
-        // if(tile_x == room_x)
-
-        return result;
-    }
 }

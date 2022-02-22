@@ -55,8 +55,8 @@ public class MapGenerator : MonoBehaviour
             room.InspectedRightWall();
         });
 
-        manager.InspectedHorizontalWay();
-        manager.InspectedVerticalWay();
+        // manager.InspectedHorizontalWay();
+        // manager.InspectedVerticalWay();
 
         // 타일에 설정된 타입에 맞게 스프라이트 한번에 변경
         for (int x = 0; x < height; x++)

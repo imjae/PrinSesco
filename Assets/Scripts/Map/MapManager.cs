@@ -83,6 +83,15 @@ public class MapManager : Singleton<MapManager>
                         TileArray[x - 2, y + 1].type = Tile.Type.Entrance_Left_Bottom;
                     }
                 }
+                else if (TileArray[x, y].type == Tile.Type.Way_Wall_Top)
+                {
+                    // 수평 길이 방의 윗쪽 벽과 겹쳤을 경우 방과 합친다.
+                    if (TileArray[x - 1, y].type == Tile.Type.Room_Wall_Top)
+                    {
+                        TileArray[x - 1, y].type = Tile.Type.Ground_Top;
+                        TileArray[x - 2, y].type = Tile.Type.Ground_Inner;
+                    }
+                }
             }
         }
     }
@@ -106,6 +115,19 @@ public class MapManager : Singleton<MapManager>
                     {
                         TileArray[x - 1, y + 1].type = Tile.Type.Way_Floor_NotTop;
                     }
+                }
+                else if (TileArray[x, y].type == Tile.Type.Way_Wall_Right)
+                {
+                    // 수직 길이 방의 오른쪽 벽과 겹쳤을 경우 길의 바닥을 방과 합쳐준다.
+                    if (TileArray[x, y - 1].type == Tile.Type.Room_Wall_Right)
+                    {
+                        TileArray[x, y - 1].type = Tile.Type.Ground_Right;
+                        TileArray[x, y - 2].type = Tile.Type.Ground_Inner;
+                    }
+                }
+                else if (TileArray[x, y].type == Tile.Type.Way_Floor_NotTop)
+                {
+                    // 수직 길이 방의 오른쪽 벽과 
                 }
             }
         }
