@@ -9,23 +9,35 @@ public class Room
 
     #region Properties
     public Vector2Int Coordinate { get; set; }
+
+    // 방의 모서리 좌표 (ex: LB == LeftBottom, RB == RightBottom ..)
+    public Vector2Int LB { get; set; }
+    public Vector2Int LT { get; set; }
+    public Vector2Int RB { get; set; }
+    public Vector2Int RT { get; set; }
+
     public int Width { get; set; }
     public int Height { get; set; }
     #endregion
 
     public Room(Container container)
     {
-        this.x = container.x + UnityEngine.Random.Range(2,4);
-        this.y = container.y + UnityEngine.Random.Range(2,4);
+        this.x = container.x + UnityEngine.Random.Range(2, 4);
+        this.y = container.y + UnityEngine.Random.Range(2, 4);
         this.w = container.w - (this.x - container.x);
         this.h = container.h - (this.y - container.y);
-        this.w -= UnityEngine.Random.Range(2,4);
-        this.h -= UnityEngine.Random.Range(2,4);
+        this.w -= UnityEngine.Random.Range(2, 4);
+        this.h -= UnityEngine.Random.Range(2, 4);
 
         this.Coordinate = new Vector2Int(this.x, this.y);
         this.Width = w;
         this.Height = h;
         this.size = this.w * this.h;
+
+        this.LB = new Vector2Int(this.x, this.y);
+        this.LT = new Vector2Int(this.x, this.y + this.Height - 1);
+        this.RB = new Vector2Int(this.x + this.Width - 1, this.y);
+        this.RT = new Vector2Int(this.x + this.Width - 1, this.y + this.Height - 1);
     }
 
     public void PaintColor(Color color)
@@ -128,7 +140,7 @@ public class Room
                 tileArray[y + h - 1, i].type = Tile.Type.Ground_Inner;
             }
             // 윗쪽 벽의 윗쪽 한칸만 길의 바닥인 경우(방과 길을 합쳐야 하는 경우)
-            else if(tileArray[y + h + 1, i].type.ToString().Contains("Way_Floor"))
+            else if (tileArray[y + h + 1, i].type.ToString().Contains("Way_Floor"))
             {
                 tileArray[y + h + 1, i].type = Tile.Type.Ground_Inner;
             }
@@ -150,7 +162,7 @@ public class Room
                 tileArray[y - 1, i + 1].type = Tile.Type.Entrance_Bottom_Right;
             }
             // 아래 벽의 아래쪽 한칸만 길의 바닥인 경우 (방과 길을 합쳐야 하는 경우)
-            else if(tileArray[y - 2, i].type.ToString().Contains("Way_Floor"))
+            else if (tileArray[y - 2, i].type.ToString().Contains("Way_Floor"))
             {
                 tileArray[y - 1, i].type = Tile.Type.Ground_Bottom;
             }
@@ -172,13 +184,15 @@ public class Room
                 tileArray[i - 1, x - 1].type = Tile.Type.Entrance_Left_Bottom;
             }
             // 왼쪽 벽과 수직 길이 합쳐지는 경우
-            else if(tileArray[i, x - 2].type.ToString().Contains("Way_Floor"))
+            else if (tileArray[i, x - 2].type.ToString().Contains("Way_Floor"))
             {
                 // 방의 왼쪽벽을 바닥으로 변경하고 엣지의 경우 방향에 맞게 돌려줘야함
                 tileArray[i, x - 1].type = Tile.Type.Ground_Inner;
+                // if( i == )
+                tileArray[i, x].type = Tile.Type.Ground_Inner;
 
-                if(tileArray[i, x - 1].type == Tile.Type.Room_Wall_Edge_Left_Top) tileArray[i, x - 1].type = Tile.Type.Room_Wall_Edge_Left_Bottom;
-                if(tileArray[i, x - 1].type == Tile.Type.Room_Wall_Edge_Left_Bottom) tileArray[i, x - 1].type = Tile.Type.Room_Wall_Edge_Left_Top;
+                if (tileArray[i, x - 1].type == Tile.Type.Room_Wall_Edge_Left_Top) tileArray[i, x - 1].type = Tile.Type.Room_Wall_Edge_Left_Bottom;
+                if (tileArray[i, x - 1].type == Tile.Type.Room_Wall_Edge_Left_Bottom) tileArray[i, x - 1].type = Tile.Type.Room_Wall_Edge_Left_Top;
             }
         }
     }
@@ -198,13 +212,13 @@ public class Room
                 tileArray[i - 1, x + w].type = Tile.Type.Entrance_Right_Bottom;
             }
             // 오른쪽 벽과 수직 길이 합쳐지는 경우
-            else if(tileArray[i, x + w + 1].type.ToString().Contains("Way_Floor"))
+            else if (tileArray[i, x + w + 1].type.ToString().Contains("Way_Floor"))
             {
                 // 방의 오른쪽벽을 바닥으로 변경하고 엣지의 경우 방향에 맞게 돌려줘야함
                 tileArray[i, x + w].type = Tile.Type.Ground_Inner;
 
-                if(tileArray[i, x + w].type == Tile.Type.Room_Wall_Edge_Right_Top) tileArray[i, x + w].type = Tile.Type.Room_Wall_Edge_Right_Bottom;
-                if(tileArray[i, x + w].type == Tile.Type.Room_Wall_Edge_Right_Bottom) tileArray[i, x + w].type = Tile.Type.Room_Wall_Edge_Right_Top;
+                if (tileArray[i, x + w].type == Tile.Type.Room_Wall_Edge_Right_Top) tileArray[i, x + w].type = Tile.Type.Room_Wall_Edge_Right_Bottom;
+                if (tileArray[i, x + w].type == Tile.Type.Room_Wall_Edge_Right_Bottom) tileArray[i, x + w].type = Tile.Type.Room_Wall_Edge_Right_Top;
             }
         }
     }
