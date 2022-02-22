@@ -115,26 +115,33 @@ public class Room
         // tileArray[y + 1, x + w - 2].type = Tile.Type.Ground_Edge_Right_Bottom;
     }
 
+    // 방의 윗쪽 벽에서 예외 케이스 검사
     public void InspectedTopWall()
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
         for (int i = x - 1; i < x + w + 1; i++)
         {
-            // tileArray[y + h, i].color = Color.black;
-            if (tileArray[y + h + 1, i].type.ToString().Contains("Way_Floor"))
+            // 윗쪽 벽의 윗쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
+            if (tileArray[y + h + 1, i].type.ToString().Contains("Way_Floor") && tileArray[y + h + 2, i].type.ToString().Contains("Way_Floor"))
             {
                 tileArray[y + h, i].type = Tile.Type.Way_Floor_NotTop;
                 tileArray[y + h - 1, i].type = Tile.Type.Ground_Inner;
             }
+            // 윗쪽 벽의 윗쪽 한칸만 길의 바닥인 경우(방과 길을 합쳐야 하는 경우)
+            else if(tileArray[y + h + 1, i].type.ToString().Contains("Way_Floor"))
+            {
+                tileArray[y + h + 1, i].type = Tile.Type.Ground_Inner;
+            }
         }
     }
+    // 방의 아랫쪽 벽에서 예외 케이스 검사
     public void InspectedBottomWall()
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
         for (int i = x - 1; i < x + w + 1; i++)
         {
-            // tileArray[y - 1, i].color = Color.black;
-            if (tileArray[y - 2, i].type.ToString().Contains("Way_Floor"))
+            // 아래 벽의 아래쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
+            if (tileArray[y - 2, i].type.ToString().Contains("Way_Floor") && tileArray[y - 3, i].type.ToString().Contains("Way_Floor"))
             {
                 tileArray[y, i].type = Tile.Type.Way_Floor_NotTop;
 
@@ -142,9 +149,14 @@ public class Room
                 tileArray[y - 1, i - 1].type = Tile.Type.Entrance_Bottom_Left;
                 tileArray[y - 1, i + 1].type = Tile.Type.Entrance_Bottom_Right;
             }
+            // 아래 벽의 아래쪽 한칸만 길의 바닥인 경우 (방과 길을 합쳐야 하는 경우)
+            else if(tileArray[y - 2, i].type.ToString().Contains("Way_Floor"))
+            {
+                tileArray[y - 1, i].type = Tile.Type.Ground_Bottom;
+            }
         }
     }
-
+    // 방의 왼쪽 벽에서 예외 케이스 검사
     public void InspectedLeftWall()
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
@@ -170,7 +182,7 @@ public class Room
             }
         }
     }
-
+    // 방의 오른쪽 벽에서 예외 케이스 검사
     public void InspectedRightWall()
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
