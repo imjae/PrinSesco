@@ -18,11 +18,16 @@ public class Room
     #region Properties
     public Vector2Int Coordinate { get; set; }
 
-    // 방의 모서리 좌표 (ex: LB == LeftBottom, RB == RightBottom ..)
+    // 방의 가장자리 모서리 좌표 (ex: LB == LeftBottom, RB == RightBottom ..)
     public Vector2Int LB { get; set; }
     public Vector2Int LT { get; set; }
     public Vector2Int RB { get; set; }
     public Vector2Int RT { get; set; }
+    // 방의 벽 모서리 좌표 (ex: WLB == WallLeftBottom, WRB == WallRightBottom ..)
+    public Vector2Int WLB { get; set; }
+    public Vector2Int WLT { get; set; }
+    public Vector2Int WRB { get; set; }
+    public Vector2Int WRT { get; set; }
 
     public int Width { get; set; }
     public int Height { get; set; }
@@ -46,6 +51,11 @@ public class Room
         this.LT = new Vector2Int(this.x, this.y + this.Height - 1);
         this.RB = new Vector2Int(this.x + this.Width - 1, this.y);
         this.RT = new Vector2Int(this.x + this.Width - 1, this.y + this.Height - 1);
+
+        this.WLB = new Vector2Int(this.LB.x - 1, this.LB.y - 1);
+        this.WLT = new Vector2Int(this.LT.x - 1, this.LT.y + 1);
+        this.WRB = new Vector2Int(this.RB.x + 1, this.RB.y - 1);
+        this.WRT = new Vector2Int(this.RT.x + 1, this.RT.y + 1);
     }
 
     public bool IsBorder(Dir dir, int x, int y)
