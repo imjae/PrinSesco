@@ -181,23 +181,97 @@ public class Room
         // tileArray[y + 1, x + w - 2].type = Tile.Type.Ground_Edge_Right_Bottom;
     }
 
+    // 방의 왼쪽 벽에서 예외 케이스 검사
+    public void InspectedLeftWall()
+    {
+        Tile[,] tileArray = MapManager.Instance.TileArray;
+
+        for (int i = WLB.y + 1; i < WLT.y; i++)
+        {
+            // 왼쪽 벽의 왼쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
+            if (tileArray[i, WLB.x - 1].IsContainString("Way_Floor") && tileArray[i, WLB.x - 2].IsContainString("Way_Floor"))
+            {
+                tileArray[i, WLB.x + 1].type = Tile.Type.Ground_Inner;
+
+                tileArray[i, WLB.x].type = Tile.Type.Way_Floor_Top;
+
+                tileArray[i + 1, WLB.x].type = Tile.Type.Entrance_Top;
+                tileArray[i - 1, WLB.x].type = Tile.Type.Entrance_Left_Bottom;
+            }
+            // 왼쪽 벽과 수직 길이 합쳐지는 경우
+            else if (tileArray[i, WLB.x - 1].IsContainString("Way_Floor"))
+            {
+                // 방의 왼쪽벽을 바닥으로 변경하고 엣지의 경우 방향에 맞게 돌려줘야함
+                tileArray[i, WLB.x - 1].type = Tile.Type.Ground_Inner;
+                tileArray[i, WLB.x].type = Tile.Type.Ground_Inner;
+                tileArray[i, WLB.x + 1].type = Tile.Type.Ground_Inner;
+
+                if (tileArray[i, WLB.x - 1].type == Tile.Type.Room_Wall_Edge_Left_Top) tileArray[i, WLB.x - 1].type = Tile.Type.Room_Wall_Edge_Left_Bottom;
+                if (tileArray[i, WLB.x - 1].type == Tile.Type.Room_Wall_Edge_Left_Bottom) tileArray[i, WLB.x - 1].type = Tile.Type.Room_Wall_Edge_Left_Top;
+            }
+            else if (tileArray[i, WLB.x - 1].type == Tile.Type.Way_Wall_Left)
+            {
+                tileArray[i + 1, WLB.x].type = Tile.Type.Ground_Inner;
+                tileArray[i, WLB.x].type = Tile.Type.Ground_Inner;
+                tileArray[i - 1, WLB.x].type = Tile.Type.Ground_Inner;
+
+                tileArray[i, WLB.x + 1].type = Tile.Type.Ground_Inner;
+            }
+        }
+    }
     // 방의 윗쪽 벽에서 예외 케이스 검사
     public void InspectedTopWall()
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
-        for (int i = WLT.x; i <= WRT.x; i++)
+        for (int i = WLT.x; i < WRT.x; i++)
         {
             // 윗쪽 벽의 윗쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
-            if (tileArray[WLT.y + 1, i].type.ToString().Contains("Way_Floor") && tileArray[WLT.y + 2, i].type.ToString().Contains("Way_Floor"))
+            if (tileArray[WLT.y + 1, i].IsContainString("Way_Floor") && tileArray[WLT.y + 2, i].IsContainString("Way_Floor"))
             {
                 tileArray[WLT.y, i].type = Tile.Type.Way_Floor_NotTop;
                 tileArray[WLT.y - 1, i].type = Tile.Type.Ground_Inner;
             }
             // 윗쪽 벽의 윗쪽 한칸만 길의 바닥인 경우(방과 길을 합쳐야 하는 경우)
-            else if (tileArray[WLT.y + 1, i].type.ToString().Contains("Way_Floor"))
+            else if (tileArray[WLT.y + 1, i].IsContainString("Way_Floor"))
             {
                 // tileArray[WLT.y + 1, i].color = Color.black;
                 tileArray[WLT.y, i].type = Tile.Type.Ground_Inner;
+                if (tileArray[WLT.y, i].type == Tile.Type.Room_Wall_Edge_Left_Top) tileArray[WLT.y, i].type = Tile.Type.Room_Wall_Edge_Right_Top;
+                if (tileArray[WLT.y, i].type == Tile.Type.Room_Wall_Edge_Right_Top) tileArray[WLT.y, i].type = Tile.Type.Room_Wall_Edge_Left_Top;
+            }
+        }
+    }
+    // 방의 오른쪽 벽에서 예외 케이스 검사
+    public void InspectedRightWall()
+    {
+        Tile[,] tileArray = MapManager.Instance.TileArray;
+        for (int i = WRB.y; i < WRT.y; i++)
+        {
+            // 오른쪽 벽의 오른쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
+            if (tileArray[i, WRB.x + 1].IsContainString("Way_Floor") && tileArray[i, WRB.x + 2].IsContainString("Way_Floor"))
+            {
+                tileArray[i, WRB.x].type = Tile.Type.Ground_Inner;
+
+                tileArray[i, WRB.x].type = Tile.Type.Way_Floor_Top;
+
+                tileArray[i + 1, WRB.x].type = Tile.Type.Entrance_Top;
+                tileArray[i - 1, WRB.x].type = Tile.Type.Entrance_Right_Bottom;
+            }
+            // 오른쪽 벽과 수직 길이 합쳐지는 경우
+            else if (tileArray[i, WRB.x + 1].IsContainString("Way_Floor"))
+            {
+                // 방의 오른쪽벽을 바닥으로 변경하고 엣지의 경우 방향에 맞게 돌려줘야함
+                tileArray[i, WRB.x].type = Tile.Type.Ground_Inner;
+                tileArray[i, WRB.x - 1].type = Tile.Type.Ground_Inner;
+
+                if (tileArray[i, WRB.x].type == Tile.Type.Room_Wall_Edge_Right_Top) tileArray[i, WRB.x].type = Tile.Type.Room_Wall_Edge_Right_Bottom;
+                if (tileArray[i, WRB.x].type == Tile.Type.Room_Wall_Edge_Right_Bottom) tileArray[i, WRB.x].type = Tile.Type.Room_Wall_Edge_Right_Top;
+            }
+            else if (tileArray[i, WRB.x + 1].type == Tile.Type.Way_Wall_Right)
+            {
+                tileArray[i + 1, WRB.x].type = Tile.Type.Ground_Inner;
+                tileArray[i, WRB.x].type = Tile.Type.Ground_Inner;
+                tileArray[i - 1, WRB.x].type = Tile.Type.Ground_Inner;
             }
         }
     }
@@ -208,7 +282,7 @@ public class Room
         for (int i = WLB.x; i <= WRB.x; i++)
         {
             // 아래 벽의 아래쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
-            if (tileArray[WLB.y - 1, i].type.ToString().Contains("Way_Floor") && tileArray[WLB.y - 2, i].type.ToString().Contains("Way_Floor"))
+            if (tileArray[WLB.y - 1, i].IsContainString("Way_Floor") && tileArray[WLB.y - 2, i].IsContainString("Way_Floor"))
             {
                 tileArray[WLB.y + 1, i].type = Tile.Type.Ground_Inner;
 
@@ -217,65 +291,35 @@ public class Room
                 tileArray[WLB.y, i + 1].type = Tile.Type.Entrance_Bottom_Right;
             }
             // 아래 벽의 아래쪽 한칸만 길의 바닥인 경우 (방과 길을 합쳐야 하는 경우)
-            else if (tileArray[y - 2, i].type.ToString().Contains("Way_Floor"))
+            else if (tileArray[WLB.y - 1, i].IsContainString("Way_Floor"))
             {
-                tileArray[WLB.y, i].type = Tile.Type.Ground_Bottom;
+                // ㄴ 모양으로 왼쪽부터 오른쪽 타일을 변경
+                if (tileArray[WLB.y, i].type == Tile.Type.Room_Wall_Edge_Left_Bottom) tileArray[WLB.y, i].type = Tile.Type.Room_Wall_Edge_Right_Bottom;
+                else
+                {
+                    tileArray[WLB.y, i - 1].type = Tile.Type.Ground_Inner;
+                    tileArray[WLB.y - 1, i - 1].type = Tile.Type.Ground_Inner;
+                    tileArray[WLB.y - 1, i].type = Tile.Type.Ground_Inner;
+
+                    if (tileArray[WLB.y, i].type == Tile.Type.Room_Wall_Edge_Right_Bottom) tileArray[WLB.y, i].type = Tile.Type.Room_Wall_Edge_Left_Bottom;
+                }
             }
-        }
-    }
-    // 방의 왼쪽 벽에서 예외 케이스 검사
-    public void InspectedLeftWall()
-    {
-        Tile[,] tileArray = MapManager.Instance.TileArray;
-        for (int i = WLB.y; i <= WLT.y; i++)
-        {
-            // 왼쪽 벽의 왼쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
-            if (tileArray[i, WLB.x - 1].type.ToString().Contains("Way_Floor") && tileArray[i, WLB.x - 2].type.ToString().Contains("Way_Floor"))
+            else if (tileArray[WLB.y - 1, i].type == Tile.Type.Way_Wall_Bottom)
             {
-                tileArray[i, WLB.x + 1].type = Tile.Type.Ground_Inner;
-
-                tileArray[i, WLB.x].type = Tile.Type.Way_Floor_Top;
-
-                tileArray[i + 1, WLB.x - 1].type = Tile.Type.Entrance_Top;
-                tileArray[i - 1, WLB.x - 1].type = Tile.Type.Entrance_Left_Bottom;
-            }
-            // 왼쪽 벽과 수직 길이 합쳐지는 경우
-            else if (tileArray[i, WLB.x - 1].type.ToString().Contains("Way_Floor"))
-            {
-                // 방의 왼쪽벽을 바닥으로 변경하고 엣지의 경우 방향에 맞게 돌려줘야함
-                tileArray[i, WLB.x - 1].type = Tile.Type.Ground_Inner;
-                // if( i == )
-                tileArray[i, WLB.x].type = Tile.Type.Ground_Inner;
-
-                if (tileArray[i, WLB.x - 1].type == Tile.Type.Room_Wall_Edge_Left_Top) tileArray[i, WLB.x - 1].type = Tile.Type.Room_Wall_Edge_Left_Bottom;
-                if (tileArray[i, WLB.x - 1].type == Tile.Type.Room_Wall_Edge_Left_Bottom) tileArray[i, WLB.x - 1].type = Tile.Type.Room_Wall_Edge_Left_Top;
-            }
-        }
-    }
-    // 방의 오른쪽 벽에서 예외 케이스 검사
-    public void InspectedRightWall()
-    {
-        Tile[,] tileArray = MapManager.Instance.TileArray;
-        for (int i = WRB.y; i <= WRT.y; i++)
-        {
-            // 오른쪽 벽의 오른쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
-            if (tileArray[i, WRB.x + 1].type.ToString().Contains("Way_Floor") && tileArray[i, WRB.x + 2].type.ToString().Contains("Way_Floor"))
-            {
-                tileArray[i, WRB.x].type = Tile.Type.Ground_Inner;
-
-                tileArray[i, WRB.x].type = Tile.Type.Way_Floor_Top;
-
-                tileArray[i + 1, WRB.x].type = Tile.Type.Entrance_Top;
-                tileArray[i - 1, WRB.x].type = Tile.Type.Entrance_Right_Bottom;
-            }
-            // 오른쪽 벽과 수직 길이 합쳐지는 경우
-            else if (tileArray[i, WRB.x + 1].type.ToString().Contains("Way_Floor"))
-            {
-                // 방의 오른쪽벽을 바닥으로 변경하고 엣지의 경우 방향에 맞게 돌려줘야함
-                tileArray[i, WRB.x].type = Tile.Type.Ground_Inner;
-
-                if (tileArray[i, WRB.x].type == Tile.Type.Room_Wall_Edge_Right_Top) tileArray[i, WRB.x].type = Tile.Type.Room_Wall_Edge_Right_Bottom;
-                if (tileArray[i, WRB.x].type == Tile.Type.Room_Wall_Edge_Right_Bottom) tileArray[i, WRB.x].type = Tile.Type.Room_Wall_Edge_Right_Top;
+                if (tileArray[WLB.y, i].type == Tile.Type.Room_Wall_Edge_Left_Bottom)
+                {
+                    tileArray[WLB.y + 1, i].type = Tile.Type.Entrance_Top;
+                    tileArray[WLB.y, i].type = Tile.Type.Way_Floor_Top;
+                }
+                else if (tileArray[WLB.y, i].type == Tile.Type.Room_Wall_Edge_Right_Bottom)
+                {
+                    tileArray[WLB.y + 1, i].type = Tile.Type.Entrance_Top;
+                    tileArray[WLB.y, i].type = Tile.Type.Way_Floor_Top;
+                }
+                else
+                {
+                    tileArray[WLB.y, i].type = Tile.Type.Ground_Inner;
+                }
             }
         }
     }

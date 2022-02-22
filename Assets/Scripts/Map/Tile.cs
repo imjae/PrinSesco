@@ -69,7 +69,7 @@ public class Tile : MonoBehaviour
         Entrance_Left_Bottom,
         Entrance_Right_Bottom,
         Entrance_Bottom_Left,
-        Entrance_Bottom_Right,RoundDoor_Left,
+        Entrance_Bottom_Right, RoundDoor_Left,
         RoundDoor_Right,
         SquareDoor_Left,
         SquareDoor_Right,
@@ -95,7 +95,15 @@ public class Tile : MonoBehaviour
     }
 
     #region Functions
+    // 두 번째 인자로 받은 타입이 맞는지 확인하는 메소드
+    public bool IsContainString(string typePrefix)
+    {
+        bool result = false;
 
+        result = this.type.ToString().Contains(typePrefix);
+
+        return result;
+    }
 
     #endregion
 }
