@@ -132,19 +132,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: width
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: height
-      value: 74
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 1614107565}
     - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
-      propertyPath: iterationNumber
+      propertyPath: widthRatio
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
+      propertyPath: heightRatio
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
+      propertyPath: wayMinRange
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3982917052541622277, guid: d8ef1130048716c42896921fe81041fe, type: 3}
+      propertyPath: iterationNumber
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3982917052541622278, guid: d8ef1130048716c42896921fe81041fe, type: 3}
       propertyPath: m_RootOrder
@@ -231,7 +243,7 @@ Camera:
   m_GameObject: {fileID: 1571252029}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -355,8 +367,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 4391378522864355753, guid: e83e83cec635620419bdc67fca1d15c9, type: 3}
-  tileWidth: 1
-  tileHeight: 1
+  tileset:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1949893550
 Transform:
   m_ObjectHideFlags: 0
