@@ -120,22 +120,22 @@ public class Room
 
 
                 // 방의 모서리에 해당하는 바닥타일과, 벽을 마지막으로 덮는다.
-                if (i == x && j == y)
+                if (i == LB.x && j == LB.y)
                 {
                     tileArray[j, i].type = Tile.Type.Ground_Edge_Left_Bottom;
                     tileArray[j - 1, i - 1].type = Tile.Type.Room_Wall_Edge_Left_Bottom;
                 }
-                else if (i == x + w - 1 && j == y + h - 1)
+                else if (i == RT.x && j == RT.y)
                 {
                     tileArray[j, i].type = Tile.Type.Ground_Edge_Right_Top;
                     tileArray[j + 1, i + 1].type = Tile.Type.Room_Wall_Edge_Right_Top;
                 }
-                else if (i == x && j == y + h - 1)
+                else if (i == LT.x && j == LT.y)
                 {
                     tileArray[j, i].type = Tile.Type.Ground_Edge_Left_Top;
                     tileArray[j + 1, i - 1].type = Tile.Type.Room_Wall_Edge_Left_Top;
                 }
-                else if (i == x + w - 1 && j == y)
+                else if (i == RB.x && j == RB.y)
                 {
                     tileArray[j, i].type = Tile.Type.Ground_Edge_Right_Bottom;
                     tileArray[j - 1, i + 1].type = Tile.Type.Room_Wall_Edge_Right_Bottom;
