@@ -203,9 +203,9 @@ public class Room
             // 왼쪽 벽의 왼쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
             if (standardTileLeft1.IsContainString("Way_Floor") && tileArray[i, WLB.x - 2].IsContainString("Way_Floor"))
             {
+                standardTile.type = Tile.Type.Entrance_Floor_Left;
                 standardTileRight1.type = Tile.Type.Ground_Inner;
 
-                standardTile.type = Tile.Type.Way_Floor_Top;
 
                 tileArray[i + 1, WLB.x].type = Tile.Type.Entrance_Top;
                 tileArray[i - 1, WLB.x].type = Tile.Type.Entrance_Left_Bottom;
@@ -271,7 +271,7 @@ public class Room
             // 윗쪽 벽의 윗쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
             if (standardTileUp1.IsContainString("Way_Floor") && tileArray[WLT.y + 2, i].IsContainString("Way_Floor"))
             {
-                standardTile.type = Tile.Type.Way_Floor_NotTop;
+                standardTile.type = Tile.Type.Entrance_Floor_Top;
                 standardTileDown1.type = Tile.Type.Ground_Inner;
             }
             // 윗쪽 벽의 윗쪽 한칸만 길의 바닥인 경우(방과 길을 합쳐야 하는 경우)
@@ -341,7 +341,7 @@ public class Room
             // 오른쪽 벽의 오른쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
             if (standardTileRight1.IsContainString("Way_Floor") && tileArray[i, WRB.x + 2].IsContainString("Way_Floor"))
             {
-                standardTile.type = Tile.Type.Way_Floor_Top;
+                standardTile.type = Tile.Type.Entrance_Floor_Right;
                 standardTileLeft1.type = Tile.Type.Ground_Inner;
 
                 standardTileUp1.type = Tile.Type.Entrance_Top;
@@ -414,8 +414,8 @@ public class Room
             // 아래 벽의 아래쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
             if (standardTileDown1.IsContainString("Way_Floor") && tileArray[WLB.y - 2, i].IsContainString("Way_Floor"))
             {
+                standardTile.type = Tile.Type.Entrance_Floor_Bottom;
                 standardTileUp1.type = Tile.Type.Ground_Inner;
-                standardTile.type = Tile.Type.Way_Floor_NotTop;
 
                 standardTileLeft1.type = Tile.Type.Entrance_Bottom_Left;
                 standardTileRight1.type = Tile.Type.Entrance_Bottom_Right;
