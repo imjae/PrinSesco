@@ -186,36 +186,67 @@ public class Room
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
 
-        for (int i = WLB.y + 1; i < WLT.y; i++)
-        {
-            // 왼쪽 벽의 왼쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
-            if (tileArray[i, WLB.x - 1].IsContainString("Way_Floor") && tileArray[i, WLB.x - 2].IsContainString("Way_Floor"))
-            {
-                tileArray[i, WLB.x + 1].type = Tile.Type.Ground_Inner;
+        // 기준 타일
+        Tile standardTile = default(Tile);
+        // 기준 타일 한칸 왼쪽 타일
+        Tile standardTileLeft1 = default(Tile);
+        // 기준 타일 한칸 오른쪽 타일
+        Tile standardTileRight1 = default(Tile);
 
-                tileArray[i, WLB.x].type = Tile.Type.Way_Floor_Top;
+        for (int i = WLB.y; i <= WLT.y; i++)
+        {
+            standardTile = tileArray[i, WLB.x];
+            standardTileLeft1 = tileArray[i, WLB.x - 1];
+            // standardTileLeft2 = tileArray[i, WLB.x - 2];
+            standardTileRight1 = tileArray[i, WLB.x + 1];
+
+            // 왼쪽 벽의 왼쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
+            if (standardTileLeft1.IsContainString("Way_Floor") && tileArray[i, WLB.x - 2].IsContainString("Way_Floor"))
+            {
+                standardTileRight1.type = Tile.Type.Ground_Inner;
+
+                standardTile.type = Tile.Type.Way_Floor_Top;
 
                 tileArray[i + 1, WLB.x].type = Tile.Type.Entrance_Top;
                 tileArray[i - 1, WLB.x].type = Tile.Type.Entrance_Left_Bottom;
             }
             // 왼쪽 벽과 수직 길이 합쳐지는 경우
-            else if (tileArray[i, WLB.x - 1].IsContainString("Way_Floor"))
+            else if (standardTileLeft1.IsContainString("Way_Floor"))
             {
                 // 방의 왼쪽벽을 바닥으로 변경하고 엣지의 경우 방향에 맞게 돌려줘야함
-                tileArray[i, WLB.x - 1].type = Tile.Type.Ground_Inner;
-                tileArray[i, WLB.x].type = Tile.Type.Ground_Inner;
-                tileArray[i, WLB.x + 1].type = Tile.Type.Ground_Inner;
+                if (standardTile.type == Tile.Type.Room_Wall_Edge_Left_Top)
+                {
+                    standardTile.type = Tile.Type.Entrance_Top;
 
-                if (tileArray[i, WLB.x - 1].type == Tile.Type.Room_Wall_Edge_Left_Top) tileArray[i, WLB.x - 1].type = Tile.Type.Room_Wall_Edge_Left_Bottom;
-                if (tileArray[i, WLB.x - 1].type == Tile.Type.Room_Wall_Edge_Left_Bottom) tileArray[i, WLB.x - 1].type = Tile.Type.Room_Wall_Edge_Left_Top;
+                }
+                else if (standardTile.type == Tile.Type.Room_Wall_Edge_Left_Bottom)
+                {
+                    standardTile.type = Tile.Type.Entrance_Bottom_Right;
+                }
+                else
+                {
+                    standardTile.type = Tile.Type.Ground_Inner;
+                    standardTileLeft1.type = Tile.Type.Ground_Inner;
+                    standardTileRight1.type = Tile.Type.Ground_Inner;
+                }
             }
-            else if (tileArray[i, WLB.x - 1].type == Tile.Type.Way_Wall_Left)
+            else if (standardTileLeft1.type == Tile.Type.Way_Wall_Left)
             {
-                tileArray[i + 1, WLB.x].type = Tile.Type.Ground_Inner;
-                tileArray[i, WLB.x].type = Tile.Type.Ground_Inner;
-                tileArray[i - 1, WLB.x].type = Tile.Type.Ground_Inner;
-
-                tileArray[i, WLB.x + 1].type = Tile.Type.Ground_Inner;
+                if (standardTile.type == Tile.Type.Room_Wall_Edge_Left_Top)
+                {
+                    standardTile.type = Tile.Type.Way_Floor_NotTop;
+                    standardTileRight1.type = Tile.Type.Entrance_Top;
+                }
+                else if (standardTile.type == Tile.Type.Room_Wall_Edge_Left_Bottom)
+                {
+                    standardTile.type = Tile.Type.Way_Floor_NotTop;
+                    standardTileRight1.type = Tile.Type.Entrance_Bottom_Right;
+                }
+                else
+                {
+                    standardTile.type = Tile.Type.Ground_Inner;
+                    standardTileRight1.type = Tile.Type.Ground_Inner;
+                }
             }
         }
     }
@@ -228,20 +259,17 @@ public class Room
         Tile standardTile = default(Tile);
         // 기준 타일 한칸 위 타일
         Tile standardTileUp1 = default(Tile);
-        // 기준 타일 두칸 위 타일
-        Tile standardTileUp2 = default(Tile);
         // 기준 타일 한칸 아래 타일
         Tile standardTileDown1 = default(Tile);
 
-        for (int i = WLT.x; i < WRT.x; i++)
+        for (int i = WLT.x; i <= WRT.x; i++)
         {
             standardTile = tileArray[WLT.y, i];
             standardTileUp1 = tileArray[WLT.y + 1, i];
-            standardTileUp2 = tileArray[WLT.y + 2, i];
             standardTileDown1 = tileArray[WLT.y - 1, i];
 
             // 윗쪽 벽의 윗쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
-            if (standardTileUp1.IsContainString("Way_Floor") && standardTileUp2.IsContainString("Way_Floor"))
+            if (standardTileUp1.IsContainString("Way_Floor") && tileArray[WLT.y + 2, i].IsContainString("Way_Floor"))
             {
                 standardTile.type = Tile.Type.Way_Floor_NotTop;
                 standardTileDown1.type = Tile.Type.Ground_Inner;
@@ -290,81 +318,144 @@ public class Room
     // 방의 오른쪽 벽에서 예외 케이스 검사
     public void InspectedRightWall()
     {
+        // 기준 타일
+        Tile standardTile = default(Tile);
+        // 기준 타일 한칸 오른쪽 타일
+        Tile standardTileRight1 = default(Tile);
+        // 기준 타일 한칸 왼쪽 타일
+        Tile standardTileLeft1 = default(Tile);
+        // 기준 타일 한칸 위 타일
+        Tile standardTileUp1 = default(Tile);
+        // 기준 타일 한칸 아래 타일
+        Tile standardTileDown1 = default(Tile);
+
         Tile[,] tileArray = MapManager.Instance.TileArray;
-        for (int i = WRB.y; i < WRT.y; i++)
+        for (int i = WRB.y; i <= WRT.y; i++)
         {
+            standardTile = tileArray[i, WRB.x];
+            standardTileRight1 = tileArray[i, WRB.x + 1];
+            standardTileLeft1 = tileArray[i, WRB.x - 1];
+            standardTileUp1 = tileArray[i + 1, WRB.x];
+            standardTileDown1 = tileArray[i - 1, WRB.x];
+
             // 오른쪽 벽의 오른쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
-            if (tileArray[i, WRB.x + 1].IsContainString("Way_Floor") && tileArray[i, WRB.x + 2].IsContainString("Way_Floor"))
+            if (standardTileRight1.IsContainString("Way_Floor") && tileArray[i, WRB.x + 2].IsContainString("Way_Floor"))
             {
-                tileArray[i, WRB.x].type = Tile.Type.Ground_Inner;
+                standardTile.type = Tile.Type.Way_Floor_Top;
+                standardTileLeft1.type = Tile.Type.Ground_Inner;
 
-                tileArray[i, WRB.x].type = Tile.Type.Way_Floor_Top;
-
-                tileArray[i + 1, WRB.x].type = Tile.Type.Entrance_Top;
-                tileArray[i - 1, WRB.x].type = Tile.Type.Entrance_Right_Bottom;
+                standardTileUp1.type = Tile.Type.Entrance_Top;
+                standardTileDown1.type = Tile.Type.Entrance_Right_Bottom;
             }
             // 오른쪽 벽과 수직 길이 합쳐지는 경우
-            else if (tileArray[i, WRB.x + 1].IsContainString("Way_Floor"))
+            else if (standardTileRight1.IsContainString("Way_Floor"))
             {
                 // 방의 오른쪽벽을 바닥으로 변경하고 엣지의 경우 방향에 맞게 돌려줘야함
-                tileArray[i, WRB.x].type = Tile.Type.Ground_Inner;
-                tileArray[i, WRB.x - 1].type = Tile.Type.Ground_Inner;
-
-                if (tileArray[i, WRB.x].type == Tile.Type.Room_Wall_Edge_Right_Top) tileArray[i, WRB.x].type = Tile.Type.Room_Wall_Edge_Right_Bottom;
-                if (tileArray[i, WRB.x].type == Tile.Type.Room_Wall_Edge_Right_Bottom) tileArray[i, WRB.x].type = Tile.Type.Room_Wall_Edge_Right_Top;
+                if (standardTile.type == Tile.Type.Room_Wall_Edge_Right_Top)
+                {
+                    standardTile.type = Tile.Type.Entrance_Top;
+                    standardTileRight1.type = Tile.Type.Way_Floor_NotTop;
+                }
+                else if (standardTile.type == Tile.Type.Room_Wall_Edge_Right_Bottom)
+                {
+                    standardTile.type = Tile.Type.Entrance_Bottom_Left;
+                    standardTileRight1.type = Tile.Type.Way_Floor_NotTop;
+                }
+                else
+                {
+                    standardTile.type = Tile.Type.Ground_Inner;
+                    standardTileRight1.type = Tile.Type.Ground_Inner;
+                    standardTileLeft1.type = Tile.Type.Ground_Inner;
+                }
             }
-            else if (tileArray[i, WRB.x + 1].type == Tile.Type.Way_Wall_Right)
+            else if (standardTileRight1.type == Tile.Type.Way_Wall_Right)
             {
-                tileArray[i + 1, WRB.x].type = Tile.Type.Ground_Inner;
-                tileArray[i, WRB.x].type = Tile.Type.Ground_Inner;
-                tileArray[i - 1, WRB.x].type = Tile.Type.Ground_Inner;
+                if (standardTile.type == Tile.Type.Room_Wall_Edge_Right_Top)
+                {
+                    standardTile.type = Tile.Type.Entrance_Top;
+                    standardTileRight1.type = Tile.Type.Way_Floor_NotTop;
+                }
+                else if (standardTile.type == Tile.Type.Room_Wall_Edge_Right_Bottom)
+                {
+                    standardTile.type = Tile.Type.Entrance_Bottom_Left;
+                    standardTileRight1.type = Tile.Type.Way_Floor_NotTop;
+                }
+                else
+                {
+                    standardTile.type = Tile.Type.Ground_Inner;
+                    standardTileLeft1.type = Tile.Type.Ground_Inner;
+                }
             }
         }
     }
     // 방의 아랫쪽 벽에서 예외 케이스 검사
     public void InspectedBottomWall()
     {
+        // 기준 타일
+        Tile standardTile = default(Tile);
+        // 기준 타일 한칸 위 타일
+        Tile standardTileUp1 = default(Tile);
+        // 기준 타일 한칸 아래 타일
+        Tile standardTileDown1 = default(Tile);
+        // 기준 타일 한칸 오른쪽 타일
+        Tile standardTileRight1 = default(Tile);
+        // 기준 타일 한칸 왼쪽 타일
+        Tile standardTileLeft1 = default(Tile);
+        
         Tile[,] tileArray = MapManager.Instance.TileArray;
         for (int i = WLB.x; i <= WRB.x; i++)
         {
-            // 아래 벽의 아래쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
-            if (tileArray[WLB.y - 1, i].IsContainString("Way_Floor") && tileArray[WLB.y - 2, i].IsContainString("Way_Floor"))
-            {
-                tileArray[WLB.y + 1, i].type = Tile.Type.Ground_Inner;
+            standardTile = tileArray[WLB.y, i];
+            standardTileUp1 = tileArray[WLB.y + 1, i];
+            standardTileDown1 = tileArray[WLB.y - 1, i];
+            standardTileRight1 = tileArray[WLB.y, i + 1];
+            standardTileLeft1 = tileArray[WLB.y, i - 1];
 
-                tileArray[WLB.y, i].type = Tile.Type.Way_Floor_NotTop;
-                tileArray[WLB.y, i - 1].type = Tile.Type.Entrance_Bottom_Left;
-                tileArray[WLB.y, i + 1].type = Tile.Type.Entrance_Bottom_Right;
+            // 아래 벽의 아래쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
+            if (standardTileDown1.IsContainString("Way_Floor") && tileArray[WLB.y - 2, i].IsContainString("Way_Floor"))
+            {
+                standardTileUp1.type = Tile.Type.Ground_Inner;
+                standardTile.type = Tile.Type.Way_Floor_NotTop;
+
+                standardTileLeft1.type = Tile.Type.Entrance_Bottom_Left;
+                standardTileRight1.type = Tile.Type.Entrance_Bottom_Right;
             }
             // 아래 벽의 아래쪽 한칸만 길의 바닥인 경우 (방과 길을 합쳐야 하는 경우)
-            else if (tileArray[WLB.y - 1, i].IsContainString("Way_Floor"))
+            else if (standardTileDown1.IsContainString("Way_Floor"))
             {
-                // ㄴ 모양으로 왼쪽부터 오른쪽 타일을 변경
-                if (tileArray[WLB.y, i].type == Tile.Type.Room_Wall_Edge_Left_Bottom) tileArray[WLB.y, i].type = Tile.Type.Room_Wall_Edge_Right_Bottom;
+                if (standardTile.type == Tile.Type.Room_Wall_Edge_Left_Bottom)
+                {
+                    standardTile.type = Tile.Type.Entrance_Top;
+                    standardTileDown1.type = Tile.Type.Way_Floor_Top;
+                }
+                else if (standardTile.type == Tile.Type.Room_Wall_Edge_Right_Bottom)
+                {
+                    standardTile.type = Tile.Type.Entrance_Top;
+                    standardTileDown1.type = Tile.Type.Way_Floor_Top;
+                }
                 else
                 {
-                    tileArray[WLB.y, i - 1].type = Tile.Type.Ground_Inner;
-                    tileArray[WLB.y - 1, i - 1].type = Tile.Type.Ground_Inner;
-                    tileArray[WLB.y - 1, i].type = Tile.Type.Ground_Inner;
-
-                    if (tileArray[WLB.y, i].type == Tile.Type.Room_Wall_Edge_Right_Bottom) tileArray[WLB.y, i].type = Tile.Type.Room_Wall_Edge_Left_Bottom;
+                    standardTileUp1.type = Tile.Type.Ground_Inner;
+                    standardTile.type = Tile.Type.Ground_Inner;
+                    standardTileDown1.type = Tile.Type.Ground_Inner;
                 }
             }
-            else if (tileArray[WLB.y - 1, i].type == Tile.Type.Way_Wall_Bottom)
+            else if (standardTileDown1.type == Tile.Type.Way_Wall_Bottom)
             {
-                if (tileArray[WLB.y, i].type == Tile.Type.Room_Wall_Edge_Left_Bottom)
+                if (standardTile.type == Tile.Type.Room_Wall_Edge_Left_Bottom)
                 {
-                    tileArray[WLB.y + 1, i].type = Tile.Type.Entrance_Top;
-                    tileArray[WLB.y, i].type = Tile.Type.Way_Floor_Top;
+                    standardTileUp1.type = Tile.Type.Entrance_Top;
+                    standardTile.type = Tile.Type.Way_Floor_Top;
                 }
-                else if (tileArray[WLB.y, i].type == Tile.Type.Room_Wall_Edge_Right_Bottom)
+                else if (standardTile.type == Tile.Type.Room_Wall_Edge_Right_Bottom)
                 {
-                    tileArray[WLB.y + 1, i].type = Tile.Type.Entrance_Top;
-                    tileArray[WLB.y, i].type = Tile.Type.Way_Floor_Top;
+                    standardTileUp1.type = Tile.Type.Entrance_Top;
+                    standardTile.type = Tile.Type.Way_Floor_Top;
                 }
                 else
                 {
-                    tileArray[WLB.y, i].type = Tile.Type.Ground_Inner;
+                    standardTileUp1.type = Tile.Type.Ground_Inner;
+                    standardTile.type = Tile.Type.Ground_Inner;
                 }
             }
         }
