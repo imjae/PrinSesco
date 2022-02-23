@@ -14,5 +14,5 @@ Unity `2020.3.26f1 LTS`
 <br>[김찬영](https://github.com/zzanyoung)
 <br>[홍찬영](https://github.com/ChanYongH)
 <br>[유시온](https://github.com/BigBear621)
-<br>[김진영](https://github.com/)
+<br>[김진영](https://github.com/KjinYoung)
 <br>[서윤주](https://github.com/peewoong)
