@@ -255,17 +255,23 @@ public class Room
         Tile standardTileUp1 = default(Tile);
         // 기준 타일 한칸 아래 타일
         Tile standardTileDown1 = default(Tile);
+        Tile standardTileLeft1 = default(Tile);
+        Tile standardTileRight1 = default(Tile);
 
         for (int i = WLT.x; i <= WRT.x; i++)
         {
             standardTile = tileArray[WLT.y, i];
             standardTileUp1 = tileArray[WLT.y + 1, i];
             standardTileDown1 = tileArray[WLT.y - 1, i];
+            standardTileLeft1 = tileArray[WLT.y, i - 1];
+            standardTileRight1 = tileArray[WLT.y, i + 1];
 
             // 윗쪽 벽의 윗쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
             if (standardTileUp1.IsContainString("Way_Floor") && tileArray[WLT.y + 2, i].IsContainString("Way_Floor"))
             {
                 standardTile.type = Tile.Type.Entrance_Floor_Top;
+                standardTileLeft1.type = Tile.Type.Entrance_Top;
+                standardTileRight1.type = Tile.Type.Entrance_Top;
                 standardTileDown1.type = Tile.Type.Ground_Inner;
             }
             // 윗쪽 벽의 윗쪽 한칸만 길의 바닥인 경우(방과 길을 합쳐야 하는 경우)
