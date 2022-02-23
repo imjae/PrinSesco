@@ -61,8 +61,48 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
+    // 인자로 받은 좌표가 맵의 범위 내에 있는지 체크 (true : 내부, false : 외부)
+    public bool IsMapInside(int x, int y)
+    {
+        bool result = false;
+
+        result = (x >= 0 && x < width) && (y >= 0 && y < height);
+
+        return result;
+    }
+
+    // 방향을 순서대로 입력하여 기준 타일로부터 이동된 거리의 타일 좌표 반남
+    public Tile FindTile(Tile standardTile, params Dir[] dir)
+    {
+        Tile result = default(Tile);
+
+        int standardX = standardTile.Coordinate.x;
+        int standardY = standardTile.Coordinate.y;
+
+        for (int i = 0; i < dir.Length; i++)
+        {
+            if (dir[i] == Dir.UP) standardY++;
+            else if (dir[i] == Dir.DOWN) standardY--;
+            else if (dir[i] == Dir.LEFT) standardX--;
+            else if (dir[i] == Dir.RIGHT) standardX++;
+        }
+
+        if (MapManager.Instance.IsMapInside(standardX, standardY))
+        {
+            result = TileArray[standardY, standardX];
+        }
+        else
+        {
+            result = null;
+        }
+
+        return result;
+    }
+
+    // 길 검사
     public void InspectedWay()
     {
+        MapManager mm = MapManager.Instance;
         // 기준 타일
         Tile standardTile = default(Tile);
         Tile standardTileUp1 = default(Tile);
@@ -82,6 +122,7 @@ public class MapManager : Singleton<MapManager>
             for (int y = 1; y < width - 1; y++)
             {
                 standardTile = TileArray[x, y];
+
                 standardTileUp1 = TileArray[x + 1, y];
                 standardTileDown1 = TileArray[x - 1, y];
 
@@ -94,7 +135,9 @@ public class MapManager : Singleton<MapManager>
                 standardTileRight1Down1 = TileArray[x - 1, y + 1];
 
                 // 수평 길
-                if (standardTile.IsContainString("Way_Floor") && standardTileUp1.type == Tile.Type.Way_Wall_Top && standardTileDown1.type == Tile.Type.Way_Wall_Bottom)
+                if ((standardTile.IsContainString("Way_Floor") || standardTile.IsContainString("Entrance_Floor"))
+                        && (standardTileUp1.type == Tile.Type.Way_Wall_Top || standardTileUp1.type == Tile.Type.Entrance_Top)
+                        && (standardTileDown1.type == Tile.Type.Way_Wall_Bottom || standardTileDown1.IsContainString("Entrance")))
                 {
                     if (standardTileLeft1.type == Tile.Type.Way_Wall_Right)
                     {
@@ -108,21 +151,125 @@ public class MapManager : Singleton<MapManager>
                         standardTileRight1Up1.type = Tile.Type.Entrance_Top;
                         standardTileRight1Down1.type = Tile.Type.Entrance_Left_Bottom;
                     }
+
+                    // 수평 길에서 타일의 두번째 위 타일이 땅(Ground)일 경우 방에 합친다.
+                    if (mm.FindTile(standardTile, Dir.UP, Dir.UP).IsContainString("Ground"))
+                    {
+                        standardTile.type = Tile.Type.Ground_Inner;
+                        standardTileUp1.type = Tile.Type.Ground_Inner;
+                    }
+                    // 수평 길에서 타일의 두번째 위 타일이 벽일 경우 해당 타일을 입구(Entrance)로 변경하고 바로 위 타일을 입구 타일로 변경한다.
+                    else if (mm.FindTile(standardTile, Dir.UP, Dir.UP).type == Tile.Type.Way_Wall_Left)
+                    {
+                        standardTile.type = Tile.Type.Entrance_Floor_Left;
+                        standardTileUp1.type = Tile.Type.Entrance_Top;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.UP, Dir.UP).type == Tile.Type.Way_Wall_Right)
+                    {
+                        standardTile.type = Tile.Type.Entrance_Floor_Right;
+                        standardTileUp1.type = Tile.Type.Entrance_Top;
+                    }
+
+                    if (mm.FindTile(standardTile, Dir.DOWN, Dir.DOWN).IsContainString("Ground"))
+                    {
+                        standardTile.type = Tile.Type.Ground_Inner;
+                        standardTileDown1.type = Tile.Type.Ground_Inner;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.DOWN, Dir.DOWN).type == Tile.Type.Way_Wall_Left)
+                    {
+                        standardTile.type = Tile.Type.Entrance_Floor_Left;
+                        standardTileDown1.type = Tile.Type.Entrance_Left_Bottom;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.DOWN, Dir.DOWN).type == Tile.Type.Way_Wall_Right)
+                    {
+                        standardTile.type = Tile.Type.Entrance_Floor_Right;
+                        standardTileDown1.type = Tile.Type.Entrance_Right_Bottom;
+                    }
                 }
+
                 // 수직 길
-                else if (standardTile.IsContainString("Way_Floor") && standardTileLeft1.type == Tile.Type.Way_Wall_Top && standardTileRight1.type == Tile.Type.Way_Wall_Bottom)
+                if ((standardTile.IsContainString("Way_Floor") || standardTile.IsContainString("Entrance_Floor"))
+                        && (standardTileLeft1.type == Tile.Type.Way_Wall_Left || standardTileLeft1.IsContainString("Entrance"))
+                        && (standardTileRight1.type == Tile.Type.Way_Wall_Right || standardTileRight1.IsContainString("Entrance")))
                 {
                     if (standardTileUp1.type == Tile.Type.Way_Wall_Bottom)
                     {
+                        standardTile.type = Tile.Type.Way_Floor_NotTop;
                         standardTileUp1.type = Tile.Type.Way_Floor_NotTop;
                         standardTileLeft1Up1.type = Tile.Type.Entrance_Bottom_Left;
                         standardTileRight1Up1.type = Tile.Type.Entrance_Bottom_Right;
                     }
                     else if (standardTileDown1.type == Tile.Type.Way_Wall_Top)
                     {
+                        standardTile.type = Tile.Type.Way_Floor_NotTop;
                         standardTileDown1.type = Tile.Type.Way_Floor_NotTop;
                         standardTileLeft1Down1.type = Tile.Type.Entrance_Top;
                         standardTileRight1Down1.type = Tile.Type.Entrance_Top;
+                    }
+
+                    // 수직 길에서 왼쪽왼쪽 타일 체크해 벽 생성 로직
+                    if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Ground") 
+                            || mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Way_Floor"))
+                    {
+                        standardTile.type = Tile.Type.Ground_Inner;
+                        standardTileLeft1.type = Tile.Type.Ground_Inner;
+                    }
+                    if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).type == Tile.Type.Way_Wall_Bottom)
+                    {
+                        standardTile.type = Tile.Type.Entrance_Floor_Bottom;
+                        standardTileLeft1.type = Tile.Type.Entrance_Bottom_Left;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).type == Tile.Type.Way_Wall_Top)
+                    {
+                        standardTile.type = Tile.Type.Entrance_Floor_Top;
+                        standardTileLeft1.type = Tile.Type.Entrance_Top;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).type == Tile.Type.Entrance_Bottom_Right)
+                    {
+                        standardTileLeft1.type = Tile.Type.Entrance_Bottom_Left;
+                    }
+
+                    // 수직 길에서 오른쪽오른쪽 타일 체크해 벽 생성 로직
+                    if (mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).IsContainString("Ground") || mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).IsContainString("Way_Floor"))
+                    {
+                        standardTile.type = Tile.Type.Ground_Inner;
+                        standardTileRight1.type = Tile.Type.Ground_Inner;
+                    }
+                    if (mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).type == Tile.Type.Way_Wall_Bottom)
+                    {
+                        standardTile.type = Tile.Type.Entrance_Floor_Bottom;
+                        standardTileRight1.type = Tile.Type.Entrance_Bottom_Right;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).type == Tile.Type.Way_Wall_Top)
+                    {
+                        standardTile.type = Tile.Type.Entrance_Floor_Top;
+                        standardTileRight1.type = Tile.Type.Entrance_Top;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).type == Tile.Type.Entrance_Bottom_Left)
+                    {
+                        standardTileRight1.type = Tile.Type.Entrance_Bottom_Right;
+                    }
+                }
+
+
+                // 길에서 입구 바닥의 옆옆, 뒤뒤, 아래아래 타일이 Dark 일 경우 타일 벽으로 변경(문은 입구 바닥 위치로 놓으면 됨)
+                if (standardTile.IsContainString("Entrance_Floor"))
+                {
+                    if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).type == Tile.Type.Dark)
+                    {
+                        standardTileLeft1.type = Tile.Type.Way_Wall_Left;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).type == Tile.Type.Dark)
+                    {
+                        standardTileRight1.type = Tile.Type.Way_Wall_Right;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.UP, Dir.UP).type == Tile.Type.Dark)
+                    {
+                        standardTileUp1.type = Tile.Type.Way_Wall_Top;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.DOWN, Dir.DOWN).type == Tile.Type.Dark)
+                    {
+                        standardTileDown1.type = Tile.Type.Way_Wall_Bottom;
                     }
                 }
             }
