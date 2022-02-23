@@ -223,21 +223,67 @@ public class Room
     public void InspectedTopWall()
     {
         Tile[,] tileArray = MapManager.Instance.TileArray;
+
+        // 기준 타일
+        Tile standardTile = default(Tile);
+        // 기준 타일 한칸 위 타일
+        Tile standardTileUp1 = default(Tile);
+        // 기준 타일 두칸 위 타일
+        Tile standardTileUp2 = default(Tile);
+        // 기준 타일 한칸 아래 타일
+        Tile standardTileDown1 = default(Tile);
+
         for (int i = WLT.x; i < WRT.x; i++)
         {
+            standardTile = tileArray[WLT.y, i];
+            standardTileUp1 = tileArray[WLT.y + 1, i];
+            standardTileUp2 = tileArray[WLT.y + 2, i];
+            standardTileDown1 = tileArray[WLT.y - 1, i];
+
             // 윗쪽 벽의 윗쪽 한칸, 두칸이 모두 길의 바닥인 경우(수직 길인 경우)
-            if (tileArray[WLT.y + 1, i].IsContainString("Way_Floor") && tileArray[WLT.y + 2, i].IsContainString("Way_Floor"))
+            if (standardTileUp1.IsContainString("Way_Floor") && standardTileUp2.IsContainString("Way_Floor"))
             {
-                tileArray[WLT.y, i].type = Tile.Type.Way_Floor_NotTop;
-                tileArray[WLT.y - 1, i].type = Tile.Type.Ground_Inner;
+                standardTile.type = Tile.Type.Way_Floor_NotTop;
+                standardTileDown1.type = Tile.Type.Ground_Inner;
             }
             // 윗쪽 벽의 윗쪽 한칸만 길의 바닥인 경우(방과 길을 합쳐야 하는 경우)
-            else if (tileArray[WLT.y + 1, i].IsContainString("Way_Floor"))
+            else if (standardTileUp1.IsContainString("Way_Floor"))
             {
-                // tileArray[WLT.y + 1, i].color = Color.black;
-                tileArray[WLT.y, i].type = Tile.Type.Ground_Inner;
-                if (tileArray[WLT.y, i].type == Tile.Type.Room_Wall_Edge_Left_Top) tileArray[WLT.y, i].type = Tile.Type.Room_Wall_Edge_Right_Top;
-                if (tileArray[WLT.y, i].type == Tile.Type.Room_Wall_Edge_Right_Top) tileArray[WLT.y, i].type = Tile.Type.Room_Wall_Edge_Left_Top;
+                if (standardTile.type == Tile.Type.Room_Wall_Edge_Left_Top)
+                {
+                    standardTile.type = Tile.Type.Entrance_Left_Bottom;
+                    standardTileUp1.type = Tile.Type.Way_Floor_Top;
+                }
+                else if (standardTile.type == Tile.Type.Room_Wall_Edge_Right_Top)
+                {
+                    standardTile.type = Tile.Type.Entrance_Right_Bottom;
+                    standardTileUp1.type = Tile.Type.Way_Floor_Top;
+                }
+                else
+                {
+                    standardTile.type = Tile.Type.Ground_Inner;
+                    standardTileUp1.type = Tile.Type.Ground_Top;
+                    standardTileDown1.type = Tile.Type.Ground_Inner;
+                }
+            }
+            // 윗쪽 벽과 길의 윗 벽이 닿아있는 경우(방과 길을 합침)
+            else if (standardTileUp1.type == Tile.Type.Way_Wall_Top)
+            {
+                if (standardTile.type == Tile.Type.Room_Wall_Edge_Left_Top)
+                {
+                    standardTile.type = Tile.Type.Way_Floor_Top;
+                    standardTileDown1.type = Tile.Type.Entrance_Left_Bottom;
+                }
+                else if (standardTile.type == Tile.Type.Room_Wall_Edge_Right_Top)
+                {
+                    standardTile.type = Tile.Type.Way_Floor_Top;
+                    standardTileDown1.type = Tile.Type.Entrance_Right_Bottom;
+                }
+                else
+                {
+                    standardTile.type = Tile.Type.Ground_Top;
+                    standardTileDown1.type = Tile.Type.Ground_Inner;
+                }
             }
         }
     }
