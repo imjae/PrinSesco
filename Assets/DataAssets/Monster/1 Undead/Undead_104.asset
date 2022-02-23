@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Undead_104
   m_EditorClassIdentifier: 
   monsterName: Undead_104
-  maxHP: 0
+  maxHP: 8
   damage: 5
-  moveSpeed: 10
+  attackRate: 0.5
+  moveSpeed: 2
   monsterImage: {fileID: 21300000, guid: 8b50376ec7ef44d25932ffaf5ecbb6b3, type: 3}
-  drop: {fileID: 0}
+  drop: {fileID: 599634753301497828, guid: d2cefae1278e6ba49912c14102d69bc6, type: 3}
   monsterType: 0
   monsterSpecies: 0
