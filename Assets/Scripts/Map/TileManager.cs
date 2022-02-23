@@ -79,4 +79,5 @@ public class TileManager : Singleton<TileManager>
         // Debug.Log($"{tile.type.ToString()} -> {spriteListByType.Count} -> {index}");
         tile.sprite = spriteListByType[index];
     }
+
 }
