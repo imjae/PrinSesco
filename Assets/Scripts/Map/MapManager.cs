@@ -162,7 +162,12 @@ public class MapManager : Singleton<MapManager>
                     else if (mm.FindTile(standardTile, Dir.UP, Dir.UP).type == Tile.Type.Way_Wall_Left)
                     {
                         standardTile.type = Tile.Type.Entrance_Floor_Left;
-                        standardTileDown1.type = Tile.Type.Entrance_Top;
+                        standardTileUp1.type = Tile.Type.Entrance_Top;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.UP, Dir.UP).type == Tile.Type.Way_Wall_Right)
+                    {
+                        standardTile.type = Tile.Type.Entrance_Floor_Right;
+                        standardTileUp1.type = Tile.Type.Entrance_Top;
                     }
 
                     if (mm.FindTile(standardTile, Dir.DOWN, Dir.DOWN).IsContainString("Ground"))
@@ -174,6 +179,11 @@ public class MapManager : Singleton<MapManager>
                     {
                         standardTile.type = Tile.Type.Entrance_Floor_Left;
                         standardTileDown1.type = Tile.Type.Entrance_Left_Bottom;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.DOWN, Dir.DOWN).type == Tile.Type.Way_Wall_Right)
+                    {
+                        standardTile.type = Tile.Type.Entrance_Floor_Right;
+                        standardTileDown1.type = Tile.Type.Entrance_Right_Bottom;
                     }
                 }
 
@@ -198,7 +208,8 @@ public class MapManager : Singleton<MapManager>
                     }
 
                     // 수직 길에서 왼쪽왼쪽 타일 체크해 벽 생성 로직
-                    if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Ground") || mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Way_Floor"))
+                    if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Ground") 
+                            || mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Way_Floor"))
                     {
                         standardTile.type = Tile.Type.Ground_Inner;
                         standardTileLeft1.type = Tile.Type.Ground_Inner;
@@ -212,6 +223,10 @@ public class MapManager : Singleton<MapManager>
                     {
                         standardTile.type = Tile.Type.Entrance_Floor_Top;
                         standardTileLeft1.type = Tile.Type.Entrance_Top;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).type == Tile.Type.Entrance_Bottom_Right)
+                    {
+                        standardTileLeft1.type = Tile.Type.Entrance_Bottom_Left;
                     }
 
                     // 수직 길에서 오른쪽오른쪽 타일 체크해 벽 생성 로직
@@ -229,6 +244,10 @@ public class MapManager : Singleton<MapManager>
                     {
                         standardTile.type = Tile.Type.Entrance_Floor_Top;
                         standardTileRight1.type = Tile.Type.Entrance_Top;
+                    }
+                    else if (mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).type == Tile.Type.Entrance_Bottom_Left)
+                    {
+                        standardTileRight1.type = Tile.Type.Entrance_Bottom_Right;
                     }
                 }
 
