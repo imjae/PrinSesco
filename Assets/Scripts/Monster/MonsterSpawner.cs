@@ -2,13 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct Wave
+{
+    public float spawnRate;
+    public int monsterCount;
+    public MonsterData[] monsterDatas;
+}
+
 public class MonsterSpawner : MonoBehaviour
 {
     #region Spawning Implementation
     [SerializeField]
-    private List<MonsterData> monsterDatas;
+    private Wave waves;
+    [SerializeField]
+    private MonsterData[] monsterDatas;
     [SerializeField]
     private GameObject monsterPrefab;
+    public Transform player;
+
+    public int enemyCount;
 
     public Monster SpawnMonster(MONSTER_TYPE type)
     {
@@ -16,21 +29,15 @@ public class MonsterSpawner : MonoBehaviour
         newMonster.transform.position = new Vector3(-3, 3, 0);
         newMonster.monsterData = monsterDatas[(int)type];
         newMonster.name = newMonster.monsterData.MonsterName;
-        newMonster.GetComponent<SpriteRenderer>().sprite = newMonster.monsterData.MonsterImage;
+        newMonster.monsterImage.sprite = newMonster.monsterData.MonsterImage;
         newMonster.gameObject.AddComponent<BoxCollider2D>();
+        newMonster.player = this.player;
         return newMonster;
     }
     #endregion
 
     private void Start()
     {
-        //for (int i = 0; i < monsterDatas.Count; i++)
-        //{
-        //    Monster monster = SpawnMonster((MONSTER_TYPE)i);
-        //    monster.PrintMonsterData();
-        //}
-        Monster monster = SpawnMonster((MONSTER_TYPE)0);
-        //monster.PrintMonsterData();
-        Debug.Log(monster.monsterData.MonsterSpecies);
+        Monster monster = SpawnMonster((MONSTER_TYPE)1);
     }
 }

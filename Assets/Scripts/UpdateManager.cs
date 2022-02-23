@@ -2,10 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpdateController : MonoBehaviour
+public class UpdateManager : MonoBehaviour
 {
-    private void Update()
+    public delegate void OnUpdate();
+    public static OnUpdate onUpdate;
+
+    public delegate void OnFixedUpdate();
+    public static OnFixedUpdate onFixedUpdate;
+
+    //private void Update()
+    //{
+    //    if (onUpdate != null)
+    //        onUpdate();
+    //}
+
+    private void FixedUpdate()
     {
-        //Monster.MoveToPlayer();
+        if (onFixedUpdate != null)
+            onFixedUpdate();
     }
 }

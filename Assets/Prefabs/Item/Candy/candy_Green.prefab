@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6967587955732838540}
   - component: {fileID: 8037395027616244549}
   m_Layer: 0
-  m_Name: candy_Green
+  m_Name: Candy_Green
   m_TagString: Candy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
