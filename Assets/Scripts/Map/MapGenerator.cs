@@ -54,7 +54,6 @@ public class MapGenerator : MonoBehaviour
             // 기본 방 타일 타입 변경
             room.InitRoomTileType();
 
-
             // 방과 길의 예외케이스 검사 (최대한 방의 벽에서 체크를 해야 비용을 줄일 수 있다)
             room.InspectedLeftWall();
             room.InspectedTopWall();
@@ -62,8 +61,7 @@ public class MapGenerator : MonoBehaviour
             room.InspectedBottomWall();
         });
 
-        // manager.InspectedHorizontalWay();
-        // manager.InspectedVerticalWay();
+        manager.InspectedWay();
 
         // 타일에 설정된 타입에 맞게 스프라이트 한번에 변경
         for (int x = 0; x < height; x++)

@@ -61,73 +61,69 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
-    public void InspectedHorizontalWay()
+    public void InspectedWay()
     {
-        for (int x = 0; x < height; x++)
-        {
-            for (int y = 0; y < width; y++)
-            {
-                if (TileArray[x, y].type == Tile.Type.Way_Wall_Top)
-                {
-                    // 수평 길이 수직길을 만났을 경우에 수직 길이 왼쪽에 있는경우와 오른쪽에 있는 경우 길 합치기 로직
-                    if (TileArray[x, y - 1].type == Tile.Type.Way_Wall_Right)
-                    {
-                        TileArray[x, y - 1].type = Tile.Type.Way_Wall_Top;
-                        TileArray[x - 1, y - 1].type = Tile.Type.Way_Floor_Top;
-                        TileArray[x - 2, y - 1].type = Tile.Type.Entrance_Right_Bottom;
-                    }
-                    else if (TileArray[x, y + 1].type == Tile.Type.Way_Wall_Left)
-                    {
-                        TileArray[x, y + 1].type = Tile.Type.Way_Wall_Top;
-                        TileArray[x - 1, y + 1].type = Tile.Type.Way_Floor_Top;
-                        TileArray[x - 2, y + 1].type = Tile.Type.Entrance_Left_Bottom;
-                    }
-                }
-                else if (TileArray[x, y].type == Tile.Type.Way_Wall_Top)
-                {
-                    // 수평 길이 방의 윗쪽 벽과 겹쳤을 경우 방과 합친다.
-                    if (TileArray[x - 1, y].type == Tile.Type.Room_Wall_Top)
-                    {
-                        TileArray[x - 1, y].type = Tile.Type.Ground_Top;
-                        TileArray[x - 2, y].type = Tile.Type.Ground_Inner;
-                    }
-                }
-            }
-        }
-    }
+        // 기준 타일
+        Tile standardTile = default(Tile);
+        Tile standardTileUp1 = default(Tile);
+        Tile standardTileDown1 = default(Tile);
 
-    public void InspectedVerticalWay()
-    {
-        for (int x = 0; x < height; x++)
+        Tile standardTileLeft1 = default(Tile);
+        Tile standardTileLeft1Up1 = default(Tile);
+        Tile standardTileLeft1Down1 = default(Tile);
+
+        Tile standardTileRight1 = default(Tile);
+        Tile standardTileRight1Up1 = default(Tile);
+        Tile standardTileRight1Down1 = default(Tile);
+
+
+        for (int x = 1; x < height - 1; x++)
         {
-            for (int y = 0; y < width; y++)
+            for (int y = 1; y < width - 1; y++)
             {
-                if (TileArray[x, y].type == Tile.Type.Way_Wall_Left)
+                standardTile = TileArray[x, y];
+                standardTileUp1 = TileArray[x + 1, y];
+                standardTileDown1 = TileArray[x - 1, y];
+
+                standardTileLeft1 = TileArray[x, y - 1];
+                standardTileLeft1Up1 = TileArray[x + 1, y - 1];
+                standardTileLeft1Down1 = TileArray[x - 1, y - 1];
+
+                standardTileRight1 = TileArray[x, y + 1];
+                standardTileRight1Up1 = TileArray[x + 1, y + 1];
+                standardTileRight1Down1 = TileArray[x - 1, y + 1];
+
+                // 수평 길
+                if (standardTile.IsContainString("Way_Floor") && standardTileUp1.type == Tile.Type.Way_Wall_Top && standardTileDown1.type == Tile.Type.Way_Wall_Bottom)
                 {
-                    // 수직 길이 수평길을 만났을 경우에 수평 길이 위쪽에 있는 경우와 아래쪽에 있는 경우 길 합치기 로직
-                    if (TileArray[x + 1, y].type == Tile.Type.Way_Wall_Bottom)
+                    if (standardTileLeft1.type == Tile.Type.Way_Wall_Right)
                     {
-                        TileArray[x + 1, y].type = Tile.Type.Entrance_Bottom_Left;
-                        TileArray[x + 1, y + 1].type = Tile.Type.Way_Floor_NotTop;
-                        TileArray[x + 1, y + 2].type = Tile.Type.Entrance_Bottom_Right;
+                        standardTileLeft1.type = Tile.Type.Way_Floor_Top;
+                        standardTileLeft1Up1.type = Tile.Type.Entrance_Top;
+                        standardTileLeft1Down1.type = Tile.Type.Entrance_Right_Bottom;
                     }
-                    else if (TileArray[x - 1, y].type == Tile.Type.Way_Wall_Top)
+                    else if (standardTileRight1.type == Tile.Type.Way_Wall_Left)
                     {
-                        TileArray[x - 1, y + 1].type = Tile.Type.Way_Floor_NotTop;
+                        standardTileRight1.type = Tile.Type.Way_Floor_Top;
+                        standardTileRight1Up1.type = Tile.Type.Entrance_Top;
+                        standardTileRight1Down1.type = Tile.Type.Entrance_Left_Bottom;
                     }
                 }
-                else if (TileArray[x, y].type == Tile.Type.Way_Wall_Right)
+                // 수직 길
+                else if (standardTile.IsContainString("Way_Floor") && standardTileLeft1.type == Tile.Type.Way_Wall_Top && standardTileRight1.type == Tile.Type.Way_Wall_Bottom)
                 {
-                    // 수직 길이 방의 오른쪽 벽과 겹쳤을 경우 길의 바닥을 방과 합쳐준다.
-                    if (TileArray[x, y - 1].type == Tile.Type.Room_Wall_Right)
+                    if (standardTileUp1.type == Tile.Type.Way_Wall_Bottom)
                     {
-                        TileArray[x, y - 1].type = Tile.Type.Ground_Right;
-                        TileArray[x, y - 2].type = Tile.Type.Ground_Inner;
+                        standardTileUp1.type = Tile.Type.Way_Floor_NotTop;
+                        standardTileLeft1Up1.type = Tile.Type.Entrance_Bottom_Left;
+                        standardTileRight1Up1.type = Tile.Type.Entrance_Bottom_Right;
                     }
-                }
-                else if (TileArray[x, y].type == Tile.Type.Way_Floor_NotTop)
-                {
-                    // 수직 길이 방의 오른쪽 벽과 
+                    else if (standardTileDown1.type == Tile.Type.Way_Wall_Top)
+                    {
+                        standardTileDown1.type = Tile.Type.Way_Floor_NotTop;
+                        standardTileLeft1Down1.type = Tile.Type.Entrance_Top;
+                        standardTileRight1Down1.type = Tile.Type.Entrance_Top;
+                    }
                 }
             }
         }
