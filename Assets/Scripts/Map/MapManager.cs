@@ -82,6 +82,7 @@ public class MapManager : Singleton<MapManager>
             for (int y = 1; y < width - 1; y++)
             {
                 standardTile = TileArray[x, y];
+
                 standardTileUp1 = TileArray[x + 1, y];
                 standardTileDown1 = TileArray[x - 1, y];
 
@@ -108,6 +109,8 @@ public class MapManager : Singleton<MapManager>
                         standardTileRight1Up1.type = Tile.Type.Entrance_Top;
                         standardTileRight1Down1.type = Tile.Type.Entrance_Left_Bottom;
                     }
+
+                    
                 }
                 // 수직 길
                 else if (standardTile.IsContainString("Way_Floor") && standardTileLeft1.type == Tile.Type.Way_Wall_Top && standardTileRight1.type == Tile.Type.Way_Wall_Bottom)
@@ -125,6 +128,9 @@ public class MapManager : Singleton<MapManager>
                         standardTileRight1Down1.type = Tile.Type.Entrance_Top;
                     }
                 }
+
+
+
             }
         }
     }
