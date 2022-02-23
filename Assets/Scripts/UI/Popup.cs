@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Popup : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private GameObject popupUI;
+    
     void Start()
     {
-        
     }
 
     // Update is called once per frame
