@@ -1,13 +1,6 @@
 using System.Net.WebSockets;
 using UnityEngine;
 
-public enum Dir
-{
-    LEFT,
-    RIGHT,
-    TOP,
-    BOTTOM
-}
 
 public class Room
 {
@@ -69,9 +62,9 @@ public class Room
             result = (x == LB.x && (y >= LB.y && y <= LT.y));
         else if (dir == Dir.RIGHT)
             result = (x == RB.x && (y >= RB.y && y <= RT.y));
-        else if (dir == Dir.TOP)
+        else if (dir == Dir.UP)
             result = (x >= LT.x && x <= RT.x) && y == LT.y;
-        else if (dir == Dir.BOTTOM)
+        else if (dir == Dir.DOWN)
             result = (x >= LT.x && x <= RT.x) && y == LB.y;
 
         return result;
@@ -86,9 +79,9 @@ public class Room
             result = (x == WLB.x && (y >= WLB.y && y <= WLT.y));
         else if (dir == Dir.RIGHT)
             result = (x == WRB.x && (y >= WRB.y && y <= WRT.y));
-        else if (dir == Dir.TOP)
+        else if (dir == Dir.UP)
             result = (x >= WLT.x && x <= WRT.x) && y == WLT.y;
-        else if (dir == Dir.BOTTOM)
+        else if (dir == Dir.DOWN)
             result = (x >= WLT.x && x <= WRT.x) && y == WLB.y;
 
         return result;
@@ -116,7 +109,7 @@ public class Room
                 // tileArray[j, i].color = Color.cyan;
                 tileArray[j, i].type = Tile.Type.Ground_Inner;
 
-                if (IsBorderByFloor(Dir.BOTTOM, i, j))
+                if (IsBorderByFloor(Dir.DOWN, i, j))
                 {
                     // 방의 아랫쪽 벽, 바닥 타일 타입 셋팅
                     tileArray[j, i].type = Tile.Type.Ground_Bottom;
@@ -134,7 +127,7 @@ public class Room
                     // 방의 가장 좌측 위쪽 바닥의 경우 여기서 처리
                     // if (j == y + h - 1) tileArray[j + 1, i].type = Tile.Type.Room_Wall_Top;
                 }
-                if (IsBorderByFloor(Dir.TOP, i, j))
+                if (IsBorderByFloor(Dir.UP, i, j))
                 {
                     // 방의 윗쪽 벽, 바닥 타일 타입 셋팅
                     tileArray[j, i].type = Tile.Type.Ground_Top;
@@ -184,9 +177,11 @@ public class Room
     // 방의 왼쪽 벽에서 예외 케이스 검사
     public void InspectedLeftWall()
     {
+        // 자주 사용하기 때문에 이름을 간추렸다.
+        MapManager mm = MapManager.Instance;
         Tile[,] tileArray = MapManager.Instance.TileArray;
 
-        // 기준 타일
+        // 기준 타일 (Standard Tile)
         Tile standardTile = default(Tile);
         // 기준 타일 한칸 왼쪽 타일
         Tile standardTileLeft1 = default(Tile);
@@ -196,19 +191,18 @@ public class Room
         for (int i = WLB.y; i <= WLT.y; i++)
         {
             standardTile = tileArray[i, WLB.x];
-            standardTileLeft1 = tileArray[i, WLB.x - 1];
+            standardTileLeft1 = mm.FindTile(standardTile, Dir.LEFT);
             // standardTileLeft2 = tileArray[i, WLB.x - 2];
-            standardTileRight1 = tileArray[i, WLB.x + 1];
+            standardTileRight1 = mm.FindTile(standardTile, Dir.RIGHT);
 
             // 왼쪽 벽의 왼쪽으로 한칸, 두칸이 모두 길 바닥일 경우 입구를 생성
-            if (standardTileLeft1.IsContainString("Way_Floor") && tileArray[i, WLB.x - 2].IsContainString("Way_Floor"))
+            if (standardTileLeft1.IsContainString("Way_Floor") && mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Way_Floor"))
             {
                 standardTile.type = Tile.Type.Entrance_Floor_Left;
                 standardTileRight1.type = Tile.Type.Ground_Inner;
 
-
-                tileArray[i + 1, WLB.x].type = Tile.Type.Entrance_Top;
-                tileArray[i - 1, WLB.x].type = Tile.Type.Entrance_Left_Bottom;
+                mm.FindTile(standardTile, Dir.UP).type = Tile.Type.Entrance_Top;
+                mm.FindTile(standardTile, Dir.DOWN).type = Tile.Type.Entrance_Left_Bottom;
             }
             // 왼쪽 벽과 수직 길이 합쳐지는 경우
             else if (standardTileLeft1.IsContainString("Way_Floor"))

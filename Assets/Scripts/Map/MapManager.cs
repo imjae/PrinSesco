@@ -61,6 +61,44 @@ public class MapManager : Singleton<MapManager>
         }
     }
 
+    // 인자로 받은 좌표가 맵의 범위 내에 있는지 체크 (true : 내부, false : 외부)
+    public bool IsMapInside(int x, int y)
+    {
+        bool result = false;
+
+        result = (x >= 0 && x < width) && (y >= 0 && y < height);
+
+        return result;
+    }
+
+    // 방향을 순서대로 입력하여 기준 타일로부터 이동된 거리의 타일 좌표 반남
+    public Tile FindTile(Tile standardTile, params Dir[] dir)
+    {
+        Tile result = default(Tile);
+
+        int standardX = standardTile.Coordinate.x;
+        int standardY = standardTile.Coordinate.y;
+
+        for (int i = 0; i < dir.Length; i++)
+        {
+            if (dir[i] == Dir.UP) standardY++;
+            else if (dir[i] == Dir.DOWN) standardY--;
+            else if (dir[i] == Dir.LEFT) standardX--;
+            else if (dir[i] == Dir.RIGHT) standardX++;
+        }
+
+        if (MapManager.Instance.IsMapInside(standardX, standardY))
+        {
+            result = TileArray[standardY, standardX];
+        }
+        else
+        {
+            result = null;
+        }
+
+        return result;
+    }
+
     public void InspectedWay()
     {
         // 기준 타일
@@ -109,8 +147,6 @@ public class MapManager : Singleton<MapManager>
                         standardTileRight1Up1.type = Tile.Type.Entrance_Top;
                         standardTileRight1Down1.type = Tile.Type.Entrance_Left_Bottom;
                     }
-
-                    
                 }
                 // 수직 길
                 else if (standardTile.IsContainString("Way_Floor") && standardTileLeft1.type == Tile.Type.Way_Wall_Top && standardTileRight1.type == Tile.Type.Way_Wall_Bottom)
@@ -130,7 +166,11 @@ public class MapManager : Singleton<MapManager>
                 }
 
 
+                // 수평길, 수직길이 + 모양으로 합쳐진 후, 일이 방안에 깊숙히 있는 경우 방으로 변경
+                if (standardTile.IsContainString("Entrance_Floor") || standardTile.IsContainString("Way_Floor"))
+                {
 
+                }
             }
         }
     }
