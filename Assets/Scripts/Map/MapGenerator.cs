@@ -68,11 +68,12 @@ public class MapGenerator : MonoBehaviour
         {
             for (int y = 0; y < width; y++)
             {
-                
+                TileManager.Instance.ChangeTileSpriteByType(manager.TileArray[x, y]);
 
-                TileManager.Instance.ChangeTileSpriteByType(ref manager.TileArray[x, y]);
+                TileManager.Instance.ChangeTileParentByType(manager.TileArray[x, y]);
             }
         }
 
+        TileManager.Instance.wallTileBucket.GetComponent<CompositeCollider2D>().GenerateGeometry();
     }
 }
