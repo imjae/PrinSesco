@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     [Header("PlayerInfo")]
     [SerializeField] float speed;
-    [SerializeField] float hp;
+    [SerializeField] float maxHp;
+    public float hp;
     [SerializeField] float level;
     [SerializeField] float exp;
     public float Hp
@@ -15,6 +17,11 @@ public class Player : MonoBehaviour
         set
         {
             hp = value;
+            playerUIHp.fillAmount = hp / maxHp;
+            if (hp > maxHp / 2)
+                playerUIHp.color = Color.green;
+            else
+                playerUIHp.color = Color.red;
         }
     }
     public float Level
@@ -23,6 +30,7 @@ public class Player : MonoBehaviour
         set
         {
             level = value;
+            playerManager.PlayerLevelUp();
         }
     }
     public float Exp
@@ -31,6 +39,8 @@ public class Player : MonoBehaviour
         set
         {
             exp = value;
+            if (exp > 0)
+                Level++;
         }
     }
     public bool reversal = false; // 반전처리
@@ -38,32 +48,21 @@ public class Player : MonoBehaviour
     Animator ani;
     GameObject whip;
 
-    [SerializeField] PlayerUIManager playerUIManager;
+    [SerializeField] Transform equipWeaponPos;
+    [SerializeField] PlayerManager playerManager;
+    [SerializeField] Image playerUIHp;
 
     void Awake()
     {
+        hp = maxHp;
         spriteRenderer = GetComponent<SpriteRenderer>();
         ani = GetComponent<Animator>();
         whip = transform.GetChild(0).gameObject;
-        //StartCoroutine(AttackCo());
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            transform.GetChild(0).gameObject.SetActive(true);
         PlayerMove();
     }
-
-    //IEnumerator AttackCo() // 자동으로 공격함(TEST)
-    //{
-    //    while(true)
-    //    {
-    //        yield return new WaitForSeconds(2);
-    //        whip.SetActive(true);
-    //        yield return new WaitForSeconds(0.5f);
-    //        whip.SetActive(false);
-    //    }
-    //}
     void PlayerMove()
     {
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime * 5,
@@ -85,13 +84,32 @@ public class Player : MonoBehaviour
         spriteRenderer.flipX = reversal; // 캐릭터 반전
     }
     //진영 : 추가 코드 입니다
-    
 
+    public void GetWeapon(int weaponIndex) // 무기 획득
+    {
+        for (int i = 0; i < equipWeaponPos.childCount; i++)
+        {
+            if (equipWeaponPos.GetChild(i).GetComponent<Weapons>().GetType().Name ==
+                playerManager.weaponPrefabs[weaponIndex].GetComponent<Weapons>().GetType().Name)
+            {
+                equipWeaponPos.GetChild(i).GetComponent<Weapons>().level++;
+                break;
+            }
+            if (equipWeaponPos.GetChild(i).GetComponent<Weapons>().GetType().Name !=
+                playerManager.weaponPrefabs[weaponIndex].GetComponent<Weapons>().GetType().Name)
+            {
+                Instantiate(playerManager.weaponPrefabs[weaponIndex], equipWeaponPos);
+                break;
+            }
+        }
+        playerManager.playerLevelUp.SetActive(false);
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Candy")
         {
             Destroy(other.gameObject);
+            Exp++;
         }
     }
 }
