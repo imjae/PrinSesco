@@ -13,7 +13,7 @@ public class Magnet : MonoBehaviour
     private Rigidbody2D candyRigidbody2;
     //private bool magnetZone;
 
-    private void Start()
+    private void Update()
     {
         thisTrans = gameObject.transform;
     }
@@ -24,6 +24,7 @@ public class Magnet : MonoBehaviour
         float magnetDistanceStr = (distanceStretch / distance) * magnetPower; // 거리에 따른 힘이 달라져야 하니 거리로 나눔
         candyRi.AddForce(magnetDistanceStr * (directionToMagnet * magnetDirection), ForceMode2D.Force); // 힘의 크기와 방향이 있으니 물리적 힘구현
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Candy")

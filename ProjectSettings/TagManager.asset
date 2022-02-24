@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Candy
   - Monster
+  - Magnet
   layers:
   - Default
   - TransparentFX

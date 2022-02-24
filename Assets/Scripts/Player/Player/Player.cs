@@ -48,9 +48,9 @@ public class Player : MonoBehaviour
     Animator ani;
     GameObject whip;
 
-    [SerializeField] Transform equipWeaponPos;
-    [SerializeField] PlayerManager playerManager;
-    [SerializeField] Image playerUIHp;
+    [SerializeField] Transform equipWeaponPos = null;
+    [SerializeField] PlayerManager playerManager = null;
+    [SerializeField] Image playerUIHp = null;
 
     void Awake()
     {
@@ -67,8 +67,8 @@ public class Player : MonoBehaviour
     {
         Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime * 5,
                                         Input.GetAxis("Vertical") * speed * Time.deltaTime * 5);
-        //transform.position = new Vector2(transform.position.x + moveInput.x, transform.position.y+ moveInput.y);
-        transform.Translate(new Vector2(moveInput.x, moveInput.y));
+        transform.position = new Vector2(transform.position.x + moveInput.x, transform.position.y+ moveInput.y);
+        //transform.Translate(new Vector2(moveInput.x, moveInput.y));
         //bool isWalk = Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Vertical") > 0;
         bool isWalk = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.W);
         bool isAttack = whip.activeSelf;
@@ -83,8 +83,6 @@ public class Player : MonoBehaviour
             whip.transform.localPosition = new Vector2(-0.4f, whip.transform.localPosition.y);
         spriteRenderer.flipX = reversal; // 캐릭터 반전
     }
-    //진영 : 추가 코드 입니다
-
     public void GetWeapon(int weaponIndex) // 무기 획득
     {
         for (int i = 0; i < equipWeaponPos.childCount; i++)
@@ -104,12 +102,13 @@ public class Player : MonoBehaviour
         }
         playerManager.playerLevelUp.SetActive(false);
     }
+    //진영 : 추가 코드 입니다
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Candy")
         {
             Destroy(other.gameObject);
-            Exp++;
+            Exp += other.GetComponent<Candy>().exp;
         }
     }
 }
