@@ -80,4 +80,6 @@ public class TileManager : Singleton<TileManager>
         tile.sprite = spriteListByType[index];
     }
 
+    public void Change
+
 }
