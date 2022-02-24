@@ -68,6 +68,8 @@ public class MapGenerator : MonoBehaviour
         {
             for (int y = 0; y < width; y++)
             {
+                
+
                 TileManager.Instance.ChangeTileSpriteByType(ref manager.TileArray[x, y]);
             }
         }

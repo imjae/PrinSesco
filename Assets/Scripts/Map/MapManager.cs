@@ -13,6 +13,7 @@ public class MapManager : Singleton<MapManager>
 
     [Header("Tile References")]
     public TileManager tileManager;
+    private Transform emptyTileBucket;
     #endregion
 
     #region Properties
@@ -25,7 +26,13 @@ public class MapManager : Singleton<MapManager>
     #endregion
 
     #region Unity Life Cycles ()
-
+    public override void Awake()
+    {
+        base.Awake();
+        
+        emptyTileBucket = tileManager.transform.Find("EmptyTileBucket");
+        Debug.Log(emptyTileBucket.ToString());
+    }
     #endregion
 
 
@@ -48,6 +55,10 @@ public class MapManager : Singleton<MapManager>
             {
                 // 실제로 생성되는 타일의 위치는 0,0을 중심으로 생성되야 하기 때문에 좌표값을 할당하지 않는다.
                 var tileObject = tileManager.Create(tileManager.transform, new Vector2(x, y), Color.white);
+                
+                // 초기에는 빈공간 버킷에 타일을 분류
+                tileObject.transform.SetParent(emptyTileBucket);
+
                 tileObject.Coordinate = new Vector2Int(dx, dy);
                 tileObject.name = $"Tile({dx}.{dy})";
                 tileObject.type = Tile.Type.Dark;

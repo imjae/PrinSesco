@@ -140,9 +140,6 @@ public class Room
                     tileArray[j, i + 1].type = Tile.Type.Room_Wall_Right;
                 }
 
-
-
-
                 // 방의 모서리에 해당하는 바닥타일과, 벽을 마지막으로 덮는다.
                 if (i == LB.x && j == LB.y)
                 {
@@ -166,12 +163,6 @@ public class Room
                 }
             }
         }
-
-        // // 방의 각 모서리 바닥 타일 셋팅
-        // tileArray[y + 1, x + 1].type = Tile.Type.Ground_Edge_Left_Bottom;
-        // tileArray[y + h - 2, x + w - 2].type = Tile.Type.Ground_Edge_Right_Top;
-        // tileArray[y + h - 2, x + 1].type = Tile.Type.Ground_Edge_Left_Top;
-        // tileArray[y + 1, x + w - 2].type = Tile.Type.Ground_Edge_Right_Bottom;
     }
 
     // 방의 왼쪽 벽에서 예외 케이스 검사
