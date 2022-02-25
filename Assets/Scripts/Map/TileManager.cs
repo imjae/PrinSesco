@@ -14,6 +14,13 @@ public class TileManager : Singleton<TileManager>
 
     public Sprite[] tileset;
     public Dictionary<string, List<Sprite>> tileDictionary;
+
+    public Transform wallTileBucket;
+    public Transform groundTileBucket;
+    public Transform floorTileBucket;
+    public Transform entranceTileBucket;
+    public Transform emptyTileBucket;
+
     #endregion
 
     public override void Awake()
@@ -22,7 +29,6 @@ public class TileManager : Singleton<TileManager>
 
         tileset = Resources.LoadAll<Sprite>("Map/DungeonTileset/Dungeon_Tileset");
         tileDictionary = InitializeTileset(tileset);
-
     }
 
     public Tile Create(Transform parent, Vector2 position, Color color, int order = 1)
@@ -80,4 +86,24 @@ public class TileManager : Singleton<TileManager>
         tile.sprite = spriteListByType[index];
     }
 
+    public void ChangeTileParentByType(ref Tile tile)
+    {
+        if((tile.IsContainString("Wall") || tile.IsContainString("Entrance")) && !tile.IsContainString("Floor"))
+        {
+            tile.transform.SetParent(wallTileBucket);
+            tile.gameObject.AddComponent<BoxCollider2D>();
+        }
+        else if(tile.IsContainString("Ground"))
+        {
+            tile.transform.SetParent(groundTileBucket);
+        }
+    }
+
+    public void CreateDoor(ref Tile tile)
+    {
+        if(tile.type == Tile.Type.Entrance_Floor_Left)
+        {
+            
+        }
+    }
 }

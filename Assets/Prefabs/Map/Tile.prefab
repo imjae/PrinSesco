@@ -95,4 +95,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c2991b6170fc194db40b5f4c64278ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: 0
   <Coordinate>k__BackingField: {x: 0, y: 0}
