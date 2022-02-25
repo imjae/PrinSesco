@@ -72,7 +72,7 @@ public class TileManager : Singleton<TileManager>
     }
 
     //타일의 타입에 해당하는 스프라이트 리스트에서 랜덤 스프라이트를 설정
-    public void ChangeTileSpriteByType(Tile tile)
+    public void ChangeTileSpriteByType(ref Tile tile)
     {
         List<Sprite> spriteListByType = tileDictionary[tile.type.ToString()];
 
@@ -86,7 +86,7 @@ public class TileManager : Singleton<TileManager>
         tile.sprite = spriteListByType[index];
     }
 
-    public void ChangeTileParentByType(Tile tile)
+    public void ChangeTileParentByType(ref Tile tile)
     {
         if((tile.IsContainString("Wall") || tile.IsContainString("Entrance")) && !tile.IsContainString("Floor"))
         {
@@ -96,6 +96,14 @@ public class TileManager : Singleton<TileManager>
         else if(tile.IsContainString("Ground"))
         {
             tile.transform.SetParent(groundTileBucket);
+        }
+    }
+
+    public void CreateDoor(ref Tile tile)
+    {
+        if(tile.type == Tile.Type.Entrance_Floor_Left)
+        {
+            
         }
     }
 }

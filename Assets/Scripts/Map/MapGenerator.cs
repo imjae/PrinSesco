@@ -43,9 +43,9 @@ public class MapGenerator : MonoBehaviour
         containerTree.GetLeafs().ForEach(node =>
         {
             Room tmpRoom = new Room(node);
-            
+
             //방의 가로, 세로 길이가 1인 경우 방을 추가하지 않는다. (타일 구조상 한칸짜리 방은 타일의 규칙을 흐트러트린다.)
-            if(!(tmpRoom.Width == 1 || tmpRoom.Height == 1))
+            if (!(tmpRoom.Width == 1 || tmpRoom.Height == 1))
                 roomList.Add(tmpRoom);
         });
 
@@ -68,9 +68,11 @@ public class MapGenerator : MonoBehaviour
         {
             for (int y = 0; y < width; y++)
             {
-                TileManager.Instance.ChangeTileSpriteByType(manager.TileArray[x, y]);
+                //TODO 환경 구조물 타일 생성
+                
 
-                TileManager.Instance.ChangeTileParentByType(manager.TileArray[x, y]);
+                TileManager.Instance.ChangeTileSpriteByType(ref manager.TileArray[x, y]);
+                TileManager.Instance.ChangeTileParentByType(ref manager.TileArray[x, y]);
             }
         }
 

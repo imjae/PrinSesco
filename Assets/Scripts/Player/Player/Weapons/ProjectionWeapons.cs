@@ -41,8 +41,6 @@ public class ProjectionWeapons : Weapons
     protected void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Monster"))
-            other.GetComponent<Monster>().Hp -= att;
+            other.GetComponent<Monster>().GetHit(att);
     }
-
-
 }
