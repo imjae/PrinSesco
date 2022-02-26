@@ -112,10 +112,10 @@ TextureImporter:
     second: Dungeon_Tileset_Room_Wall_Right_2#Way_Wall_Right_2
   - first:
       213: 6505958660565071534
-    second: Dungeon_Tileset_SquareDoor_Left
+    second: Dungeon_Tileset_Door_Vertical_Left_0
   - first:
       213: 1042098557448713531
-    second: Dungeon_Tileset_SquareDoor_Right
+    second: Dungeon_Tileset_Door_Vertical_Right_0
   - first:
       213: -6580451823669508612
     second: Dungeon_Tileset_Vent
@@ -142,13 +142,13 @@ TextureImporter:
     second: Dungeon_Tileset_Room_Wall_Edge_Right_Bottom
   - first:
       213: -2680935109507513731
-    second: Dungeon_Tileset_VerticalDoor_Center_Up
+    second: Dungeon_Tileset_Door_Horizontal_Center_Up
   - first:
       213: 8185415898879777628
-    second: Dungeon_Tileset_VerticalDoor_Left_Up
+    second: Dungeon_Tileset_Door_Horizontal_Left_Up
   - first:
       213: 2869445173234102217
-    second: Dungeon_Tileset_VerticalDoor_Right_Up
+    second: Dungeon_Tileset_Door_Horizontal_Right_Up
   - first:
       213: -5338643416407846498
     second: Dungeon_Tileset_Big_Rock
@@ -172,13 +172,13 @@ TextureImporter:
     second: Dungeon_Tileset_Entrance_Left_Bottom_1#Entrance_Bottom_Left_1
   - first:
       213: -2097155515530198684
-    second: Dungeon_Tileset_VerticalDoor_Center_Down
+    second: Dungeon_Tileset_Door_Horizontal_Center_Down
   - first:
       213: -7197758672315654437
-    second: Dungeon_Tileset_VerticalDoor_Left_Down
+    second: Dungeon_Tileset_Door_Horizontal_Left_Down
   - first:
       213: 6069686093187096410
-    second: Dungeon_Tileset_VerticalDoor_Right_Down
+    second: Dungeon_Tileset_Door_Horizontal_Right_Down
   - first:
       213: -3192858651156017326
     second: Dungeon_Tileset_Small_Rock
@@ -202,10 +202,10 @@ TextureImporter:
     second: Dungeon_Tileset_65
   - first:
       213: -4695309399070934062
-    second: Dungeon_Tileset_RoundDoor_Left
+    second: Dungeon_Tileset_Door_Vertical_Left_1
   - first:
       213: -4765653632507054551
-    second: Dungeon_Tileset_RoundDoor_Right
+    second: Dungeon_Tileset_Door_Vertical_Right_1
   - first:
       213: 8042273296376651466
     second: Dungeon_Tileset_68
@@ -332,7 +332,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 2
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -342,8 +342,8 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 5
-  spriteMeshType: 1
+  spriteExtrude: 11
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
@@ -414,10 +414,10 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: 47
     textureCompression: 1
-    compressionQuality: 100
+    compressionQuality: 0
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 1
@@ -1183,7 +1183,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_SquareDoor_Left
+      name: Dungeon_Tileset_Door_Vertical_Left_0
       rect:
         serializedVersion: 2
         x: 96
@@ -1204,7 +1204,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_SquareDoor_Right
+      name: Dungeon_Tileset_Door_Vertical_Right_0
       rect:
         serializedVersion: 2
         x: 112
@@ -1393,7 +1393,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_VerticalDoor_Center_Up
+      name: Dungeon_Tileset_Door_Horizontal_Center_Up
       rect:
         serializedVersion: 2
         x: 96
@@ -1414,7 +1414,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_VerticalDoor_Left_Up
+      name: Dungeon_Tileset_Door_Horizontal_Left_Up
       rect:
         serializedVersion: 2
         x: 112
@@ -1435,7 +1435,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_VerticalDoor_Right_Up
+      name: Dungeon_Tileset_Door_Horizontal_Right_Up
       rect:
         serializedVersion: 2
         x: 128
@@ -1603,7 +1603,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_VerticalDoor_Center_Down
+      name: Dungeon_Tileset_Door_Horizontal_Center_Down
       rect:
         serializedVersion: 2
         x: 96
@@ -1624,7 +1624,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_VerticalDoor_Left_Down
+      name: Dungeon_Tileset_Door_Horizontal_Left_Down
       rect:
         serializedVersion: 2
         x: 112
@@ -1645,7 +1645,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_VerticalDoor_Right_Down
+      name: Dungeon_Tileset_Door_Horizontal_Right_Down
       rect:
         serializedVersion: 2
         x: 128
@@ -1813,7 +1813,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_RoundDoor_Left
+      name: Dungeon_Tileset_Door_Vertical_Left_1
       rect:
         serializedVersion: 2
         x: 96
@@ -1834,7 +1834,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_RoundDoor_Right
+      name: Dungeon_Tileset_Door_Vertical_Right_1
       rect:
         serializedVersion: 2
         x: 112
