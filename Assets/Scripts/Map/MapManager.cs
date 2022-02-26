@@ -29,14 +29,14 @@ public class MapManager : Singleton<MapManager>
     public override void Awake()
     {
         base.Awake();
-        
+
         emptyTileBucket = tileManager.transform.Find("EmptyTileBucket");
         Debug.Log(emptyTileBucket.ToString());
     }
     #endregion
 
 
-    public void InitializeTiles()
+    public void InitializeEarlyTiles()
     {
         int dx = 0;
         int dy = 0;
@@ -54,8 +54,8 @@ public class MapManager : Singleton<MapManager>
             for (int x = -halfWidth; x < halfWidth; x++)
             {
                 // 실제로 생성되는 타일의 위치는 0,0을 중심으로 생성되야 하기 때문에 좌표값을 할당하지 않는다.
-                var tileObject = tileManager.Create(tileManager.transform, new Vector2(x, y), Color.white);
-                
+                var tileObject = tileManager.Create(tileManager.transform, new Vector2(x, y));
+
                 // 초기에는 빈공간 버킷에 타일을 분류
                 tileObject.transform.SetParent(emptyTileBucket);
 
@@ -95,7 +95,7 @@ public class MapManager : Singleton<MapManager>
             if (dir[i] == Dir.UP) standardY++;
             else if (dir[i] == Dir.DOWN) standardY--;
             else if (dir[i] == Dir.LEFT) standardX--;
-            else if (dir[i] == Dir.RIGHT) standardX++;
+        else if (dir[i] == Dir.RIGHT) standardX++;
         }
 
         if (MapManager.Instance.IsMapInside(standardX, standardY))
@@ -108,6 +108,27 @@ public class MapManager : Singleton<MapManager>
         }
 
         return result;
+    }
+
+    public void CreateDoorTiles(Tile tile)
+    {
+         var tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.Coordinate.x, tile.Coordinate.y), 2);
+
+
+        //입구의 바닥 타일이면
+        if (tile.type == Tile.Type.Entrance_Floor_Top || tile.type == Tile.Type.Entrance_Floor_Bottom)
+        {
+            // 위, 아래 문이면 Vertical Door 타입 설정
+            
+        }
+        else if(tile.type == Tile.Type.Entrance_Floor_Left)
+        {
+
+        }
+        else if(tile.type == Tile.Type.Entrance_Floor_Right)
+        {
+            
+        }
     }
 
     // 길 검사
@@ -219,7 +240,7 @@ public class MapManager : Singleton<MapManager>
                     }
 
                     // 수직 길에서 왼쪽왼쪽 타일 체크해 벽 생성 로직
-                    if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Ground") 
+                    if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Ground")
                             || mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Way_Floor"))
                     {
                         standardTile.type = Tile.Type.Ground_Inner;

@@ -20,6 +20,7 @@ public class TileManager : Singleton<TileManager>
     public Transform floorTileBucket;
     public Transform entranceTileBucket;
     public Transform emptyTileBucket;
+    public Transform doorTileBucket;
 
     #endregion
 
@@ -31,7 +32,7 @@ public class TileManager : Singleton<TileManager>
         tileDictionary = InitializeTileset(tileset);
     }
 
-    public Tile Create(Transform parent, Vector2 position, Color color, int order = 1)
+    public Tile Create(Transform parent, Vector2 position, int order = 1)
     {
         Tile result = default(Tile);
 
@@ -42,7 +43,6 @@ public class TileManager : Singleton<TileManager>
         if (result.TryGetComponent<Tile>(out Tile tile))
         {
             tile.type = Tile.Type.Dark;
-            // tile.color = color;
             tile.sortingOrder = order;
         }
 
@@ -96,14 +96,6 @@ public class TileManager : Singleton<TileManager>
         else if(tile.IsContainString("Ground"))
         {
             tile.transform.SetParent(groundTileBucket);
-        }
-    }
-
-    public void CreateDoor(ref Tile tile)
-    {
-        if(tile.type == Tile.Type.Entrance_Floor_Left)
-        {
-            
         }
     }
 }

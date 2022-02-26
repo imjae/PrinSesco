@@ -32,7 +32,7 @@ public class MapGenerator : MonoBehaviour
 
         manager.width = width;
         manager.height = height;
-        manager.InitializeTiles();
+        manager.InitializeEarlyTiles();
 
         Container mainContainer = new Container(0, 0, width, height);
         TreeNode containerTree = mainContainer.SplitContainer(mainContainer, iterationNumber, widthRatio, heightRatio);
