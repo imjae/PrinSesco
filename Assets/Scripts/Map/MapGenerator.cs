@@ -32,7 +32,7 @@ public class MapGenerator : MonoBehaviour
 
         manager.width = width;
         manager.height = height;
-        manager.InitializeEarlyTiles();
+        manager.CreateBeginTiles();
 
         Container mainContainer = new Container(0, 0, width, height);
         TreeNode containerTree = mainContainer.SplitContainer(mainContainer, iterationNumber, widthRatio, heightRatio);
@@ -63,19 +63,23 @@ public class MapGenerator : MonoBehaviour
 
         manager.InspectedWay();
 
+        Tile targetTile = default(Tile);
         // 타일에 설정된 타입에 맞게 스프라이트 한번에 변경
         for (int x = 0; x < height; x++)
         {
             for (int y = 0; y < width; y++)
             {
                 //TODO 환경 구조물 타일 생성
-                
+                targetTile = manager.TileArray[x, y];
 
-                TileManager.Instance.ChangeTileSpriteByType(ref manager.TileArray[x, y]);
-                TileManager.Instance.ChangeTileParentByType(ref manager.TileArray[x, y]);
+                if(targetTile.IsContainString("Entrance_Floor")) manager.CreateDoorTiles(targetTile);
+
+                TileManager.Instance.ChangeTileSpriteByType(ref targetTile);    // 타입에 맞게 스프라이트 변경
+                TileManager.Instance.ChangeTileParentByType(ref targetTile);    // 타입에 맞게 부모오브젝트 분류
             }
         }
 
+        // WallTileBucket에 임포트된 CompositeCollider2D 컴포넌트 실행 (벽 타일의 box콜라이더들 합쳐주는 역할)
         TileManager.Instance.wallTileBucket.GetComponent<CompositeCollider2D>().GenerateGeometry();
     }
 }

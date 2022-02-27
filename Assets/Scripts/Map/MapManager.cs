@@ -54,7 +54,7 @@ public class MapManager : Singleton<MapManager>
             for (int x = -halfWidth; x < halfWidth; x++)
             {
                 // 실제로 생성되는 타일의 위치는 0,0을 중심으로 생성되야 하기 때문에 좌표값을 할당하지 않는다.
-                var tileObject = tileManager.Create(tileManager.transform, new Vector2(x, y));
+                var tileObject = tileManager.Create(tileManager.transform, new Vector2(x, y), (int)Tile.Layer.Background);
 
                 // 초기에는 빈공간 버킷에 타일을 분류
                 tileObject.transform.SetParent(emptyTileBucket);
@@ -96,7 +96,7 @@ public class MapManager : Singleton<MapManager>
             if (dir[i] == Dir.UP) standardY++;
             else if (dir[i] == Dir.DOWN) standardY--;
             else if (dir[i] == Dir.LEFT) standardX--;
-        else if (dir[i] == Dir.RIGHT) standardX++;
+            else if (dir[i] == Dir.RIGHT) standardX++;
         }
 
         // 이동된 거리의 타일이 맵 범위를 벗어날 경우 null을 반환한다.
@@ -113,10 +113,11 @@ public class MapManager : Singleton<MapManager>
     }
 
     public void CreateDoorTiles(Tile tile)
-    {   
+    {
         // 기본 타일 생성(해당 타일 위치로 이동)
-         Tile tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), 2);
-
+        Tile tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
+        tileObject.transform.SetParent(tileManager.doorTileBucket);
+        tileObject.gameObject.AddComponent<Door>();
 
         //입구의 바닥 타일이면
         if (tile.type == Tile.Type.Entrance_Floor_Top || tile.type == Tile.Type.Entrance_Floor_Bottom)
@@ -124,13 +125,15 @@ public class MapManager : Singleton<MapManager>
             // 위, 아래 문이면 Vertical Door 타입 설정
             tileObject.type = Tile.Type.Door_Vertical_Right;
         }
-        else if(tile.type == Tile.Type.Entrance_Floor_Left)
+        else if (tile.type == Tile.Type.Entrance_Floor_Left)
         {
+            tileObject.type = Tile.Type.Door_Horizontal_Right_Up;
 
         }
-        else if(tile.type == Tile.Type.Entrance_Floor_Right)
+        else if (tile.type == Tile.Type.Entrance_Floor_Right)
         {
-            
+            tileObject.type = Tile.Type.Door_Horizontal_Left_Up;
+
         }
 
         TileManager.Instance.ChangeTileSpriteByType(ref tileObject);
