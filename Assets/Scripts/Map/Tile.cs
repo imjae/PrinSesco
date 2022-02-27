@@ -13,6 +13,7 @@ public class Tile : MonoBehaviour
     #region Properties
     [field: SerializeField] public Vector2Int Coordinate { get; set; }
     [field: SerializeField] public Vector2Int RealCoordinate { get; set; }
+    public bool IsStructure { get; set; }
     public Color color
     {
         set => spriteRenderer.color = value;
@@ -96,7 +97,7 @@ public class Tile : MonoBehaviour
         Background = 1,
         Structure = 2
     }
-    
+
     #endregion
 
     /// <summary>

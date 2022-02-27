@@ -61,6 +61,7 @@ public class MapManager : Singleton<MapManager>
 
                 tileObject.Coordinate = new Vector2Int(dx, dy);
                 tileObject.RealCoordinate = new Vector2Int(x, y);
+                tileObject.IsStructure = false;
                 tileObject.name = $"Tile({dx}.{dy})";
                 tileObject.type = Tile.Type.Dark;
 
@@ -118,6 +119,9 @@ public class MapManager : Singleton<MapManager>
         Tile tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
         tileObject.transform.SetParent(tileManager.doorTileBucket);
         tileObject.gameObject.AddComponent<Door>();
+        
+        tileObject.IsStructure = true;
+        tileObject.name = "DoorTile";
 
         //입구의 바닥 타일이면
         if (tile.type == Tile.Type.Entrance_Floor_Top || tile.type == Tile.Type.Entrance_Floor_Bottom)

@@ -72,7 +72,8 @@ public class MapGenerator : MonoBehaviour
                 //TODO 환경 구조물 타일 생성
                 targetTile = manager.TileArray[x, y];
 
-                if(targetTile.IsContainString("Entrance_Floor")) manager.CreateDoorTiles(targetTile);
+                // 타일에 구조물이 없는 상태에서, Entrance_Floor인 조건
+                if (!targetTile.IsStructure && targetTile.IsContainString("Entrance_Floor")) manager.CreateDoorTiles(targetTile);
 
                 TileManager.Instance.ChangeTileSpriteByType(ref targetTile);    // 타입에 맞게 스프라이트 변경
                 TileManager.Instance.ChangeTileParentByType(ref targetTile);    // 타입에 맞게 부모오브젝트 분류
