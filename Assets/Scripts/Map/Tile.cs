@@ -91,6 +91,12 @@ public class Tile : MonoBehaviour
         Floor,
         Dark
     }
+    public enum Layer
+    {
+        Background = 1,
+        Structure = 2
+    }
+    
     #endregion
 
     /// <summary>
