@@ -35,6 +35,7 @@ public class Monster : MonoBehaviour, IDamageable
         hp = monsterData.MaxHP;
         attackRate = new WaitForSeconds(monsterData.AttackRate);
         attackCoroutine = Attack(player.GetComponent<TempPlayer>());
+
         UpdateManager.onFixedUpdate += MoveToPlayer;
     }
     public void MoveToPlayer()
@@ -42,6 +43,10 @@ public class Monster : MonoBehaviour, IDamageable
         heading = player.transform.position - transform.position;
         distance = heading.magnitude;
         direction = heading / distance;
+        if (direction.x > 0 && !monsterImage.flipX)
+            monsterImage.flipX = true;
+        else if (direction.x < 0 && monsterImage.flipX)
+            monsterImage.flipX = false;
         Debug.DrawRay(transform.position, direction, Color.red);
 
         transform.Translate(direction * monsterData.MoveSpeed * Time.deltaTime);
@@ -69,15 +74,15 @@ public class Monster : MonoBehaviour, IDamageable
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Attack Start");
         if (collision.transform.GetComponent<TempPlayer>() != null)
             StartCoroutine(attackCoroutine);
-        Debug.Log("Attack Start");
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
+        Debug.Log("Attack Stop");
         if (collision.transform.GetComponent<TempPlayer>() != null)
             StopCoroutine(attackCoroutine);
-        Debug.Log("Attack Stop");
     }
 
 }
