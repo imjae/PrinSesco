@@ -36,7 +36,7 @@ public class MapManager : Singleton<MapManager>
     #endregion
 
 
-    public void InitializeEarlyTiles()
+    public void CreateBeginTiles()
     {
         int dx = 0;
         int dy = 0;
@@ -60,6 +60,7 @@ public class MapManager : Singleton<MapManager>
                 tileObject.transform.SetParent(emptyTileBucket);
 
                 tileObject.Coordinate = new Vector2Int(dx, dy);
+                tileObject.RealCoordinate = new Vector2Int(x, y);
                 tileObject.name = $"Tile({dx}.{dy})";
                 tileObject.type = Tile.Type.Dark;
 
@@ -98,6 +99,7 @@ public class MapManager : Singleton<MapManager>
         else if (dir[i] == Dir.RIGHT) standardX++;
         }
 
+        // 이동된 거리의 타일이 맵 범위를 벗어날 경우 null을 반환한다.
         if (MapManager.Instance.IsMapInside(standardX, standardY))
         {
             result = TileArray[standardY, standardX];
@@ -111,15 +113,16 @@ public class MapManager : Singleton<MapManager>
     }
 
     public void CreateDoorTiles(Tile tile)
-    {
-         var tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.Coordinate.x, tile.Coordinate.y), 2);
+    {   
+        // 기본 타일 생성(해당 타일 위치로 이동)
+         Tile tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), 2);
 
 
         //입구의 바닥 타일이면
         if (tile.type == Tile.Type.Entrance_Floor_Top || tile.type == Tile.Type.Entrance_Floor_Bottom)
         {
             // 위, 아래 문이면 Vertical Door 타입 설정
-            
+            tileObject.type = Tile.Type.Door_Vertical_Right;
         }
         else if(tile.type == Tile.Type.Entrance_Floor_Left)
         {
@@ -129,6 +132,8 @@ public class MapManager : Singleton<MapManager>
         {
             
         }
+
+        TileManager.Instance.ChangeTileSpriteByType(ref tileObject);
     }
 
     // 길 검사

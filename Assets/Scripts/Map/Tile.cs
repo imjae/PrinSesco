@@ -6,12 +6,13 @@ public class Tile : MonoBehaviour
 {
     #region Fields
     private SpriteRenderer spriteRenderer;
-    private Vector2Int _coordinate;
+    private Vector2Int _realCoordinate;
     public Type _type;
     #endregion
 
     #region Properties
     [field: SerializeField] public Vector2Int Coordinate { get; set; }
+    [field: SerializeField] public Vector2Int RealCoordinate { get; set; }
     public Color color
     {
         set => spriteRenderer.color = value;
@@ -73,7 +74,7 @@ public class Tile : MonoBehaviour
         Entrance_Left_Bottom,
         Entrance_Right_Bottom,
         Entrance_Bottom_Left,
-        Entrance_Bottom_Right, 
+        Entrance_Bottom_Right,
         Door_Vertical_Left,
         Door_Vertical_Right,
         Door_Horizontal_Center_Up,
