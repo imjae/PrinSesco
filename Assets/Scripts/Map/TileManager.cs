@@ -32,7 +32,7 @@ public class TileManager : Singleton<TileManager>
         tileDictionary = InitializeTileset(tileset);
     }
 
-    public Tile Create(Transform parent, Vector2 position, int order = 1)
+    public Tile Create(Transform parent, Vector2 position, int order = (int)Tile.Layer.Background)
     {
         Tile result = default(Tile);
 
@@ -49,6 +49,7 @@ public class TileManager : Singleton<TileManager>
         return result;
     }
 
+    // 타일의 타입에 해당하는 타일 스프라이트 리스트 딕셔너리에 분류하여 반환
     public Dictionary<string, List<Sprite>> InitializeTileset(Sprite[] tileset)
     {
         Dictionary<string, List<Sprite>> result = new Dictionary<string, List<Sprite>>();
@@ -67,6 +68,15 @@ public class TileManager : Singleton<TileManager>
 
             result.Add(type, tmpList);
         }
+
+        return result;
+    }
+
+    public Vector2Int RealCoordinate(Tile tile)
+    {
+        Vector2Int result = default(Vector2Int);
+
+
 
         return result;
     }
