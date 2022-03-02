@@ -4,11 +4,6 @@ using UnityEngine;
 
 public enum MONSTER_TYPE
 {
-    NORMAL,
-    BOSS
-}
-public enum MONSTER_SPECIES
-{
     UNDEAD,
     JUNGLE,
     SEA,
@@ -17,6 +12,21 @@ public enum MONSTER_SPECIES
     CAVE,
     DEVIL,
     ICE,
+}
+public enum MONSTER_RANK
+{
+    _01,
+    _02,
+    _03,
+    _04,
+    _05,
+    _06,
+    _07,
+    _08,
+    _09,
+    _10,
+    _11,
+    _12
 }
 
 [CreateAssetMenu(fileName = "Monster Data", menuName = "Scriptable Object/Monster", order = int.MaxValue)]
@@ -55,6 +65,6 @@ public class MonsterData : ScriptableObject
     public MONSTER_TYPE MonsterType => monsterType;
 
     [SerializeField]
-    private MONSTER_SPECIES monsterSpecies;
-    public MONSTER_SPECIES MonsterSpecies => monsterSpecies;
+    private MONSTER_RANK monsterRank;
+    public MONSTER_RANK MonsterRank => monsterRank;
 }
