@@ -101,8 +101,8 @@ public class TileManager : Singleton<TileManager>
         if((tile.IsContainString("Wall") || tile.IsContainString("Entrance")) && !tile.IsContainString("Floor"))
         {
             tile.transform.SetParent(wallTileBucket);
-            var box = tile.gameObject.AddComponent<BoxCollider2D>();
-            box.usedByComposite = true;
+            var wallCollider = tile.gameObject.AddComponent<BoxCollider2D>();
+            wallCollider.usedByComposite = true;
         }
         else if(tile.IsContainString("Ground"))
         {
