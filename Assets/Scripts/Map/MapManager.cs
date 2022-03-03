@@ -23,6 +23,8 @@ public class MapManager : Singleton<MapManager>
         get => _tileArray;
         set { _tileArray = value; }
     }
+    // 문 역할을 하는 타일 담고있는 리스트
+    public List<Tile> DoorList { get; set; }
     #endregion
 
     #region Unity Life Cycles ()
@@ -31,7 +33,8 @@ public class MapManager : Singleton<MapManager>
         base.Awake();
 
         emptyTileBucket = tileManager.transform.Find("EmptyTileBucket");
-        Debug.Log(emptyTileBucket.ToString());
+
+        DoorList = new List<Tile>();
     }
     #endregion
 
@@ -118,7 +121,9 @@ public class MapManager : Singleton<MapManager>
         // 기본 타일 생성(해당 타일 위치로 이동)
         Tile tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
         tileObject.transform.SetParent(tileManager.doorTileBucket);
+        
         tileObject.gameObject.AddComponent<Door>();
+        tileObject.gameObject.AddComponent<BoxCollider2D>();
 
         tileObject.IsStructure = true;
         tileObject.name = "DoorTile";
@@ -139,6 +144,8 @@ public class MapManager : Singleton<MapManager>
             tileObject.type = Tile.Type.Door_Horizontal_Left_Up;
 
         }
+
+        DoorList.Add(tileObject);
 
         TileManager.Instance.ChangeTileSpriteByType(ref tileObject);
     }
