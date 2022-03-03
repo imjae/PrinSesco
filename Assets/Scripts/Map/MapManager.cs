@@ -119,7 +119,7 @@ public class MapManager : Singleton<MapManager>
         Tile tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
         tileObject.transform.SetParent(tileManager.doorTileBucket);
         tileObject.gameObject.AddComponent<Door>();
-        
+
         tileObject.IsStructure = true;
         tileObject.name = "DoorTile";
 
