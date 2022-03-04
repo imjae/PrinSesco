@@ -1,5 +1,5 @@
-using System.Net.WebSockets;
 using UnityEngine;
+using System;
 
 
 public class Room
@@ -23,6 +23,9 @@ public class Room
     public Vector2Int WLT { get; set; }
     public Vector2Int WRB { get; set; }
     public Vector2Int WRT { get; set; }
+
+    // 방의 가운데 좌표
+    public Vector2Int Center { get; set; }
 
     public int Width { get; set; }
     public int Height { get; set; }
@@ -51,6 +54,12 @@ public class Room
         this.WLT = new Vector2Int(this.LT.x - 1, this.LT.y + 1);
         this.WRB = new Vector2Int(this.RB.x + 1, this.RB.y - 1);
         this.WRT = new Vector2Int(this.RT.x + 1, this.RT.y + 1);
+
+        this.Center = new Vector2Int
+        {
+            x = this.x + Mathf.RoundToInt(this.w * 0.5f),
+            y = this.y + Mathf.RoundToInt(this.h * 0.5f)
+        };
     }
 
     // 방의 바닥의 가장자리 여부를 체크
@@ -95,6 +104,19 @@ public class Room
             for (int j = y; j < y + h; j++)
             {
                 tileArray[j, i].color = color;
+            }
+        }
+    }
+
+    // 방 타일을 순환하하면서 인자로 받은 콜백함수 실행
+    public void ExcutesCallbackCirculationRoom(Action<Tile> action)
+    {
+        Tile[,] tileArray = MapManager.Instance.TileArray;
+        for (int i = x; i < x + w; i++)
+        {
+            for (int j = y; j < y + h; j++)
+            {
+                action(tileArray[j, i]);
             }
         }
     }
@@ -392,7 +414,7 @@ public class Room
         Tile standardTileRight1 = default(Tile);
         // 기준 타일 한칸 왼쪽 타일
         Tile standardTileLeft1 = default(Tile);
-        
+
         Tile[,] tileArray = MapManager.Instance.TileArray;
         for (int i = WLB.x; i <= WRB.x; i++)
         {
@@ -451,4 +473,7 @@ public class Room
             }
         }
     }
+
+
+
 }
