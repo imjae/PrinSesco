@@ -61,6 +61,7 @@ public class MapGenerator : MonoBehaviour
             room.InspectedBottomWall();
         });
 
+        // 컨테이너를 이어준 길이 교차하는지를 검사하는 로직
         manager.InspectedWay();
 
         Tile targetTile = default(Tile);
