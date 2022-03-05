@@ -4,12 +4,12 @@ using System;
 
 public class Room
 {
-    #region Fields
+    #region Fields (클래스 내부 연산 용도)
     private int x, y, w, h;
     private int size;
     #endregion
 
-    #region Properties
+    #region Properties (클래스 외부에서 접근 가능한 데이터 용도)
     public Vector2Int Coordinate { get; set; }
 
     // 방의 가장자리 모서리 좌표 (ex: LB == LeftBottom, RB == RightBottom ..)
@@ -62,6 +62,7 @@ public class Room
         };
     }
 
+    #region Room 판별 함수(벽, 바닥, 룸 내부 ...)
     // 방의 바닥의 가장자리 여부를 체크
     public bool IsBorderByFloor(Dir dir, int x, int y)
     {
@@ -95,6 +96,24 @@ public class Room
 
         return result;
     }
+
+    public bool IsRoom(Vector2Int coordinate)
+    {
+        bool result = default(bool);
+
+        int x = coordinate.x;
+        int y = coordinate.y;
+
+        // y 좌표가 LB보다 크거나 같고 LT보다 작거나 같고
+        bool isY = y >= this.LB.y && y <= this.LT.y;
+        // x 좌표가 LB 보다 크거나 같고 RB보다 작거나 같아야 한다.
+        bool isX = x >= this.LB.x && x <= this.RB.x;
+
+        result = isX && isY;
+
+        return result;
+    }
+    #endregion
 
     public void PaintColor(Color color)
     {
@@ -187,6 +206,7 @@ public class Room
         }
     }
 
+    #region Inspect 함수 모음 (벽 검사)
     // 방의 왼쪽 벽에서 예외 케이스 검사
     public void InspectedLeftWall()
     {
@@ -473,7 +493,5 @@ public class Room
             }
         }
     }
-
-
-
+    #endregion
 }
