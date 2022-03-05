@@ -162,27 +162,32 @@ public class MapManager : Singleton<MapManager>
         // 해당 타일이 위치한 방 객체를 얻어와야 함.
         this.RoomList.ForEach(room =>
         {
+            // 해당 바닥 타일이 현재 방에 위치하는 경우 (방에 할당된 바위의 갯수를 넘지 않게하기위해 방을 참조해야한다.)
             if (room.IsRoom(tile.Coordinate))
             {
-                Debug.Log("@@r@");
-                tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
-                tileObject.transform.SetParent(tileManager.rockTileBucket);
+                // 제한된 바위의 갯수만큼 바퀴 생성하는 조건
+                if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomPer(30))
+                {
+                    tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
+                    tileObject.transform.SetParent(tileManager.rockTileBucket);
 
-                tileObject.type = Tile.Type.Big_Rock;
+                    // 바위의 종류 랜덤하게 생성
+                    if (Utils.RandomPer(3)) tileObject.type = Tile.Type.Small_Rock;
+                    else tileObject.type = Tile.Type.Big_Rock;
 
-                tileObject.gameObject.AddComponent<Rock>();
-                tileObject.gameObject.AddComponent<BoxCollider2D>();
+                    tileObject.gameObject.AddComponent<Rock>();
+                    tileObject.gameObject.AddComponent<BoxCollider2D>();
 
-                tileObject.IsStructure = true;
-                tileObject.name = "RockTile";
+                    tileObject.IsStructure = true;
+                    tileObject.name = "RockTile";
 
-                RockList.Add(tileObject);
-                TileManager.Instance.ChangeTileSpriteByType(ref tileObject);
+                    RockList.Add(tileObject);
+                    TileManager.Instance.ChangeTileSpriteByType(ref tileObject);
+
+                    room.CurrentNumberOfRock++;
+                }
             }
         });
-        // 방의 크기에 따라 생성되는 바위의 갯수 알맞게 조절
-
-        // 바위의 종류 랜덤하게 생성
     }
 
     // 길 검사

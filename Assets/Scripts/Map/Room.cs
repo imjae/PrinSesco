@@ -63,8 +63,8 @@ public class Room
             y = this.y + Mathf.RoundToInt(this.h * 0.5f)
         };
 
-        // TODO 일단 넓이에서 5를 나눈 몫을 바위의 갯수로 지정
-        this.NumberOfRock = this.size / 5;
+        // TODO 일단 넓이에서 10를 나눈 몫을 바위의 갯수로 지정
+        this.NumberOfRock = this.size / 10;
         this.CurrentNumberOfRock = 0;
     }
 
