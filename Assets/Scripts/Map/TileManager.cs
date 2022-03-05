@@ -81,7 +81,7 @@ public class TileManager : Singleton<TileManager>
         return result;
     }
 
-    //타일의 타입에 해당하는 스프라이트 리스트에서 랜덤 스프라이트를 설정
+    //타일의 타입에 해당하는 스프라이트 리스트에서 랜덤 스프라이트를 설정 (꽤 중요한 함수)
     public void ChangeTileSpriteByType(ref Tile tile)
     {
         List<Sprite> spriteListByType = tileDictionary[tile.type.ToString()];

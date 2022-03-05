@@ -116,6 +116,7 @@ public class MapManager : Singleton<MapManager>
         return result;
     }
 
+    // 구조물(문)이 생성될 위치의 바닥 타일을 받아, 문 생성
     public void CreateDoorTiles(Tile tile)
     {
         // 기본 타일 생성(해당 타일 위치로 이동)
@@ -148,6 +149,16 @@ public class MapManager : Singleton<MapManager>
         DoorList.Add(tileObject);
 
         TileManager.Instance.ChangeTileSpriteByType(ref tileObject);
+    }
+
+    // 구조물(바위)이 생성될 위치의 바닥 타일을 받아, 문 생성
+    public void CreateRockTiles(Tile tile)
+    {
+        // 해당 타일이 위치한 방 객체를 얻어와야 함.
+        
+        // 방의 크기에 따라 생성되는 바위의 갯수 알맞게 조절
+
+        // 바위의 종류 랜덤하게 생성
     }
 
     // 길 검사
