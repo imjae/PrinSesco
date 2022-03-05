@@ -313,6 +313,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8ef1130048716c42896921fe81041fe, type: 3}
+--- !u!1 &992042991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 992042992}
+  m_Layer: 0
+  m_Name: RockTileBucket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &992042992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992042991}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1949893550}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1137661439
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,6 +572,7 @@ MonoBehaviour:
   entranceTileBucket: {fileID: 1137661440}
   emptyTileBucket: {fileID: 1997521212}
   doorTileBucket: {fileID: 2067019582}
+  rockTileBucket: {fileID: 992042992}
 --- !u!4 &1949893550
 Transform:
   m_ObjectHideFlags: 0
@@ -559,6 +590,7 @@ Transform:
   - {fileID: 1137661440}
   - {fileID: 1997521212}
   - {fileID: 2067019582}
+  - {fileID: 992042992}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
