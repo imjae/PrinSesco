@@ -29,6 +29,8 @@ public class Room
 
     public int Width { get; set; }
     public int Height { get; set; }
+    public int NumberOfRock { get; set; }
+    public int CurrentNumberOfRock { get; set; }
     #endregion
 
     public Room(Container container)
@@ -60,6 +62,10 @@ public class Room
             x = this.x + Mathf.RoundToInt(this.w * 0.5f),
             y = this.y + Mathf.RoundToInt(this.h * 0.5f)
         };
+
+        // TODO 일단 넓이에서 5를 나눈 몫을 바위의 갯수로 지정
+        this.NumberOfRock = this.size / 5;
+        this.CurrentNumberOfRock = 0;
     }
 
     #region Room 판별 함수(벽, 바닥, 룸 내부 ...)

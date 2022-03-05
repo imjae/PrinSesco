@@ -25,6 +25,8 @@ public class MapManager : Singleton<MapManager>
     }
     // 문 역할을 하는 타일 담고있는 리스트
     public List<Tile> DoorList { get; set; }
+    public List<Tile> RockList { get; set; }
+    public List<Room> RoomList { get; set; }
     #endregion
 
     #region Unity Life Cycles ()
@@ -35,6 +37,8 @@ public class MapManager : Singleton<MapManager>
         emptyTileBucket = tileManager.transform.Find("EmptyTileBucket");
 
         DoorList = new List<Tile>();
+        RockList = new List<Tile>();
+        RoomList = new List<Room>();
     }
     #endregion
 
@@ -122,7 +126,7 @@ public class MapManager : Singleton<MapManager>
         // 기본 타일 생성(해당 타일 위치로 이동)
         Tile tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
         tileObject.transform.SetParent(tileManager.doorTileBucket);
-        
+
         tileObject.gameObject.AddComponent<Door>();
         tileObject.gameObject.AddComponent<BoxCollider2D>();
 
@@ -154,8 +158,28 @@ public class MapManager : Singleton<MapManager>
     // 구조물(바위)이 생성될 위치의 바닥 타일을 받아, 문 생성
     public void CreateRockTiles(Tile tile)
     {
+        Tile tileObject = default(Tile);
         // 해당 타일이 위치한 방 객체를 얻어와야 함.
-        
+        this.RoomList.ForEach(room =>
+        {
+            if (room.IsRoom(tile.Coordinate))
+            {
+                Debug.Log("@@r@");
+                tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
+                tileObject.transform.SetParent(tileManager.rockTileBucket);
+
+                tileObject.type = Tile.Type.Big_Rock;
+
+                tileObject.gameObject.AddComponent<Rock>();
+                tileObject.gameObject.AddComponent<BoxCollider2D>();
+
+                tileObject.IsStructure = true;
+                tileObject.name = "RockTile";
+
+                RockList.Add(tileObject);
+                TileManager.Instance.ChangeTileSpriteByType(ref tileObject);
+            }
+        });
         // 방의 크기에 따라 생성되는 바위의 갯수 알맞게 조절
 
         // 바위의 종류 랜덤하게 생성
