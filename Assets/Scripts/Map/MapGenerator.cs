@@ -23,12 +23,10 @@ public class MapGenerator : MonoBehaviour
     [Range(2, 5)]
     [SerializeField] private int wayMinRange;
 
-    private List<Room> roomList;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
-        roomList = new List<Room>();
 
         manager.width = width;
         manager.height = height;
@@ -46,10 +44,10 @@ public class MapGenerator : MonoBehaviour
 
             //방의 가로, 세로 길이가 1인 경우 방을 추가하지 않는다. (타일 구조상 한칸짜리 방은 타일의 규칙을 흐트러트린다.)
             if (!(tmpRoom.Width == 1 || tmpRoom.Height == 1))
-                roomList.Add(tmpRoom);
+                manager.RoomList.Add(tmpRoom);
         });
 
-        roomList.ForEach(room =>
+        manager.RoomList.ForEach(room =>
         {
             // 기본 방 타일 타입 변경
             room.InitRoomTileType();
@@ -61,6 +59,7 @@ public class MapGenerator : MonoBehaviour
             room.InspectedBottomWall();
         });
 
+        // 컨테이너를 이어준 길이 교차하는지를 검사하는 로직
         manager.InspectedWay();
 
         Tile targetTile = default(Tile);
@@ -74,6 +73,7 @@ public class MapGenerator : MonoBehaviour
 
                 // 타일에 구조물이 없는 상태에서, Entrance_Floor인 조건
                 if (!targetTile.IsStructure && targetTile.IsContainString("Entrance_Floor")) manager.CreateDoorTiles(targetTile);
+                if (!targetTile.IsStructure) manager.CreateRockTiles(targetTile);
 
                 TileManager.Instance.ChangeTileSpriteByType(ref targetTile);    // 타입에 맞게 스프라이트 변경
                 TileManager.Instance.ChangeTileParentByType(ref targetTile);    // 타입에 맞게 부모오브젝트 분류
