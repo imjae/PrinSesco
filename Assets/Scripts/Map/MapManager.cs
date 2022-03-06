@@ -190,6 +190,11 @@ public class MapManager : Singleton<MapManager>
         });
     }
 
+    public void CreateBoneTiles(Tile tile)
+    {
+        
+    }
+
     // 길 검사
     public void InspectedWay()
     {
