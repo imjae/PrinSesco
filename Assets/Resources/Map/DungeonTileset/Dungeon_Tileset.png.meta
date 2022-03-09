@@ -274,13 +274,13 @@ TextureImporter:
     second: Dungeon_Tileset_89
   - first:
       213: -7443312225144014202
-    second: Dungeon_Tileset_90
+    second: Dungeon_Tileset_Structure_Torchlight_Top_01
   - first:
       213: -1808025220374361088
-    second: Dungeon_Tileset_91
+    second: Dungeon_Tileset_Structure_Torchlight_Left#Structure_Torchlight_Right
   - first:
       213: 2829099832771946518
-    second: Dungeon_Tileset_92
+    second: Dungeon_Tileset_Structure_Torchlight_Top_02
   - first:
       213: 5860325458425312261
     second: Dungeon_Tileset_93
@@ -2317,7 +2317,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_90
+      name: Dungeon_Tileset_Structure_Torchlight_Top_01
       rect:
         serializedVersion: 2
         x: 0
@@ -2338,7 +2338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_91
+      name: Dungeon_Tileset_Structure_Torchlight_Left#Structure_Torchlight_Right
       rect:
         serializedVersion: 2
         x: 16
@@ -2359,7 +2359,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_92
+      name: Dungeon_Tileset_Structure_Torchlight_Top_02
       rect:
         serializedVersion: 2
         x: 32
