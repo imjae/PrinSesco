@@ -21,7 +21,7 @@ public class TileManager : Singleton<TileManager>
     public Transform entranceTileBucket;
     public Transform emptyTileBucket;
     public Transform doorTileBucket;
-    public Transform rockTileBucket;
+    public Transform structureTileBucket;
 
     #endregion
 

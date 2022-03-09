@@ -151,7 +151,7 @@ TextureImporter:
     second: Dungeon_Tileset_Door_Horizontal_Right_Up
   - first:
       213: -5338643416407846498
-    second: Dungeon_Tileset_Big_Rock
+    second: Dungeon_Tileset_Structure_Big_Rock
   - first:
       213: 2203797919881089718
     second: Dungeon_Tileset_Entrance_Right_Bottom_0#Entrance_Bottom_Right_0
@@ -181,7 +181,7 @@ TextureImporter:
     second: Dungeon_Tileset_Door_Horizontal_Right_Down
   - first:
       213: -3192858651156017326
-    second: Dungeon_Tileset_Small_Rock
+    second: Dungeon_Tileset_Structure_Small_Rock
   - first:
       213: 824959492066083578
     second: Dungeon_Tileset_Ground_Top_2#Way_Floor_Top_2
@@ -196,7 +196,7 @@ TextureImporter:
     second: Dungeon_Tileset_Ground_Top_5#Way_Floor_Top_5
   - first:
       213: 1053006213846151300
-    second: Dungeon_Tileset_64
+    second: Dungeon_Tileset_Structure_Bone_01
   - first:
       213: 8741352430255876377
     second: Dungeon_Tileset_65
@@ -208,7 +208,7 @@ TextureImporter:
     second: Dungeon_Tileset_Door_Vertical_Right_1
   - first:
       213: 8042273296376651466
-    second: Dungeon_Tileset_68
+    second: Dungeon_Tileset_Structure_Bone_02
   - first:
       213: 5945357789820212794
     second: Dungeon_Tileset_Ceiling
@@ -235,7 +235,7 @@ TextureImporter:
     second: Dungeon_Tileset_76
   - first:
       213: 1369372634922183146
-    second: Dungeon_Tileset_77
+    second: Dungeon_Tileset_Structure_Bone_03
   - first:
       213: 1339269231420215825
     second: Dungeon_Tileset_Dark
@@ -274,13 +274,13 @@ TextureImporter:
     second: Dungeon_Tileset_89
   - first:
       213: -7443312225144014202
-    second: Dungeon_Tileset_90
+    second: Dungeon_Tileset_Structure_Torchlight_Top_01
   - first:
       213: -1808025220374361088
-    second: Dungeon_Tileset_91
+    second: Dungeon_Tileset_Structure_Torchlight_Left#Structure_Torchlight_Right
   - first:
       213: 2829099832771946518
-    second: Dungeon_Tileset_92
+    second: Dungeon_Tileset_Structure_Torchlight_Top_02
   - first:
       213: 5860325458425312261
     second: Dungeon_Tileset_93
@@ -1456,7 +1456,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Big_Rock
+      name: Dungeon_Tileset_Structure_Big_Rock
       rect:
         serializedVersion: 2
         x: 144
@@ -1666,7 +1666,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Small_Rock
+      name: Dungeon_Tileset_Structure_Small_Rock
       rect:
         serializedVersion: 2
         x: 144
@@ -1771,7 +1771,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_64
+      name: Dungeon_Tileset_Structure_Bone_01
       rect:
         serializedVersion: 2
         x: 64
@@ -1855,7 +1855,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_68
+      name: Dungeon_Tileset_Structure_Bone_02
       rect:
         serializedVersion: 2
         x: 128
@@ -2044,7 +2044,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_77
+      name: Dungeon_Tileset_Structure_Bone_03
       rect:
         serializedVersion: 2
         x: 112
@@ -2317,7 +2317,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_90
+      name: Dungeon_Tileset_Structure_Torchlight_Top_01
       rect:
         serializedVersion: 2
         x: 0
@@ -2338,7 +2338,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_91
+      name: Dungeon_Tileset_Structure_Torchlight_Left#Structure_Torchlight_Right
       rect:
         serializedVersion: 2
         x: 16
@@ -2359,7 +2359,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_92
+      name: Dungeon_Tileset_Structure_Torchlight_Top_02
       rect:
         serializedVersion: 2
         x: 32

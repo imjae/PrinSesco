@@ -26,6 +26,7 @@ public class MapManager : Singleton<MapManager>
     // 문 역할을 하는 타일 담고있는 리스트
     public List<Tile> DoorList { get; set; }
     public List<Tile> RockList { get; set; }
+    public List<Tile> BoneList { get; set; }
     public List<Room> RoomList { get; set; }
     #endregion
 
@@ -38,6 +39,7 @@ public class MapManager : Singleton<MapManager>
 
         DoorList = new List<Tile>();
         RockList = new List<Tile>();
+        BoneList = new List<Tile>();
         RoomList = new List<Room>();
     }
     #endregion
@@ -166,14 +168,14 @@ public class MapManager : Singleton<MapManager>
             if (room.IsRoom(tile.Coordinate))
             {
                 // 제한된 바위의 갯수만큼 바퀴 생성하는 조건
-                if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomPer(30))
+                if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomByCase(30))
                 {
                     tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
-                    tileObject.transform.SetParent(tileManager.rockTileBucket);
+                    tileObject.transform.SetParent(tileManager.structureTileBucket);
 
                     // 바위의 종류 랜덤하게 생성
-                    if (Utils.RandomPer(3)) tileObject.type = Tile.Type.Small_Rock;
-                    else tileObject.type = Tile.Type.Big_Rock;
+                    if (Utils.RandomByCase(3)) tileObject.type = Tile.Type.Structure_Small_Rock;
+                    else tileObject.type = Tile.Type.Structure_Big_Rock;
 
                     tileObject.gameObject.AddComponent<Rock>();
                     tileObject.gameObject.AddComponent<BoxCollider2D>();
@@ -192,7 +194,44 @@ public class MapManager : Singleton<MapManager>
 
     public void CreateBoneTiles(Tile tile)
     {
-        
+        Tile tileObject = default(Tile);
+        // 해당 타일이 위치한 방 객체를 얻어와야 함.
+        this.RoomList.ForEach(room =>
+        {
+            // 해당 바닥 타일이 현재 방에 위치하는 경우 (방에 할당된 바위의 갯수를 넘지 않게하기위해 방을 참조해야한다.)
+            if (room.IsRoom(tile.Coordinate))
+            {
+                // 제한된 바위의 갯수만큼 바퀴 생성하는 조건
+                if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomByCase(50))
+                {
+                    tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
+                    tileObject.transform.SetParent(tileManager.structureTileBucket);
+
+                    // 뼈의 종류 랜덤하게 생성
+                    int boneNumber = Utils.RandomNumber(3);
+                    if (boneNumber == 0) tileObject.type = Tile.Type.Structure_Bone_01;
+                    else if (boneNumber == 1) tileObject.type = Tile.Type.Structure_Bone_02;
+                    else if (boneNumber == 2) tileObject.type = Tile.Type.Structure_Bone_03;
+
+                    tileObject.gameObject.AddComponent<Bone>();
+                    // 뼈는 콜라이더가 없음
+                    // tileObject.gameObject.AddComponent<BoxCollider2D>();
+
+                    tileObject.IsStructure = true;
+                    tileObject.name = "BoneTile";
+
+                    BoneList.Add(tileObject);
+                    TileManager.Instance.ChangeTileSpriteByType(ref tileObject);
+
+                    room.CurrentNumberOfBone++;
+                }
+            }
+        });
+    }
+
+    public void CreateTorchlightTiles(Tile tile)
+    {
+
     }
 
     // 길 검사

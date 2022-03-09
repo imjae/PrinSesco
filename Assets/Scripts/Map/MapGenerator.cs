@@ -62,6 +62,7 @@ public class MapGenerator : MonoBehaviour
         // 컨테이너를 이어준 길이 교차하는지를 검사하는 로직
         manager.InspectedWay();
 
+
         Tile targetTile = default(Tile);
         // 타일에 설정된 타입에 맞게 스프라이트 한번에 변경
         for (int x = 0; x < height; x++)
@@ -74,6 +75,7 @@ public class MapGenerator : MonoBehaviour
                 // 타일에 구조물이 없는 상태에서, Entrance_Floor인 조건
                 if (!targetTile.IsStructure && targetTile.IsContainString("Entrance_Floor")) manager.CreateDoorTiles(targetTile);
                 if (!targetTile.IsStructure) manager.CreateRockTiles(targetTile);
+                if (!targetTile.IsStructure) manager.CreateBoneTiles(targetTile);
 
                 TileManager.Instance.ChangeTileSpriteByType(ref targetTile);    // 타입에 맞게 스프라이트 변경
                 TileManager.Instance.ChangeTileParentByType(ref targetTile);    // 타입에 맞게 부모오브젝트 분류
