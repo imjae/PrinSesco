@@ -166,13 +166,13 @@ public class MapManager : Singleton<MapManager>
             if (room.IsRoom(tile.Coordinate))
             {
                 // 제한된 바위의 갯수만큼 바퀴 생성하는 조건
-                if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomPer(30))
+                if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomByCase(30))
                 {
                     tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
                     tileObject.transform.SetParent(tileManager.rockTileBucket);
 
                     // 바위의 종류 랜덤하게 생성
-                    if (Utils.RandomPer(3)) tileObject.type = Tile.Type.Small_Rock;
+                    if (Utils.RandomByCase(3)) tileObject.type = Tile.Type.Small_Rock;
                     else tileObject.type = Tile.Type.Big_Rock;
 
                     tileObject.gameObject.AddComponent<Rock>();
@@ -191,6 +191,11 @@ public class MapManager : Singleton<MapManager>
     }
 
     public void CreateBoneTiles(Tile tile)
+    {
+        
+    }
+
+    public void CreateTorchlightTiles(Tile tile)
     {
         
     }
