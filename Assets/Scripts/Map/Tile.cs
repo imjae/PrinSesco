@@ -91,6 +91,8 @@ public class Tile : MonoBehaviour
         Structure_Bone_01,
         Structure_Bone_02,
         Structure_Bone_03,
+        Structure_Torchlight_Top,
+        Structure_Torchlight_Left,
         Ceiling,
         Floor,
         Dark

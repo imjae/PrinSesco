@@ -12,4 +12,13 @@ public static class Utils
 
         return result;
     }
+    public static bool RandomByCase(int numberOfCase, int targetNumber)
+    {
+        bool result = default(bool);
+
+        if (Random.Range(0, numberOfCase) == targetNumber) result = true;
+        else result = false;
+
+        return result;
+    }
 }

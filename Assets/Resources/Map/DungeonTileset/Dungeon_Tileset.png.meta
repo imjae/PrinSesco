@@ -196,7 +196,7 @@ TextureImporter:
     second: Dungeon_Tileset_Ground_Top_5#Way_Floor_Top_5
   - first:
       213: 1053006213846151300
-    second: Dungeon_Tileset_64
+    second: Dungeon_Tileset_Structure_Bone_01
   - first:
       213: 8741352430255876377
     second: Dungeon_Tileset_65
@@ -208,7 +208,7 @@ TextureImporter:
     second: Dungeon_Tileset_Door_Vertical_Right_1
   - first:
       213: 8042273296376651466
-    second: Dungeon_Tileset_68
+    second: Dungeon_Tileset_Structure_Bone_02
   - first:
       213: 5945357789820212794
     second: Dungeon_Tileset_Ceiling
@@ -235,7 +235,7 @@ TextureImporter:
     second: Dungeon_Tileset_76
   - first:
       213: 1369372634922183146
-    second: Dungeon_Tileset_77
+    second: Dungeon_Tileset_Structure_Bone_03
   - first:
       213: 1339269231420215825
     second: Dungeon_Tileset_Dark
@@ -1771,7 +1771,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_64
+      name: Dungeon_Tileset_Structure_Bone_01
       rect:
         serializedVersion: 2
         x: 64
@@ -1855,7 +1855,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_68
+      name: Dungeon_Tileset_Structure_Bone_02
       rect:
         serializedVersion: 2
         x: 128
@@ -2044,7 +2044,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_77
+      name: Dungeon_Tileset_Structure_Bone_03
       rect:
         serializedVersion: 2
         x: 112
