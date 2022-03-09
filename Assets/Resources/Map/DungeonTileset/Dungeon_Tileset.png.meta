@@ -151,7 +151,7 @@ TextureImporter:
     second: Dungeon_Tileset_Door_Horizontal_Right_Up
   - first:
       213: -5338643416407846498
-    second: Dungeon_Tileset_Big_Rock
+    second: Dungeon_Tileset_Structure_Big_Rock
   - first:
       213: 2203797919881089718
     second: Dungeon_Tileset_Entrance_Right_Bottom_0#Entrance_Bottom_Right_0
@@ -181,7 +181,7 @@ TextureImporter:
     second: Dungeon_Tileset_Door_Horizontal_Right_Down
   - first:
       213: -3192858651156017326
-    second: Dungeon_Tileset_Small_Rock
+    second: Dungeon_Tileset_Structure_Small_Rock
   - first:
       213: 824959492066083578
     second: Dungeon_Tileset_Ground_Top_2#Way_Floor_Top_2
@@ -1456,7 +1456,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Big_Rock
+      name: Dungeon_Tileset_Structure_Big_Rock
       rect:
         serializedVersion: 2
         x: 144
@@ -1666,7 +1666,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dungeon_Tileset_Small_Rock
+      name: Dungeon_Tileset_Structure_Small_Rock
       rect:
         serializedVersion: 2
         x: 144
