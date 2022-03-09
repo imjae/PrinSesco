@@ -172,8 +172,8 @@ public class MapManager : Singleton<MapManager>
                     tileObject.transform.SetParent(tileManager.rockTileBucket);
 
                     // 바위의 종류 랜덤하게 생성
-                    if (Utils.RandomByCase(3)) tileObject.type = Tile.Type.Small_Rock;
-                    else tileObject.type = Tile.Type.Big_Rock;
+                    if (Utils.RandomByCase(3)) tileObject.type = Tile.Type.Structure_Small_Rock;
+                    else tileObject.type = Tile.Type.Structure_Big_Rock;
 
                     tileObject.gameObject.AddComponent<Rock>();
                     tileObject.gameObject.AddComponent<BoxCollider2D>();
@@ -192,12 +192,41 @@ public class MapManager : Singleton<MapManager>
 
     public void CreateBoneTiles(Tile tile)
     {
-        
+        Tile tileObject = default(Tile);
+        // 해당 타일이 위치한 방 객체를 얻어와야 함.
+        this.RoomList.ForEach(room =>
+        {
+            // 해당 바닥 타일이 현재 방에 위치하는 경우 (방에 할당된 바위의 갯수를 넘지 않게하기위해 방을 참조해야한다.)
+            if (room.IsRoom(tile.Coordinate))
+            {
+                // 제한된 바위의 갯수만큼 바퀴 생성하는 조건
+                if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomByCase(50))
+                {
+                    tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
+                    tileObject.transform.SetParent(tileManager.rockTileBucket);
+
+                    // 바위의 종류 랜덤하게 생성
+                    if (Utils.RandomByCase(3)) tileObject.type = Tile.Type.Structure_Small_Rock;
+                    else tileObject.type = Tile.Type.Structure_Big_Rock;
+
+                    tileObject.gameObject.AddComponent<Rock>();
+                    tileObject.gameObject.AddComponent<BoxCollider2D>();
+
+                    tileObject.IsStructure = true;
+                    tileObject.name = "RockTile";
+
+                    RockList.Add(tileObject);
+                    TileManager.Instance.ChangeTileSpriteByType(ref tileObject);
+
+                    room.CurrentNumberOfRock++;
+                }
+            }
+        });
     }
 
     public void CreateTorchlightTiles(Tile tile)
     {
-        
+
     }
 
     // 길 검사
