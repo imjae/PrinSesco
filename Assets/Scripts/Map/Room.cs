@@ -31,6 +31,8 @@ public class Room
     public int Height { get; set; }
     public int NumberOfRock { get; set; }
     public int CurrentNumberOfRock { get; set; }
+    public int NumberOfBone { get; set; }
+    public int CurrentNumberOfBone { get; set; }
     #endregion
 
     public Room(Container container)
@@ -66,6 +68,9 @@ public class Room
         // TODO 일단 넓이에서 10를 나눈 몫을 바위의 갯수로 지정
         this.NumberOfRock = this.size / 10;
         this.CurrentNumberOfRock = 0;
+        // TODO 일단 넓이에서 12를 나눈 몫을 뼈의 갯수로 지정
+        this.NumberOfBone = this.size / 15;
+        this.CurrentNumberOfBone = 0;
     }
 
     #region Room 판별 함수(벽, 바닥, 룸 내부 ...)

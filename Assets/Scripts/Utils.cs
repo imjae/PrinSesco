@@ -21,4 +21,12 @@ public static class Utils
 
         return result;
     }
+    public static int RandomNumber(int numberOfCase)
+    {
+        int result = default(int);
+
+        result = Random.Range(0, numberOfCase);
+
+        return result;
+    }
 }

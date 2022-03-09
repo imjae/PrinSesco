@@ -26,6 +26,7 @@ public class MapManager : Singleton<MapManager>
     // 문 역할을 하는 타일 담고있는 리스트
     public List<Tile> DoorList { get; set; }
     public List<Tile> RockList { get; set; }
+    public List<Tile> BoneList { get; set; }
     public List<Room> RoomList { get; set; }
     #endregion
 
@@ -38,6 +39,7 @@ public class MapManager : Singleton<MapManager>
 
         DoorList = new List<Tile>();
         RockList = new List<Tile>();
+        BoneList = new List<Tile>();
         RoomList = new List<Room>();
     }
     #endregion
@@ -169,7 +171,7 @@ public class MapManager : Singleton<MapManager>
                 if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomByCase(30))
                 {
                     tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
-                    tileObject.transform.SetParent(tileManager.rockTileBucket);
+                    tileObject.transform.SetParent(tileManager.structureTileBucket);
 
                     // 바위의 종류 랜덤하게 생성
                     if (Utils.RandomByCase(3)) tileObject.type = Tile.Type.Structure_Small_Rock;
@@ -203,22 +205,25 @@ public class MapManager : Singleton<MapManager>
                 if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomByCase(50))
                 {
                     tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
-                    tileObject.transform.SetParent(tileManager.rockTileBucket);
+                    tileObject.transform.SetParent(tileManager.structureTileBucket);
 
-                    // 바위의 종류 랜덤하게 생성
-                    if (Utils.RandomByCase(3)) tileObject.type = Tile.Type.Structure_Small_Rock;
-                    else tileObject.type = Tile.Type.Structure_Big_Rock;
+                    // 뼈의 종류 랜덤하게 생성
+                    int boneNumber = Utils.RandomNumber(3);
+                    if (boneNumber == 0) tileObject.type = Tile.Type.Structure_Bone_01;
+                    else if (boneNumber == 1) tileObject.type = Tile.Type.Structure_Bone_02;
+                    else if (boneNumber == 2) tileObject.type = Tile.Type.Structure_Bone_03;
 
-                    tileObject.gameObject.AddComponent<Rock>();
-                    tileObject.gameObject.AddComponent<BoxCollider2D>();
+                    tileObject.gameObject.AddComponent<Bone>();
+                    // 뼈는 콜라이더가 없음
+                    // tileObject.gameObject.AddComponent<BoxCollider2D>();
 
                     tileObject.IsStructure = true;
-                    tileObject.name = "RockTile";
+                    tileObject.name = "BoneTile";
 
-                    RockList.Add(tileObject);
+                    BoneList.Add(tileObject);
                     TileManager.Instance.ChangeTileSpriteByType(ref tileObject);
 
-                    room.CurrentNumberOfRock++;
+                    room.CurrentNumberOfBone++;
                 }
             }
         });
