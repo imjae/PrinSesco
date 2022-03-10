@@ -214,8 +214,7 @@ public class MapManager : Singleton<MapManager>
                     else if (boneNumber == 2) tileObject.type = Tile.Type.Structure_Bone_03;
 
                     tileObject.gameObject.AddComponent<Bone>();
-                    // 뼈는 콜라이더가 없음
-                    // tileObject.gameObject.AddComponent<BoxCollider2D>();
+                    tileObject.gameObject.AddComponent<BoxCollider2D>();
 
                     tileObject.IsStructure = true;
                     tileObject.name = "BoneTile";
