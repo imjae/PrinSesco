@@ -228,7 +228,7 @@ public class MapManager : Singleton<MapManager>
         });
     }
 
-    public void CreateTorchlightTiles(Tile tile)
+    public void CreateTorchlightTiles()
     {
 
     }
@@ -408,5 +408,11 @@ public class MapManager : Singleton<MapManager>
                 }
             }
         }
+    }
+
+    // 크기가 작아(Width, Heigth 가 1) 방 등록이 되지 않은 타일 처리
+    public void InspectedEmptyRoom(Tile tile)
+    {
+        
     }
 }
