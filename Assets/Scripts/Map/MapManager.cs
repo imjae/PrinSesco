@@ -214,8 +214,7 @@ public class MapManager : Singleton<MapManager>
                     else if (boneNumber == 2) tileObject.type = Tile.Type.Structure_Bone_03;
 
                     tileObject.gameObject.AddComponent<Bone>();
-                    // 뼈는 콜라이더가 없음
-                    // tileObject.gameObject.AddComponent<BoxCollider2D>();
+                    tileObject.gameObject.AddComponent<BoxCollider2D>();
 
                     tileObject.IsStructure = true;
                     tileObject.name = "BoneTile";
@@ -229,7 +228,7 @@ public class MapManager : Singleton<MapManager>
         });
     }
 
-    public void CreateTorchlightTiles(Tile tile)
+    public void CreateTorchlightTiles()
     {
 
     }
@@ -288,10 +287,10 @@ public class MapManager : Singleton<MapManager>
                     }
 
                     // 수평 길에서 타일의 두번째 위 타일이 땅(Ground)일 경우 방에 합친다.
-                    if (mm.FindTile(standardTile, Dir.UP, Dir.UP).IsContainString("Ground"))
+                    if (mm.FindTile(standardTile, Dir.UP, Dir.UP).IsContainString("Floor"))
                     {
-                        standardTile.type = Tile.Type.Ground_Inner;
-                        standardTileUp1.type = Tile.Type.Ground_Inner;
+                        standardTile.type = Tile.Type.Room_Floor_Inner;
+                        standardTileUp1.type = Tile.Type.Room_Floor_Inner;
                     }
                     // 수평 길에서 타일의 두번째 위 타일이 벽일 경우 해당 타일을 입구(Entrance)로 변경하고 바로 위 타일을 입구 타일로 변경한다.
                     else if (mm.FindTile(standardTile, Dir.UP, Dir.UP).type == Tile.Type.Way_Wall_Left)
@@ -305,10 +304,10 @@ public class MapManager : Singleton<MapManager>
                         standardTileUp1.type = Tile.Type.Entrance_Top;
                     }
 
-                    if (mm.FindTile(standardTile, Dir.DOWN, Dir.DOWN).IsContainString("Ground"))
+                    if (mm.FindTile(standardTile, Dir.DOWN, Dir.DOWN).IsContainString("Floor"))
                     {
-                        standardTile.type = Tile.Type.Ground_Inner;
-                        standardTileDown1.type = Tile.Type.Ground_Inner;
+                        standardTile.type = Tile.Type.Room_Floor_Inner;
+                        standardTileDown1.type = Tile.Type.Room_Floor_Inner;
                     }
                     else if (mm.FindTile(standardTile, Dir.DOWN, Dir.DOWN).type == Tile.Type.Way_Wall_Left)
                     {
@@ -343,11 +342,11 @@ public class MapManager : Singleton<MapManager>
                     }
 
                     // 수직 길에서 왼쪽왼쪽 타일 체크해 벽 생성 로직
-                    if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Ground")
+                    if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Floor")
                             || mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Way_Floor"))
                     {
-                        standardTile.type = Tile.Type.Ground_Inner;
-                        standardTileLeft1.type = Tile.Type.Ground_Inner;
+                        standardTile.type = Tile.Type.Room_Floor_Inner;
+                        standardTileLeft1.type = Tile.Type.Room_Floor_Inner;
                     }
                     if (mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).type == Tile.Type.Way_Wall_Bottom)
                     {
@@ -365,10 +364,10 @@ public class MapManager : Singleton<MapManager>
                     }
 
                     // 수직 길에서 오른쪽오른쪽 타일 체크해 벽 생성 로직
-                    if (mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).IsContainString("Ground") || mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).IsContainString("Way_Floor"))
+                    if (mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).IsContainString("Floor") || mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).IsContainString("Way_Floor"))
                     {
-                        standardTile.type = Tile.Type.Ground_Inner;
-                        standardTileRight1.type = Tile.Type.Ground_Inner;
+                        standardTile.type = Tile.Type.Room_Floor_Inner;
+                        standardTileRight1.type = Tile.Type.Room_Floor_Inner;
                     }
                     if (mm.FindTile(standardTile, Dir.RIGHT, Dir.RIGHT).type == Tile.Type.Way_Wall_Bottom)
                     {
@@ -409,5 +408,18 @@ public class MapManager : Singleton<MapManager>
                 }
             }
         }
+    }
+
+    // 크기가 작아(Width, Heigth 가 1) 방 등록이 되지 않은 타일 처리
+    public void InspectedEmptyRoom(Tile tile)
+    {
+        if(FindTile(tile, Dir.RIGHT).type == Tile.Type.Room_Floor_Inner || FindTile(tile, Dir.RIGHT).IsContainString("Floor"))
+        {
+
+        }
+
+        
+        
+
     }
 }

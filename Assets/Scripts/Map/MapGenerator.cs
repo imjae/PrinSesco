@@ -35,7 +35,8 @@ public class MapGenerator : MonoBehaviour
         Container mainContainer = new Container(0, 0, width, height);
         TreeNode containerTree = mainContainer.SplitContainer(mainContainer, iterationNumber, widthRatio, heightRatio);
 
-        containerTree.Paint();
+        // Paint 함수는 테스트용
+        // containerTree.Paint();
         containerTree.InitTileWayType(wayMinRange);
 
         containerTree.GetLeafs().ForEach(node =>

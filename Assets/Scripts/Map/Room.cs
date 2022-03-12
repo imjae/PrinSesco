@@ -159,12 +159,12 @@ public class Room
             for (int j = y; j < y + h; j++)
             {
                 // tileArray[j, i].color = Color.cyan;
-                tileArray[j, i].type = Tile.Type.Ground_Inner;
+                tileArray[j, i].type = Tile.Type.Room_Floor_Inner;
 
                 if (IsBorderByFloor(Dir.DOWN, i, j))
                 {
                     // 방의 아랫쪽 벽, 바닥 타일 타입 셋팅
-                    tileArray[j, i].type = Tile.Type.Ground_Bottom;
+                    tileArray[j, i].type = Tile.Type.Room_Floor_Bottom;
                     tileArray[j - 1, i].type = Tile.Type.Room_Wall_Bottom;
 
                     // 방의 가장 좌측 아랫쪽 바닥의 경우 여기서 처리
@@ -173,7 +173,7 @@ public class Room
                 if (IsBorderByFloor(Dir.LEFT, i, j))
                 {
                     // 방의 왼쪽 벽, 바닥 타일 타입 셋팅
-                    tileArray[j, i].type = Tile.Type.Ground_Left;
+                    tileArray[j, i].type = Tile.Type.Room_Floor_Left;
                     tileArray[j, i - 1].type = Tile.Type.Room_Wall_Left;
 
                     // 방의 가장 좌측 위쪽 바닥의 경우 여기서 처리
@@ -182,35 +182,35 @@ public class Room
                 if (IsBorderByFloor(Dir.UP, i, j))
                 {
                     // 방의 윗쪽 벽, 바닥 타일 타입 셋팅
-                    tileArray[j, i].type = Tile.Type.Ground_Top;
+                    tileArray[j, i].type = Tile.Type.Room_Floor_Top;
                     tileArray[j + 1, i].type = Tile.Type.Room_Wall_Top;
                 }
                 if (IsBorderByFloor(Dir.RIGHT, i, j))
                 {
                     // 방의 오른쪽 벽, 바닥 타일 타입 셋팅
-                    tileArray[j, i].type = Tile.Type.Ground_Right;
+                    tileArray[j, i].type = Tile.Type.Room_Floor_Right;
                     tileArray[j, i + 1].type = Tile.Type.Room_Wall_Right;
                 }
 
                 // 방의 모서리에 해당하는 바닥타일과, 벽을 마지막으로 덮는다.
                 if (i == LB.x && j == LB.y)
                 {
-                    tileArray[j, i].type = Tile.Type.Ground_Edge_Left_Bottom;
+                    tileArray[j, i].type = Tile.Type.Room_Floor_Edge_Left_Bottom;
                     tileArray[j - 1, i - 1].type = Tile.Type.Room_Wall_Edge_Left_Bottom;
                 }
                 else if (i == RT.x && j == RT.y)
                 {
-                    tileArray[j, i].type = Tile.Type.Ground_Edge_Right_Top;
+                    tileArray[j, i].type = Tile.Type.Room_Floor_Edge_Right_Top;
                     tileArray[j + 1, i + 1].type = Tile.Type.Room_Wall_Edge_Right_Top;
                 }
                 else if (i == LT.x && j == LT.y)
                 {
-                    tileArray[j, i].type = Tile.Type.Ground_Edge_Left_Top;
+                    tileArray[j, i].type = Tile.Type.Room_Floor_Edge_Left_Top;
                     tileArray[j + 1, i - 1].type = Tile.Type.Room_Wall_Edge_Left_Top;
                 }
                 else if (i == RB.x && j == RB.y)
                 {
-                    tileArray[j, i].type = Tile.Type.Ground_Edge_Right_Bottom;
+                    tileArray[j, i].type = Tile.Type.Room_Floor_Edge_Right_Bottom;
                     tileArray[j - 1, i + 1].type = Tile.Type.Room_Wall_Edge_Right_Bottom;
                 }
             }
@@ -243,7 +243,7 @@ public class Room
             if (standardTileLeft1.IsContainString("Way_Floor") && mm.FindTile(standardTile, Dir.LEFT, Dir.LEFT).IsContainString("Way_Floor"))
             {
                 standardTile.type = Tile.Type.Entrance_Floor_Left;
-                standardTileRight1.type = Tile.Type.Ground_Inner;
+                standardTileRight1.type = Tile.Type.Room_Floor_Inner;
 
                 mm.FindTile(standardTile, Dir.UP).type = Tile.Type.Entrance_Top;
                 mm.FindTile(standardTile, Dir.DOWN).type = Tile.Type.Entrance_Left_Bottom;
@@ -263,9 +263,9 @@ public class Room
                 }
                 else
                 {
-                    standardTile.type = Tile.Type.Ground_Inner;
-                    standardTileLeft1.type = Tile.Type.Ground_Inner;
-                    standardTileRight1.type = Tile.Type.Ground_Inner;
+                    standardTile.type = Tile.Type.Room_Floor_Inner;
+                    standardTileLeft1.type = Tile.Type.Room_Floor_Inner;
+                    standardTileRight1.type = Tile.Type.Room_Floor_Inner;
                 }
             }
             else if (standardTileLeft1.type == Tile.Type.Way_Wall_Left)
@@ -282,8 +282,8 @@ public class Room
                 }
                 else
                 {
-                    standardTile.type = Tile.Type.Ground_Inner;
-                    standardTileRight1.type = Tile.Type.Ground_Inner;
+                    standardTile.type = Tile.Type.Room_Floor_Inner;
+                    standardTileRight1.type = Tile.Type.Room_Floor_Inner;
                 }
             }
         }
@@ -316,7 +316,7 @@ public class Room
                 standardTile.type = Tile.Type.Entrance_Floor_Top;
                 standardTileLeft1.type = Tile.Type.Entrance_Top;
                 standardTileRight1.type = Tile.Type.Entrance_Top;
-                standardTileDown1.type = Tile.Type.Ground_Inner;
+                standardTileDown1.type = Tile.Type.Room_Floor_Inner;
             }
             // 윗쪽 벽의 윗쪽 한칸만 길의 바닥인 경우(방과 길을 합쳐야 하는 경우)
             else if (standardTileUp1.IsContainString("Way_Floor"))
@@ -333,9 +333,9 @@ public class Room
                 }
                 else
                 {
-                    standardTile.type = Tile.Type.Ground_Inner;
-                    standardTileUp1.type = Tile.Type.Ground_Top;
-                    standardTileDown1.type = Tile.Type.Ground_Inner;
+                    standardTile.type = Tile.Type.Room_Floor_Inner;
+                    standardTileUp1.type = Tile.Type.Room_Floor_Top;
+                    standardTileDown1.type = Tile.Type.Room_Floor_Inner;
                 }
             }
             // 윗쪽 벽과 길의 윗 벽이 닿아있는 경우(방과 길을 합침)
@@ -353,8 +353,8 @@ public class Room
                 }
                 else
                 {
-                    standardTile.type = Tile.Type.Ground_Top;
-                    standardTileDown1.type = Tile.Type.Ground_Inner;
+                    standardTile.type = Tile.Type.Room_Floor_Top;
+                    standardTileDown1.type = Tile.Type.Room_Floor_Inner;
                 }
             }
         }
@@ -386,7 +386,7 @@ public class Room
             if (standardTileRight1.IsContainString("Way_Floor") && tileArray[i, WRB.x + 2].IsContainString("Way_Floor"))
             {
                 standardTile.type = Tile.Type.Entrance_Floor_Right;
-                standardTileLeft1.type = Tile.Type.Ground_Inner;
+                standardTileLeft1.type = Tile.Type.Room_Floor_Inner;
 
                 standardTileUp1.type = Tile.Type.Entrance_Top;
                 standardTileDown1.type = Tile.Type.Entrance_Right_Bottom;
@@ -407,9 +407,9 @@ public class Room
                 }
                 else
                 {
-                    standardTile.type = Tile.Type.Ground_Inner;
-                    standardTileRight1.type = Tile.Type.Ground_Inner;
-                    standardTileLeft1.type = Tile.Type.Ground_Inner;
+                    standardTile.type = Tile.Type.Room_Floor_Inner;
+                    standardTileRight1.type = Tile.Type.Room_Floor_Inner;
+                    standardTileLeft1.type = Tile.Type.Room_Floor_Inner;
                 }
             }
             else if (standardTileRight1.type == Tile.Type.Way_Wall_Right)
@@ -426,8 +426,8 @@ public class Room
                 }
                 else
                 {
-                    standardTile.type = Tile.Type.Ground_Inner;
-                    standardTileLeft1.type = Tile.Type.Ground_Inner;
+                    standardTile.type = Tile.Type.Room_Floor_Inner;
+                    standardTileLeft1.type = Tile.Type.Room_Floor_Inner;
                 }
             }
         }
@@ -459,7 +459,7 @@ public class Room
             if (standardTileDown1.IsContainString("Way_Floor") && tileArray[WLB.y - 2, i].IsContainString("Way_Floor"))
             {
                 standardTile.type = Tile.Type.Entrance_Floor_Bottom;
-                standardTileUp1.type = Tile.Type.Ground_Inner;
+                standardTileUp1.type = Tile.Type.Room_Floor_Inner;
 
                 standardTileLeft1.type = Tile.Type.Entrance_Bottom_Left;
                 standardTileRight1.type = Tile.Type.Entrance_Bottom_Right;
@@ -479,9 +479,9 @@ public class Room
                 }
                 else
                 {
-                    standardTileUp1.type = Tile.Type.Ground_Inner;
-                    standardTile.type = Tile.Type.Ground_Inner;
-                    standardTileDown1.type = Tile.Type.Ground_Inner;
+                    standardTileUp1.type = Tile.Type.Room_Floor_Inner;
+                    standardTile.type = Tile.Type.Room_Floor_Inner;
+                    standardTileDown1.type = Tile.Type.Room_Floor_Inner;
                 }
             }
             else if (standardTileDown1.type == Tile.Type.Way_Wall_Bottom)
@@ -498,8 +498,8 @@ public class Room
                 }
                 else
                 {
-                    standardTileUp1.type = Tile.Type.Ground_Inner;
-                    standardTile.type = Tile.Type.Ground_Inner;
+                    standardTileUp1.type = Tile.Type.Room_Floor_Inner;
+                    standardTile.type = Tile.Type.Room_Floor_Inner;
                 }
             }
         }
