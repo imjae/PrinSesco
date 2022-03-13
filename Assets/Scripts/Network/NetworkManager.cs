@@ -81,7 +81,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsConnected)
         {
             roomNumberText.text = "룸 넘버 : " + roomNumber;
-            // photonView 연결을 안해서 그런지 오류 발생
+            // photonView 연결을 안해서 그런지 오류 발생! (fork 테스트용입니다 무시)
             peopleInfoText.text = roomInfo.PlayerCount + "/ " + roomInfo.MaxPlayers; 
             if (roomInfo.PlayerCount >= 2) startButton.interactable = true;
         }
