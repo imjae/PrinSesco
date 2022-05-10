@@ -2,20 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour, IDamageable
+public class Monster : MonoBehaviour
 {
-    #region IDamageable Implementation
-    public void GetHit(int damage)
-    {
-        hp -= damage;
-        if (hp <= 0)
-        {
-            hp = 0;
-            Die();
-        }
-    }
-    #endregion
-
     #region Monster Variables
     public MonsterData monsterData;
     public SpriteRenderer monsterImage;
@@ -29,12 +17,10 @@ public class Monster : MonoBehaviour, IDamageable
     private float distance;
     #endregion
 
-    #region Monster Methods
     public void SetMonster()
     {
         hp = monsterData.MaxHP;
         attackRate = new WaitForSeconds(monsterData.AttackRate);
-        attackCoroutine = Attack(player.GetComponent<TempPlayer>());
 
         UpdateManager.onFixedUpdate += MoveToPlayer;
     }
@@ -51,7 +37,7 @@ public class Monster : MonoBehaviour, IDamageable
 
         transform.Translate(direction * monsterData.MoveSpeed * Time.deltaTime);
     }
-    public IEnumerator Attack(TempPlayer player)
+    public IEnumerator Attack()
     {
         while (true)
         {
@@ -66,7 +52,6 @@ public class Monster : MonoBehaviour, IDamageable
         GameObject drop = Instantiate(monsterData.Drop);
         drop.transform.position = transform.position;
     }
-    #endregion
 
     private void Start()
     {
@@ -75,14 +60,9 @@ public class Monster : MonoBehaviour, IDamageable
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("Attack Start");
-        if (collision.transform.GetComponent<TempPlayer>() != null)
-            StartCoroutine(attackCoroutine);
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
         Debug.Log("Attack Stop");
-        if (collision.transform.GetComponent<TempPlayer>() != null)
-            StopCoroutine(attackCoroutine);
     }
-
 }
