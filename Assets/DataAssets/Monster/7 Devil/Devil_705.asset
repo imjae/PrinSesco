@@ -18,6 +18,6 @@ MonoBehaviour:
   attackRate: 0.5
   moveSpeed: 10
   monsterImage: {fileID: 21300000, guid: 115b185f2d2314d38bdbd09a3a9b3f4d, type: 3}
-  drop: {fileID: 0}
-  monsterType: 0
+  drop: {fileID: 599634753301497828, guid: d2cefae1278e6ba49912c14102d69bc6, type: 3}
   monsterSpecies: 6
+  monsterRank: 4

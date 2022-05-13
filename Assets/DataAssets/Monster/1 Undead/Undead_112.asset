@@ -19,5 +19,5 @@ MonoBehaviour:
   moveSpeed: 2
   monsterImage: {fileID: 21300000, guid: a7e48821db41942ed9e28a81a90c2520, type: 3}
   drop: {fileID: 7076265275565560757, guid: 3802ab71428dc104fa4df07112a6d5b7, type: 3}
-  monsterType: 1
   monsterSpecies: 0
+  monsterRank: 11
