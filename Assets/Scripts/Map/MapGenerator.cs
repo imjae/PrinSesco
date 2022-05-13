@@ -83,6 +83,18 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
+        // 타일에 설정된 타입에 맞게 스프라이트 한번에 변경
+        // for (int x = 1; x < height - 1; x++)
+        // {
+        //     for (int y = 1; y < width - 1; y++)
+        //     {
+        //         //TODO 빈타일 주변 검사 타일 생성
+        //         targetTile = manager.TileArray[x, y];
+
+        //         if (targetTile.type == Tile.Type.Dark) manager.InspectedEmptyRoom(targetTile);
+        //     }
+        // }
+
         // WallTileBucket에 임포트된 CompositeCollider2D 컴포넌트 실행 (벽 타일의 box콜라이더들 합쳐주는 역할)
         TileManager.Instance.wallTileBucket.GetComponent<CompositeCollider2D>().GenerateGeometry();
     }
