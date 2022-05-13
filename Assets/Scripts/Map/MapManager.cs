@@ -168,7 +168,7 @@ public class MapManager : Singleton<MapManager>
             if (room.IsRoom(tile.Coordinate))
             {
                 // 제한된 바위의 갯수만큼 바퀴 생성하는 조건
-                if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomByCase(30))
+                if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomByCase(100))
                 {
                     tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
                     tileObject.transform.SetParent(tileManager.structureTileBucket);
@@ -202,7 +202,7 @@ public class MapManager : Singleton<MapManager>
             if (room.IsRoom(tile.Coordinate))
             {
                 // 제한된 바위의 갯수만큼 바퀴 생성하는 조건
-                if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomByCase(50))
+                if (room.NumberOfRock > room.CurrentNumberOfRock && Utils.RandomByCase(100))
                 {
                     tileObject = tileManager.Create(tileManager.transform, new Vector2(tile.RealCoordinate.x, tile.RealCoordinate.y), (int)Tile.Layer.Structure);
                     tileObject.transform.SetParent(tileManager.structureTileBucket);
@@ -413,13 +413,17 @@ public class MapManager : Singleton<MapManager>
     // 크기가 작아(Width, Heigth 가 1) 방 등록이 되지 않은 타일 처리
     public void InspectedEmptyRoom(Tile tile)
     {
-        if(FindTile(tile, Dir.RIGHT).type == Tile.Type.Room_Floor_Inner || FindTile(tile, Dir.RIGHT).IsContainString("Floor"))
+        if (FindTile(tile, Dir.LEFT).IsContainString("Floor"))
         {
-
+            FindTile(tile, Dir.LEFT, Dir.UP).type = Tile.Type.Room_Wall_Edge_Right_Top;
+            FindTile(tile, Dir.LEFT).type = Tile.Type.Room_Wall_Right;
+            FindTile(tile, Dir.LEFT, Dir.DOWN).type = Tile.Type.Room_Wall_Edge_Right_Bottom;
         }
-
-        
-        
-
+        else if (FindTile(tile, Dir.LEFT).IsContainString("Floor"))
+        {
+            FindTile(tile, Dir.RIGHT, Dir.UP).type = Tile.Type.Room_Wall_Edge_Left_Top;
+            FindTile(tile, Dir.RIGHT).type = Tile.Type.Room_Wall_Left;
+            FindTile(tile, Dir.RIGHT, Dir.DOWN).type = Tile.Type.Room_Wall_Edge_Left_Bottom;
+        }
     }
 }
