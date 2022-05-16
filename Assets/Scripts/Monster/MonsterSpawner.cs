@@ -5,6 +5,7 @@ using System;
 
 public class MonsterSpawner : MonoBehaviour
 {
+    [SerializeField] private GameObject prefab;
 
 
 }

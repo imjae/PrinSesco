@@ -5,97 +5,107 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    enum MONSTER_TYPE
+    private int hp;
+    public int Hp
     {
-        UNDEAD,
-        JUNGLE,
-        SEA,
-        FOREST,
-        FIELD,
-        CAVE,
-        DEVIL,
-        ICE,
-    }
-    enum MONSTER_RANK
-    {
-        _01,
-        _02,
-        _03,
-        _04,
-        _05,
-        _06,
-        _07,
-        _08,
-        _09,
-        _10,
-        _11,
-        _12
+        get
+        {
+            Debug.Log($"Getting HP : {hp}");
+            return hp;
+        }
+        set
+        {
+            Debug.Log($"Setting HP : {hp}");
+            hp = value;
+        }
     }
 
-    [SerializeField] private MONSTER_TYPE monsterType;
-    public int MonsterType => (int)monsterType;
 
-    [SerializeField] private MONSTER_RANK monsterRank;
-    public int MonsterRank => (int)monsterRank;
+    private int damage;
+    public int Damage
+    {
+        get
+        {
+            Debug.Log($"Getting Damage : {damage}");
+            return damage;
+        }
+        private set
+        {
+            Debug.Log($"Setting Damage : {damage}");
+            damage = value;
+        }
+    }
 
-    [SerializeField] private string monsterName;
-    public string MonsterName => monsterName;
-    
-    [SerializeField] private int maxHP;
-    public int MaxHP => maxHP;
 
-    [SerializeField] private int hp;
-    public int HP => hp;
+    private float attackRate;
+    public float AttackRate
+    {
+        get
+        {
+            Debug.Log($"Getting AttackRate : {attackRate}");
+            return attackRate;
+        }
+        private set
+        {
+            Debug.Log($"Setting AttackRate : {attackRate}");
+            attackRate = value;
+        }
+    }
 
-    [SerializeField] private int damage;
-    public int Damage => damage;
 
-    [SerializeField] private float attackRate;
-    public float AttackRate => attackRate;
+    private float moveSpeed;
+    public float MoveSpeed
+    {
+        get
+        {
+            Debug.Log($"Getting MoveSpeed : {moveSpeed}");
+            return moveSpeed;
+        }
+        private set
+        {
+            Debug.Log($"Setting MoveSpeed : {moveSpeed}");
+            moveSpeed = value;
+        }
+    }
 
-    [SerializeField] private float moveSpeed;
-    public float MoveSpeed => moveSpeed;
-
-    [SerializeField] private Sprite monsterImage;
-    public Sprite MonsterImage => monsterImage;
 
     [SerializeField] private GameObject drop;
-    public GameObject Drop => drop;
+    public GameObject Drop
+    {
+        get
+        {
+            Debug.Log($"Getting Drop : {drop}");
+            return drop;
+        }
+        set
+        {
+            Debug.Log($"Setting Drop : {drop}");
+            drop = value;
+        }
+    }
 
 
-
-    [SerializeField] private SpriteRenderer monsterRenderer;
+    private SpriteRenderer monsterRenderer;
 
     private WaitForSeconds attackRateSeconds;
     private IEnumerator attackCoroutine;
 
-    [SerializeField] private Transform player;
+    [SerializeField] private Player player;
     private Vector2 heading;
     private Vector2 direction;
     private float distance;
-    private IEnumerator moveToPlayer;
 
 
 
     private void Start()
     {
-        try
-        {
-            if (player == null)
-                player = FindObjectOfType<Player>().transform;
-            if (monsterRenderer == null)
-                TryGetComponent(out monsterRenderer);
-            if (player != null)
-                StartCoroutine(moveToPlayer = MoveToPlayer());
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e.Message);
-        }
-        finally
-        {
-            Debug.Log($"[{gameObject.name}] Target Set : {player.name}.");
-        }
+        if (player == null)
+            player = FindObjectOfType<Player>();
+        if (monsterRenderer == null)
+            TryGetComponent(out monsterRenderer);
+        if (player != null)
+            StartCoroutine(moveToPlayerCo = MoveToPlayer());
+        Debug.Log($"[{gameObject.name}] Target Set : {player.name}.");
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -108,12 +118,14 @@ public class Monster : MonoBehaviour
 
 
 
+    private bool isChasingPlayer = false;
+    private IEnumerator moveToPlayerCo = null;
     private IEnumerator MoveToPlayer()
     {
-        bool isChasing = true;
-        while (isChasing)
+        isChasingPlayer = true;
+        while (isChasingPlayer)
         {
-            heading = player.position - transform.position;
+            heading = player.transform.position - transform.position;
             distance = heading.magnitude;
             direction = heading / distance;
             Debug.DrawRay(transform.position, direction, Color.red);
@@ -127,10 +139,32 @@ public class Monster : MonoBehaviour
 
             if (player.gameObject.activeSelf == false)
             {
-                isChasing = false;
+                isChasingPlayer = false;
             }
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForEndOfFrame();
+        isChasingPlayer = false;
+    }
+
+
+    private void AttackPlayer()
+    {
+        player.Hp -= damage;
+    }
+
+    public void GetAttacked(int damage)
+    {
+        Hp -= damage;
+    }
+
+    private void MonsterDie()
+    {
+
+    }
+
+    private void DropItem()
+    {
+
     }
 }
