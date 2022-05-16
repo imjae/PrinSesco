@@ -17,3 +17,4 @@ Unity `2020.3.26f1 LTS`
 <br>[유시온](https://github.com/BigBear621)
 <br>[김진영](https://github.com/KjinYoung)
 <br>[서윤주](https://github.com/peewoong)
+<br>[박수정](https://github.com/SJPark3)
