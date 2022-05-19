@@ -7,8 +7,6 @@ using UnityEngine;
 public class TileManager : Singleton<TileManager>
 {
     #region Fields
-    private readonly string tile_prefix = "Dungeon_Tileset";
-
     [Header("Tile Prefabs")]
     [SerializeField] private Tile tilePrefab;
 
