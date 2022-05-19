@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 public abstract class Weapons : MonoBehaviour
@@ -11,6 +12,8 @@ public abstract class Weapons : MonoBehaviour
     [SerializeField] protected int att; // 플레이어에서 처리할거면 protected가 나은 것 같아서 수정
     [SerializeField] protected float duration;
 
+    public Action ATTACK_Start;
+
     public int Level
     {
         get { return level; }
@@ -20,7 +23,7 @@ public abstract class Weapons : MonoBehaviour
             LevelUp();
         }
     }
-
+    public abstract void Init();
     public abstract void LevelUp();
     public abstract void WeaponEffect();
 }

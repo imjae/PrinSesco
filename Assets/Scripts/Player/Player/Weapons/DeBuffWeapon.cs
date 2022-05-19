@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class DeBuffWeapon : Weapons
 {
+    public override void Init()
+    {
+        Debug.Log("init");
+    }
     public override void LevelUp()
     {
         throw new System.NotImplementedException();

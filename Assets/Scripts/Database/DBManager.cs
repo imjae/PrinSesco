@@ -16,7 +16,7 @@ public class DynamoDBManager : Singleton<DynamoDBManager>
         base.Awake();
 
         UnityInitializer.AttachToGameObject(this.gameObject);
-        credentials = new CognitoAWSCredentials(Env.AWS_COGNITO_KEY, RegionEndpoint.APNortheast2);
+        //credentials = new CognitoAWSCredentials(Env.AWS_COGNITO_KEY, RegionEndpoint.APNortheast2);
 
         client = new AmazonDynamoDBClient(credentials, RegionEndpoint.APNortheast2);
         context = new DynamoDBContext(client);

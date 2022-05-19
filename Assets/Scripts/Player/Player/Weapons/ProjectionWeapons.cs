@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ProjectionWeapons : Weapons
 {
@@ -11,13 +12,17 @@ public class ProjectionWeapons : Weapons
     //[SerializeField] protected float proDuration;
 
     protected Animator weaponAni;
-    public BoxCollider2D boxCol;
+    protected BoxCollider2D boxCol;
 
     private void Start()
     {
         boxCol = GetComponent<BoxCollider2D>();
         weaponAni = GetComponent<Animator>();
-        //StartCoroutine(LaunchInterval());
+    }
+
+    public override void Init()
+    {
+        throw new System.NotImplementedException();
     }
 
     public override void LevelUp()
@@ -27,16 +32,6 @@ public class ProjectionWeapons : Weapons
     public override void WeaponEffect()
     {
         throw new System.NotImplementedException(); // 구현 되지 않은 메서드에 대해 이 예외를 throw
-    }
-    protected IEnumerator LaunchInterval() // 발사 간격(공격 속도)
-    {
-        while (true)
-        {
-            boxCol.enabled = true;
-            weaponAni.SetTrigger("isAttack");
-            yield return new WaitForSeconds(coolTime);
-            boxCol.enabled = false;
-        }
     }
     protected void OnTriggerEnter2D(Collider2D other)
     {
