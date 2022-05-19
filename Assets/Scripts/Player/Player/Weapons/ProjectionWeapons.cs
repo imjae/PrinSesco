@@ -14,15 +14,10 @@ public class ProjectionWeapons : Weapons
     protected Animator weaponAni;
     protected BoxCollider2D boxCol;
 
-    private void Start()
-    {
-        boxCol = GetComponent<BoxCollider2D>();
-        weaponAni = GetComponent<Animator>();
-    }
 
     public override void Init()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Init");
     }
 
     public override void LevelUp()

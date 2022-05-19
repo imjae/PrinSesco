@@ -100,8 +100,7 @@ public class Player : MonoBehaviour
         }
         equipWeaponsObj.Add(Mainsystem_Chan.Instance.Player_Manager.weaponPrefabs[weaponIndex].GetComponent<Weapons>());
         equipWeaponsObj[equipWeaponsObj.Count - 1].Init();
-        if (equipWeaponsObj[equipWeaponsObj.Count - 1].ATTACK_Start != null)
-            equipWeaponsObj[equipWeaponsObj.Count - 1].ATTACK_Start.Invoke();
+
         Instantiate(Mainsystem_Chan.Instance.Player_Manager.weaponPrefabs[weaponIndex], equipWeaponPos);
         ShowEquipWeapon();
     }

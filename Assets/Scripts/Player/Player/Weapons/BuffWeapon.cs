@@ -7,7 +7,7 @@ public class BuffWeapon : Weapons
     [SerializeField] protected float buffDuration;
     public override void Init()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Init");
     }
     public override void LevelUp()
     {
