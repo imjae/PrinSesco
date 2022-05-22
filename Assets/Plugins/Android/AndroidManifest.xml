@@ -12,8 +12,8 @@
       android:largeScreens="true"
       android:xlargeScreens="true"
       android:anyDensity="true"/>
-
-  <uses-sdk android:minSdkVersion="9" />
+<!-- 
+  <uses-sdk android:minSdkVersion="9" /> -->
 
 
   <uses-permission android:name="android.permission.INTERNET" />
