@@ -4,7 +4,6 @@ using UnityEngine;
 
 public partial class ExampleMonster : MonoBehaviour
 {
-    private float attackek = 1f;
 
     void Awake()
     {
