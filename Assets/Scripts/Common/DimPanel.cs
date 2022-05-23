@@ -36,8 +36,8 @@ public sealed class DimPanel : MonoBehaviour
             {
                 var target = targetList[i];
                 var defaultAlpha = target.color.a;
-                target.color = new Color(target.color.r, target.color.g, target.color.b, 0f);
-                target.gameObject.SetActive(false);
+                //target.color = new Color(target.color.r, target.color.g, target.color.b, 0f);
+                //target.gameObject.SetActive(false);
 
                 defaultAlphaDic.Add(target, defaultAlpha);
             }
@@ -78,15 +78,20 @@ public sealed class DimPanel : MonoBehaviour
         {
             var target = targetList[i];
             target.DOKill(false);
-            target.DOFade(0.0f, duration)
+            target.DOFade(0f, duration)
                     .SetEase(hideEase)
-                    .OnComplete(() =>
-                    {
-                        if (target.gameObject != gameObject)
-                        {
-                            target.gameObject.SetActive(false);
-                        }
-                    });
+            .OnComplete(() =>
+            {
+                if (target.gameObject != gameObject)
+                {
+                    target.gameObject.SetActive(false);
+                }
+            });
         }
+    }
+
+    private void Start()
+    {
+        GetComponent<DimPanel>().Hide();
     }
 }
