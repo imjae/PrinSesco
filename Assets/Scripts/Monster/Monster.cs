@@ -13,9 +13,9 @@ public class Monster : MonoBehaviour
     [SerializeField] private float attackRange;
     [SerializeField] private GameObject candy;
 
-    [SerializeField] private SpriteRenderer monsterRenderer;
+    private SpriteRenderer monsterRenderer;
 
-    [SerializeField] private Player player;
+    private TestPlayer player;
     private Vector2 heading;
     private Vector2 direction;
     private float distance;
@@ -30,19 +30,12 @@ public class Monster : MonoBehaviour
         if (monsterRenderer == null)
             TryGetComponent(out monsterRenderer);
 
+        // 플레이어 스크립트에 따라 수정 필요
         if (player == null)
-            player = FindObjectOfType<Player>();
+            player = TestPlayer.Inst;
         if (player != null)
             StartCoroutine(moveToPlayerCo = MoveToPlayer());
-        Debug.Log($"[{gameObject.name}] Target Set : {player.name}.");
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log($"[{gameObject.name}] Attack Start.");
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        Debug.Log($"[{gameObject.name}] Attack Stop.");
+        Debug.Log($"[{monsterName}] Target Set : {player.name}.");
     }
 
 
@@ -53,10 +46,11 @@ public class Monster : MonoBehaviour
         {
             heading = player.transform.position - transform.position;
             distance = heading.magnitude;
-            if (distance > 0)
+            //Debug.Log($"[Monster] Distance : {distance}");
+            if (distance > 0.01f)
             {
                 direction = heading / distance;
-                Debug.DrawRay(transform.position, direction, Color.red);
+                Debug.DrawRay(transform.position, direction, Color.red, 0.02f);
         
                 if (direction.x > 0 && monsterRenderer.flipX == false)
                     monsterRenderer.flipX = true;
@@ -64,7 +58,6 @@ public class Monster : MonoBehaviour
                     monsterRenderer.flipX = false;
 
                 transform.Translate(direction * moveSpeed * Time.deltaTime);
-                yield return new WaitForEndOfFrame();
             }
 
             if (distance < attackRange)
@@ -81,14 +74,22 @@ public class Monster : MonoBehaviour
                 isChasingPlayer = false;
                 break;
             }
+            yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForEndOfFrame();
         isChasingPlayer = false;
     }
     private void AttackPlayer()
     {
         Debug.Log($"[Monster] {monsterName} attacked Player! Damage<{attackPower}>");
         player.Hp -= attackPower;
+        if (player.Hp <= 0)
+        {
+            if (moveToPlayerCo != null)
+            {
+                StopCoroutine(moveToPlayerCo);
+                moveToPlayerCo = null;
+            }
+        }
     }
     public void GetAttacked(int damage)
     {
